@@ -106,7 +106,12 @@ io.on('connection', (socket) => {
     const text = String(msg).slice(0, 120);
 socket.to(room).emit('chat', { name: socket.data.name || 'Игрок', msg: text });
   });
-
+ socket.on('switchWorld', ({ world } = {}) => {
+    const room = socket.data.room;
+    if (!room) return;
+    if (world !== 'mine' && world !== 'ice') return;
+    io.to(room).emit('worldChanged', { world });
+});
   socket.on('disconnect', () => {
     const room = socket.data.room;
     if (!room) return;
