@@ -104,7 +104,7 @@ io.on('connection', (socket) => {
     const room = socket.data.room;
     if (!room || !msg) return;
     const text = String(msg).slice(0, 120);
-    io.to(room).emit('chat', { name: socket.data.name || 'Игрок', msg: text });
+socket.to(room).emit('chat', { name: socket.data.name || 'Игрок', msg: text });
   });
 
   socket.on('disconnect', () => {
