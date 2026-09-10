@@ -119,6 +119,34 @@ socket.to(room).emit('chat', { name: socket.data.name || 'Игрок', msg: text
     if (world !== 'mine' && world !== 'ice') return;
     io.to(room).emit('worldChanged', { world });
 });
+// PvP — удар по другому игроку
+socket.on('pvpHit', ({ targetId, dmg } = {}) => {
+  const room = socket.data.room;
+  if (!room || !targetId || typeof dmg !== 'number') return;
+  const r = rooms.get(room);
+  if (!r || !r.has(targetId)) return;
+  const d = Math.max(1, Math.min(50, Math.round(dmg)));
+  io.to(targetId).emit('pvpHit', { targetId, dmg: d, attacker: socket.data.name });
+});
+
+// Смена мира
+socket.on('switchWorld', ({ world } = {}) => {
+  const room = socket.data.room;
+  if (!room) return;
+  if (world !== 'mine' && world !== 'ice' && world !== 'volcano') return;
+  io.to(room).emit('worldChanged', { world });
+});
+
+// Запрос на общий счёт команды (опционально)
+socket.on('teamScoreRequest', () => {
+  const room = socket.data.room;
+  if (!room) return;
+  const r = rooms.get(room);
+  if (!r) return;
+  let total = 0;
+  for (const [, p] of r) total += (p.coinsEarned || 0);
+  io.to(room).emit('teamScore', { total });
+});
   socket.on('disconnect', () => {
     const room = socket.data.room;
     if (!room) return;
