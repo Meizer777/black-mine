@@ -7,17 +7,14 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="format-detection" content="telephone=no">
 <title>BLACK MINE — 3D Мультиплеер</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{font-size:clamp(12px,2.5vw,16px)}
-html,body{
-  width:100%;height:100vh;height:100dvh;overflow:hidden;background:#07070c;
+html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;background:#07070c;
   font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
   color:#e8e8f0;touch-action:none;user-select:none;-webkit-user-select:none;
-  overscroll-behavior:none;-webkit-text-size-adjust:100%
-}
+  overscroll-behavior:none;-webkit-text-size-adjust:100%}
 canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 
 /* ---------- Лобби ---------- */
@@ -108,7 +105,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   bottom:calc(env(safe-area-inset-bottom) + 90px);
   display:flex;flex-direction:column;gap:12px;pointer-events:auto}
 .btn{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:.72rem;font-weight:800;letter-spacing:.06em;
+  justify-content:center;font-size:1.4rem;
   background:rgba(20,20,32,.7);border:1.5px solid rgba(255,255,255,.13);
   color:#dcdcea;backdrop-filter:blur(10px);transition:transform .08s,background .2s;
   box-shadow:0 6px 20px rgba(0,0,0,.5);cursor:pointer}
@@ -117,6 +114,8 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #btnJump{width:74px;height:74px}
 #btnMine{background:rgba(255,92,138,.16);border-color:rgba(255,92,138,.4)}
 #btnMine:active{background:rgba(255,92,138,.42)}
+#btnShop{background:rgba(255,201,74,.16);border-color:rgba(255,201,74,.4)}
+#btnShop:active{background:rgba(255,201,74,.42)}
 #stick{position:absolute;left:calc(env(safe-area-inset-left) + 20px);
   bottom:calc(env(safe-area-inset-bottom) + 20px);
   width:132px;height:132px;border-radius:50%;pointer-events:auto;
@@ -145,8 +144,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   width:42px;height:42px;border-radius:12px;display:flex;align-items:center;
   justify-content:center;font-size:1.15rem;pointer-events:auto;cursor:pointer}
 #settings{position:fixed;inset:0;z-index:60;display:none;align-items:center;
-  justify-content:center;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);
-  padding:16px}
+  justify-content:center;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);padding:16px}
 #settings.show{display:flex}
 #settings .card{width:min(360px,90vw);padding:24px;border-radius:20px;
   background:#12121c;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 60px #000}
@@ -173,11 +171,66 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   transform:translateX(-50%);font-size:.68rem;color:#6a6a86;letter-spacing:.08em;
   text-align:center;transition:opacity .6s;padding:0 14px;max-width:92vw}
 
-/* ---------- Мелкие экраны (Android) ---------- */
+/* ---------- Магазин ---------- */
+#shop{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(10px);padding:16px;overflow-y:auto}
+#shop.show{display:flex}
+#shop .card{width:min(520px,94vw);max-height:90vh;overflow-y:auto;padding:20px;
+  border-radius:22px;background:#12121c;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 30px 80px #000}
+#shop h2{font-size:1.1rem;letter-spacing:.16em;margin-bottom:6px;color:#fff;
+  display:flex;justify-content:space-between;align-items:center;gap:10px}
+#shop .wallet{font-size:.85rem;color:#7ef5ff;font-weight:800}
+#shop .tabs{display:flex;gap:8px;margin:16px 0}
+.tab{flex:1;padding:11px;border-radius:12px;background:#1a1a26;border:1px solid rgba(255,255,255,.08);
+  text-align:center;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:#9a9ab4;
+  cursor:pointer;transition:.2s}
+.tab.on{background:linear-gradient(90deg,#b06cff,#ff5c8a);color:#fff;border-color:transparent}
+.shopTab{display:none}
+.shopTab.on{display:block}
+
+/* Строка продажи */
+.sellRow{display:flex;align-items:center;gap:10px;padding:10px;margin-bottom:8px;
+  background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07);border-radius:12px}
+.sellRow .gemIcon{width:22px;height:22px;border-radius:6px;transform:rotate(45deg);
+  box-shadow:0 0 10px currentColor;flex-shrink:0}
+.sellRow .info{flex:1;min-width:0}
+.sellRow .nm{font-size:.85rem;font-weight:800;color:#e8e8f0}
+.sellRow .sub{font-size:.7rem;color:#8a8aa6;margin-top:2px}
+.sellRow .btns{display:flex;gap:6px;flex-shrink:0}
+.sellBtn{padding:9px 12px;border-radius:10px;border:none;font-weight:800;font-size:.72rem;
+  letter-spacing:.05em;color:#fff;cursor:pointer;background:#2a2a3a;
+  border:1px solid rgba(255,255,255,.1);transition:.15s;white-space:nowrap}
+.sellBtn:active{transform:scale(.94)}
+.sellBtn.primary{background:linear-gradient(90deg,#b06cff,#ff5c8a);border-color:transparent}
+.sellBtn:disabled{opacity:.35;cursor:not-allowed}
+
+/* Улучшения */
+.upgrade{padding:12px;margin-bottom:10px;background:rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.07);border-radius:12px;
+  display:flex;gap:12px;align-items:center}
+.upgrade .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:1.5rem;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(176,108,255,.25),rgba(255,92,138,.25));
+  border:1px solid rgba(176,108,255,.3)}
+.upgrade .info{flex:1;min-width:0}
+.upgrade .nm{font-size:.88rem;font-weight:800;color:#fff;margin-bottom:3px}
+.upgrade .desc{font-size:.68rem;color:#8a8aa6;line-height:1.35}
+.upgrade .lvl{font-size:.7rem;color:#7ef5ff;font-weight:800;margin-top:4px}
+.buyBtn{padding:11px 14px;border-radius:10px;border:none;font-weight:800;font-size:.75rem;
+  letter-spacing:.05em;color:#fff;cursor:pointer;flex-shrink:0;
+  background:linear-gradient(90deg,#b06cff,#ff5c8a);
+  box-shadow:0 4px 14px rgba(176,108,255,.4);transition:.15s;white-space:nowrap}
+.buyBtn:active{transform:scale(.94)}
+.buyBtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+#closeShop{margin-top:16px;width:100%;padding:13px;border-radius:12px;border:none;
+  font-weight:800;letter-spacing:.1em;font-size:.82rem;color:#fff;
+  background:linear-gradient(90deg,#4fc3ff,#b06cff);cursor:pointer}
+
 @media (max-width: 500px), (max-height: 620px){
   #stick{width:114px;height:114px}
   #knob{width:50px;height:50px;margin:-25px 0 0 -25px}
-  .btn{width:58px;height:58px}
+  .btn{width:58px;height:58px;font-size:1.2rem}
   #btnJump{width:66px;height:66px}
   .slot{width:44px;height:50px;border-radius:10px}
   .slot .ico{width:16px;height:16px}
@@ -188,16 +241,15 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 @media (max-height: 480px){
   #stick{width:96px;height:96px}
   #knob{width:42px;height:42px;margin:-21px 0 0 -21px}
-  .btn{width:50px;height:50px;font-size:.65rem}
+  .btn{width:50px;height:50px;font-size:1rem}
   #btnJump{width:56px;height:56px}
   .slot{width:40px;height:44px}
-  #playerList{font-size:.6rem;padding:6px 9px}
 }
 </style>
 </head>
 <body>
 
-<!-- ============ ЛОББИ ============ -->
+<!-- ЛОББИ -->
 <div id="lobby">
   <div class="card">
     <h1>BLACK MINE</h1>
@@ -210,7 +262,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 </div>
 
-<!-- ============ ЗАГРУЗКА ============ -->
+<!-- ЗАГРУЗКА -->
 <div id="loader">
   <h1>BLACK MINE</h1>
   <div class="sub">MULTIPLAYER</div>
@@ -218,7 +270,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   <div id="loadTxt">Инициализация…</div>
 </div>
 
-<!-- ============ HUD ============ -->
+<!-- HUD -->
 <div id="hud">
   <div class="topbar">
     <div>
@@ -239,7 +291,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 
   <div id="toasts"></div>
-  <div id="hint">Джойстик — движение · Свайп — камера · ⛏ — добыча</div>
+  <div id="hint">Джойстик — движение · Свайп — камера · ⛏ добыча · 🏪 магазин</div>
 
   <div id="invWrap" class="panel"></div>
   <div id="oreBar"><i></i></div>
@@ -247,6 +299,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   <div id="stick"><div id="knob"></div></div>
 
   <div id="rightBtns">
+    <div class="btn" id="btnShop">🏪</div>
     <div class="btn" id="btnMine">⛏</div>
     <div class="btn" id="btnJump">▲</div>
   </div>
@@ -254,7 +307,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   <div class="panel" id="gear">⚙</div>
 </div>
 
-<!-- ============ НАСТРОЙКИ ============ -->
+<!-- НАСТРОЙКИ -->
 <div id="settings">
   <div class="card">
     <h2>НАСТРОЙКИ</h2>
@@ -266,7 +319,25 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 </div>
 
-<!-- Socket.IO клиент, отдаётся самим сервером -->
+<!-- МАГАЗИН -->
+<div id="shop">
+  <div class="card">
+    <h2>
+      <span>🏪 МАГАЗИН</span>
+      <span class="wallet">💎 <span id="shopWallet">0</span></span>
+    </h2>
+    <div class="tabs">
+      <div class="tab on" data-tab="sell">ПРОДАТЬ</div>
+      <div class="tab" data-tab="upgrade">УЛУЧШЕНИЯ</div>
+    </div>
+
+    <div class="shopTab on" id="tab-sell"></div>
+    <div class="shopTab" id="tab-upgrade"></div>
+
+    <button id="closeShop">ЗАКРЫТЬ</button>
+  </div>
+</div>
+
 <script src="/socket.io/socket.io.js"></script>
 
 <script type="importmap">
@@ -279,20 +350,13 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 </script>
 
 <script type="module">
-/* ==========================================================================
-   BLACK MINE — 3D MULTIPLAYER
-   ========================================================================== */
-
 import * as THREE from 'three';
 import { EffectComposer }  from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass }      from 'three/addons/postprocessing/OutputPass.js';
 
-/* ==========================================================================
-   БЛОК 1. КОНФИГ
-   ========================================================================== */
-
+/* ========== КОНФИГ ========== */
 const CFG = {
   worldRadius: 58, groundSize: 150, groundSegments: 150,
   ceilingHeight: 22, holeRadius: 7,
@@ -306,11 +370,8 @@ const CFG = {
 };
 
 const isMobile = /Android|iPhone|iPad|iPod|Mobile|Pova/i.test(navigator.userAgent);
-
 const QUALITY = {
-  shadows: !isMobile,
-  bloom: true,
-  particles: true,
+  shadows: !isMobile, bloom: true, particles: true,
   pixelRatio: Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2),
 };
 
@@ -324,10 +385,7 @@ function angleLerp(a,b,t){let d=((b-a+Math.PI)%(Math.PI*2))-Math.PI;if(d<-Math.P
 function hash1(n){return Math.sin(n*127.1)*43758.5453%1;}
 function smoothNoise(x){const i=Math.floor(x),f=x-i;const u=f*f*(3-2*f);return lerp(hash1(i),hash1(i+1),u);}
 
-/* ==========================================================================
-   БЛОК 2. РЕНДЕР
-   ========================================================================== */
-
+/* ========== РЕНДЕР ========== */
 const renderer = new THREE.WebGLRenderer({
   antialias: !isMobile, powerPreference:'high-performance', stencil:false, alpha:false,
 });
@@ -355,10 +413,7 @@ const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, windo
 composer.addPass(bloomPass);
 composer.addPass(new OutputPass());
 
-/* ==========================================================================
-   БЛОК 3. ТЕКСТУРЫ
-   ========================================================================== */
-
+/* ========== ТЕКСТУРЫ ========== */
 const TEX = {};
 function makeCanvas(s){const c=document.createElement('canvas');c.width=c.height=s;return c;}
 
@@ -437,10 +492,7 @@ TEX.wing   = wingTexture(256);
 TEX.rock.repeat.set(28,28);
 TEX.rock2.repeat.set(14,7);
 
-/* ==========================================================================
-   БЛОК 4. СВЕТ
-   ========================================================================== */
-
+/* ========== СВЕТ ========== */
 const hemi = new THREE.HemisphereLight(0x4a5a80, 0x140f0a, 0.38);
 scene.add(hemi);
 const ambient = new THREE.AmbientLight(0x2a2a3a, 0.5);
@@ -472,13 +524,9 @@ for(let i=0;i<CFG.lightPoolSize;i++){
 }
 const lanterns = [];
 
-/* ==========================================================================
-   БЛОК 5. МИР
-   ========================================================================== */
-
+/* ========== МИР ========== */
 const world = new THREE.Group();
 scene.add(world);
-
 const collidables = [];
 const solids = [];
 
@@ -744,17 +792,14 @@ addLantern( 6.5, terrainHeight( 6.5,4)+3.2, 4);
   }
 }
 
-/* ==========================================================================
-   БЛОК 6. РУДА
-   ========================================================================== */
-
+/* ========== РУДА ========== */
 const ORE_TYPES = [
-  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  hard:1.0, weight:34 },
-  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:3,  hard:1.7, weight:26 },
-  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:4,  hard:2.0, weight:18 },
-  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:9,  hard:2.5, weight:12 },
-  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:15, hard:3.0, weight:8  },
-  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:28, hard:3.8, weight:4  },
+  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  sellPrice:2,  hard:1.0, weight:34 },
+  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:3,  sellPrice:6,  hard:1.7, weight:26 },
+  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:4,  sellPrice:9,  hard:2.0, weight:18 },
+  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:9,  sellPrice:22, hard:2.5, weight:12 },
+  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:15, sellPrice:40, hard:3.0, weight:8  },
+  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:28, sellPrice:75, hard:3.8, weight:4  },
 ];
 
 const oreNodes = [];
@@ -836,10 +881,7 @@ for(let i=0;i<CFG.oreCount;i++){
   spawnOreAt(p.x, p.z, weightedOrePick());
 }
 
-/* ==========================================================================
-   БЛОК 7. ЧАСТИЦЫ
-   ========================================================================== */
-
+/* ========== ЧАСТИЦЫ ========== */
 const particles = {
   max:CFG.maxParticles,
   positions:new Float32Array(CFG.maxParticles*3),
@@ -932,10 +974,7 @@ let dustPoints = null;
   scene.add(dustPoints);
 }
 
-/* ==========================================================================
-   БЛОК 8. ПЕРСОНАЖ (фабрика)
-   ========================================================================== */
-
+/* ========== ПЕРСОНАЖ ========== */
 function makeCharacter(){
   const char = {
     root:new THREE.Group(), body:null, head:null,
@@ -971,10 +1010,6 @@ function makeCharacter(){
     new THREE.MeshBasicMaterial({ color:0x3aa0e8, fog:false }));
   badge.position.set(0.24,1.45,0.235);
   char.root.add(badge);
-  const badgeInner = new THREE.Mesh(new THREE.CircleGeometry(0.075,20),
-    new THREE.MeshBasicMaterial({ color:0xeaf6ff, fog:false }));
-  badgeInner.position.set(0.24,1.45,0.238);
-  char.root.add(badgeInner);
 
   const head = new THREE.Group();
   head.position.y = 1.72;
@@ -1045,13 +1080,6 @@ function makeCharacter(){
     new THREE.MeshStandardMaterial({ color:0x1a1a20, roughness:0.4, metalness:0.4 }));
   band.position.y = 0.05;
   hat.add(band);
-  const boneMat = new THREE.MeshStandardMaterial({ color:0xeae6d8, roughness:0.6 });
-  for(let i=0;i<3;i++){
-    const bone = new THREE.Mesh(new THREE.CapsuleGeometry(0.028,0.11,4,8), boneMat);
-    bone.position.set(rand(-0.42,0.42), 0.01, rand(-0.42,0.42));
-    bone.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3);
-    hat.add(bone);
-  }
 
   function makeArm(side){
     const g = new THREE.Group();
@@ -1106,19 +1134,6 @@ function makeCharacter(){
   wingR.rotation.y = -0.42;
   wingGroup.add(wingR);
 
-  const wingMat2 = wingMat.clone();
-  wingMat2.opacity = 0.55; wingMat2.transparent = true; wingMat2.alphaTest = 0.3;
-  const wingL2 = new THREE.Mesh(wingGeo, wingMat2);
-  wingL2.position.set(-1.10,-0.05,-0.14);
-  wingL2.rotation.y = 0.30;
-  wingL2.scale.setScalar(0.9);
-  wingGroup.add(wingL2);
-  const wingR2 = new THREE.Mesh(wingGeo, wingMat2);
-  wingR2.position.set(1.10,-0.05,-0.14);
-  wingR2.scale.set(-0.9,0.9,0.9);
-  wingR2.rotation.y = -0.30;
-  wingGroup.add(wingR2);
-
   char.wingGroup = wingGroup;
   char.wingL = wingL;
   char.wingR = wingR;
@@ -1142,7 +1157,6 @@ function makeCharacter(){
 
 const character = makeCharacter();
 
-/* ---- Табличка с именем над игроком ---- */
 function makeNameplate(name, isLocal=false){
   const c = document.createElement('canvas');
   c.width = 256; c.height = 64;
@@ -1162,7 +1176,6 @@ function makeNameplate(name, isLocal=false){
   g.fillText(name, 128, 34);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
   const mat = new THREE.SpriteMaterial({ map:tex, transparent:true, depthTest:false, fog:false });
   const sp = new THREE.Sprite(mat);
   sp.scale.set(1.6, 0.4, 1);
@@ -1170,17 +1183,16 @@ function makeNameplate(name, isLocal=false){
   return sp;
 }
 
-/* ==========================================================================
-   БЛОК 9. ИГРОК
-   ========================================================================== */
-
+/* ========== ИГРОК ========== */
 const player = {
   pos: new THREE.Vector3(0,0,5.5),
   vel: new THREE.Vector3(),
   onGround: true,
   facing: Math.PI,
-  gems: 0, level: 1, xp: 0, xpNext: 100,
+  coins: 0,
+  level: 1, xp: 0, xpNext: 100,
   inventory: { coal:0, iron:0, copper:0, gold:0, amethyst:0, diamond:0 },
+  upgrades: { pickaxe:0, speed:0, jump:0, range:0, torch:0 },
   mining: null, mineProgress: 0,
 };
 
@@ -1197,10 +1209,7 @@ const cam = {
   target: new THREE.Vector3(0,1.5,0),
 };
 
-/* ==========================================================================
-   БЛОК 10. КОЛЛИЗИИ
-   ========================================================================== */
-
+/* ========== КОЛЛИЗИИ ========== */
 function resolveCollisions(pos, radius){
   for(const s of solids){
     const dx = pos.x - s.x, dz = pos.z - s.z;
@@ -1221,55 +1230,82 @@ function resolveCollisions(pos, radius){
   }
 }
 
-/* ==========================================================================
-   БЛОК 11. СЕТЬ
-   ========================================================================== */
+/* ========== УЛУЧШЕНИЯ ========== */
+const UPGRADES = [
+  {
+    id:'pickaxe', icon:'⛏', name:'Кирка',
+    desc:'Скорость добычи руды.',
+    max:10, baseCost:30, costMul:1.6,
+    apply:lvl => CFG.mineDPS * (1 + lvl*0.35),
+  },
+  {
+    id:'speed', icon:'👟', name:'Скорость',
+    desc:'Быстрее передвигаешься.',
+    max:10, baseCost:40, costMul:1.65,
+    apply:lvl => CFG.moveSpeed * (1 + lvl*0.12),
+  },
+  {
+    id:'jump', icon:'🦘', name:'Прыжок',
+    desc:'Прыгаешь выше.',
+    max:8, baseCost:35, costMul:1.6,
+    apply:lvl => CFG.jumpSpeed * (1 + lvl*0.1),
+  },
+  {
+    id:'range', icon:'🎯', name:'Радиус добычи',
+    desc:'Добываешь руду с большего расстояния.',
+    max:6, baseCost:50, costMul:1.7,
+    apply:lvl => CFG.mineRange + lvl*0.5,
+  },
+  {
+    id:'torch', icon:'🔦', name:'Фонарик',
+    desc:'Ярче светит фонарик.',
+    max:5, baseCost:25, costMul:1.7,
+    apply:lvl => 45 + lvl*20,
+  },
+];
 
+function upgradeCost(up){
+  return Math.floor(up.baseCost * Math.pow(up.costMul, player.upgrades[up.id]));
+}
+
+function applyUpgrades(){
+  for(const up of UPGRADES){
+    const lvl = player.upgrades[up.id] || 0;
+    const val = up.apply(lvl);
+    if(up.id === 'pickaxe') CFG.mineDPS = val;
+    else if(up.id === 'speed') CFG.moveSpeed = val;
+    else if(up.id === 'jump') CFG.jumpSpeed = val;
+    else if(up.id === 'range') CFG.mineRange = val;
+    else if(up.id === 'torch') { if(torchOn) torch.intensity = val; }
+  }
+}
+
+/* ========== СЕТЬ ========== */
 const NET = {
-  socket: null,
-  selfId: null,
-  room: null,
-  name: 'Игрок',
-  ready: false,
-  sendTimer: 0,
-  sendRate: 1/18, // 18 Hz
-  lastPing: 0,
-  latency: 0,
+  socket:null, selfId:null, room:null, name:'Игрок',
+  ready:false, sendTimer:0, sendRate:1/18, latency:0,
 };
-
-const remotePlayers = new Map(); // id -> remotePlayer
+const remotePlayers = new Map();
 
 function spawnRemotePlayer(data){
   if(remotePlayers.has(data.id)) return;
-
   const char = makeCharacter();
   char.root.position.set(data.x || 0, data.y || 0, data.z || 5.5);
   char.root.rotation.y = data.ry || 0;
-
-  // Серое свечение под ногами (отличает от локального)
   char.halo.material.color.setHex(0xb06cff);
   char.halo.material.opacity = 0.08;
 
   const nameplate = makeNameplate(data.name || 'Игрок', false);
   scene.add(nameplate);
 
-  const rp = {
-    id: data.id,
-    name: data.name || 'Игрок',
-    char,
-    nameplate,
-    targetPos: new THREE.Vector3(data.x||0, data.y||0, data.z||5.5),
-    targetRot: data.ry || 0,
-    walkPhase: 0,
-    swinging: false,
-    swing: 0,
-    lastUpdate: performance.now(),
-  };
-  remotePlayers.set(data.id, rp);
-
+  remotePlayers.set(data.id, {
+    id:data.id, name:data.name || 'Игрок', char, nameplate,
+    targetPos:new THREE.Vector3(data.x||0, data.y||0, data.z||5.5),
+    targetRot:data.ry || 0,
+    walkPhase:0, swinging:false, swing:0,
+  });
   updatePlayerListUI();
 }
-
 function removeRemotePlayer(id){
   const rp = remotePlayers.get(id);
   if(!rp) return;
@@ -1278,136 +1314,83 @@ function removeRemotePlayer(id){
   remotePlayers.delete(id);
   updatePlayerListUI();
 }
-
 function updateRemotePlayers(dt){
-  const t = performance.now() * 0.001;
-  for(const [id, rp] of remotePlayers){
-    // Позиция
+  const t = performance.now()*0.001;
+  for(const [, rp] of remotePlayers){
     rp.char.root.position.lerp(rp.targetPos, 1 - Math.exp(-13*dt));
     rp.char.root.rotation.y = angleLerp(rp.char.root.rotation.y, rp.targetRot, 1 - Math.exp(-14*dt));
-
-    // Ходьба
     const wp = rp.walkPhase;
     const amp = 0.6;
-    rp.char.legL.rotation.x = Math.sin(wp) * amp;
-    rp.char.legR.rotation.x = -Math.sin(wp) * amp;
-
-    let armL = -Math.sin(wp) * amp * 0.8;
-    let armR =  Math.sin(wp) * amp * 0.8;
-
+    rp.char.legL.rotation.x = Math.sin(wp)*amp;
+    rp.char.legR.rotation.x = -Math.sin(wp)*amp;
+    let armL = -Math.sin(wp)*amp*0.8;
+    let armR =  Math.sin(wp)*amp*0.8;
     if(rp.swinging){
-      rp.swing += dt * 6.5;
+      rp.swing += dt*6.5;
       if(rp.swing > Math.PI*2) rp.swing = 0;
       const s = Math.sin(rp.swing);
       armR = -1.5 + s*1.9;
       armL = -0.35 + s*0.35;
     }
-
     rp.char.armL.rotation.x = damp(rp.char.armL.rotation.x, armL, 16, dt);
     rp.char.armR.rotation.x = damp(rp.char.armR.rotation.x, armR, 16, dt);
     rp.char.armL.rotation.z = 0.06;
     rp.char.armR.rotation.z = -0.06;
-
-    // Крылья
-    const flap = Math.sin(t*2.6) * 0.11;
+    const flap = Math.sin(t*2.6)*0.11;
     rp.char.wingL.rotation.z = 0.12 + flap;
     rp.char.wingR.rotation.z = -0.12 - flap;
-    const pulse = 1 + Math.sin(t*3.4)*0.045;
-    rp.char.wingL.scale.set(pulse, pulse, 1);
-    rp.char.wingR.scale.set(-pulse, pulse, 1);
-
-    // Аура
     rp.char.halo.material.opacity = 0.06 + Math.sin(t*2.2)*0.025;
-
-    // Глаза
-    for(const e of rp.char.eyes){
-      e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
-    }
-
-    // Табличка
+    for(const e of rp.char.eyes) e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
     rp.nameplate.position.copy(rp.char.root.position);
     rp.nameplate.position.y += 2.45;
   }
 }
-
 function netEmitUpdate(){
   if(!NET.socket || !NET.ready) return;
   NET.socket.emit('playerUpdate', {
-    x: +player.pos.x.toFixed(3),
-    y: +player.pos.y.toFixed(3),
-    z: +player.pos.z.toFixed(3),
-    ry: +player.facing.toFixed(3),
-    wp: +character.walkPhase.toFixed(3),
-    sw: character.swingActive,
+    x:+player.pos.x.toFixed(3), y:+player.pos.y.toFixed(3), z:+player.pos.z.toFixed(3),
+    ry:+player.facing.toFixed(3), wp:+character.walkPhase.toFixed(3),
+    sw:character.swingActive,
   });
 }
-
 function connectNetwork(name, room){
   return new Promise((resolve, reject) => {
     if(typeof window.io !== 'function'){
-      reject(new Error('Socket.IO не загружен. Проверь сервер.'));
+      reject(new Error('Socket.IO не загружен'));
       return;
     }
     const socket = window.io({
-      transports: ['websocket', 'polling'],
-      reconnection: true,
-      reconnectionDelay: 1200,
-      timeout: 8000,
+      transports:['websocket','polling'],
+      reconnection:true, reconnectionDelay:1200, timeout:8000,
     });
     NET.socket = socket;
-
-    const onConnect = () => {
-      NET.selfId = socket.id;
-      socket.emit('joinRoom', { name, room });
-    };
-
-    const failTimer = setTimeout(() => {
-      reject(new Error('Не удалось подключиться к серверу'));
-    }, 9000);
-
+    const onConnect = () => { NET.selfId = socket.id; socket.emit('joinRoom', { name, room }); };
+    const failTimer = setTimeout(() => reject(new Error('Нет ответа от сервера')), 9000);
     socket.on('connect', onConnect);
-
-    socket.on('connect_error', (err) => {
-      console.warn('connect_error', err);
-    });
-
-    socket.on('roomFull', ({ room, max }) => {
+    socket.on('roomFull', ({room, max}) => {
       clearTimeout(failTimer);
       reject(new Error(`Комната «${room}» заполнена (макс. ${max})`));
     });
-
-    socket.on('roomJoined', ({ room, selfId, players }) => {
+    socket.on('roomJoined', ({room, selfId, players}) => {
       clearTimeout(failTimer);
-      NET.selfId = selfId;
-      NET.room = room;
-      NET.name = name;
-      NET.ready = true;
-
+      NET.selfId = selfId; NET.room = room; NET.name = name; NET.ready = true;
       for(const p of players) spawnRemotePlayer(p);
       updatePlayerListUI();
-
-      socket.on('playerJoined', (p) => {
-        spawnRemotePlayer(p);
-        toast(`👤 ${p.name} вошёл в игру`);
-      });
-
-      socket.on('playerLeft', ({ id }) => {
+      socket.on('playerJoined', p => { spawnRemotePlayer(p); toast(`👤 ${p.name} вошёл`); });
+      socket.on('playerLeft', ({id}) => {
         const rp = remotePlayers.get(id);
-        if(rp) toast(`👋 ${rp.name} покинул игру`);
+        if(rp) toast(`👋 ${rp.name} покинул`);
         removeRemotePlayer(id);
       });
-
-      socket.on('playerUpdate', (data) => {
+      socket.on('playerUpdate', data => {
         const rp = remotePlayers.get(data.id);
         if(!rp) return;
         rp.targetPos.set(data.x, data.y, data.z);
         rp.targetRot = data.ry;
         rp.walkPhase = data.wp || 0;
         rp.swinging = !!data.sw;
-        rp.lastUpdate = performance.now();
       });
-
-      socket.on('oreBroken', ({ index, delay }) => {
+      socket.on('oreBroken', ({index, delay}) => {
         const node = oreNodes[index];
         if(!node || !node.alive) return;
         node.alive = false;
@@ -1415,47 +1398,21 @@ function connectNetwork(name, room){
         node.respawnAt = performance.now()/1000 + delay;
         emitParticles(node.pos, node.type.color, 30, 4.0, 1.0, 0.14);
       });
-
-      socket.on('chat', ({ name, msg }) => {
-        toast(`💬 ${name}: ${msg}`);
-      });
-
-      socket.on('disconnect', () => {
-        NET.ready = false;
-        toast('⚠ Соединение потеряно, переподключение…');
-      });
-
-      socket.io.on('reconnect', () => {
-        socket.emit('joinRoom', { name, room });
-      });
-
+      socket.on('disconnect', () => { NET.ready = false; toast('⚠ Связь потеряна'); });
+      socket.io.on('reconnect', () => socket.emit('joinRoom', { name, room }));
       resolve();
     });
   });
 }
 
-/* Пинг */
-setInterval(() => {
-  if(NET.socket && NET.socket.connected){
-    const t = performance.now();
-    NET.socket.timeout(4000).emit('ping_time', null, () => {
-      NET.latency = Math.round(performance.now() - t);
-      const el = document.getElementById('netStat');
-      if(el) el.textContent = `NET ${NET.latency} ms`;
-    });
-  }
-}, 3000);
-
-/* ==========================================================================
-   БЛОК 12. УПРАВЛЕНИЕ
-   ========================================================================== */
-
+/* ========== УПРАВЛЕНИЕ ========== */
 const keys = {};
 window.addEventListener('keydown', e => {
   keys[e.code] = true;
   if(e.code === 'Space') e.preventDefault();
   if(e.code === 'KeyF') toggleTorch();
-  if(e.code === 'Escape') toggleSettings();
+  if(e.code === 'Escape') { toggleSettings(); closeShop(); }
+  if(e.code === 'KeyB') toggleShop();
 });
 window.addEventListener('keyup', e => { keys[e.code] = false; });
 
@@ -1464,7 +1421,6 @@ const knobEl  = document.getElementById('knob');
 let stickPointerId = null;
 const stickCenter = { x:0, y:0 };
 const stickRadius = 46;
-
 function stickStart(e){
   if(stickPointerId !== null) return;
   stickPointerId = e.pointerId;
@@ -1479,10 +1435,7 @@ function stickMove(e){
   let dx = e.clientX - stickCenter.x;
   let dy = e.clientY - stickCenter.y;
   const len = Math.hypot(dx,dy);
-  if(len > stickRadius){
-    dx = dx/len*stickRadius;
-    dy = dy/len*stickRadius;
-  }
+  if(len > stickRadius){ dx = dx/len*stickRadius; dy = dy/len*stickRadius; }
   knobEl.style.transform = `translate(${dx}px, ${dy}px)`;
   input.move.x = dx/stickRadius;
   input.move.y = -dy/stickRadius;
@@ -1500,33 +1453,28 @@ stickEl.addEventListener('pointercancel', stickEnd);
 
 let lookPointerId = null;
 let lookLast = { x:0, y:0 };
-
 renderer.domElement.addEventListener('pointerdown', e => {
   if(lookPointerId !== null) return;
   lookPointerId = e.pointerId;
-  lookLast.x = e.clientX;
-  lookLast.y = e.clientY;
+  lookLast.x = e.clientX; lookLast.y = e.clientY;
   try { renderer.domElement.setPointerCapture(e.pointerId); } catch(_){}
 });
 renderer.domElement.addEventListener('pointermove', e => {
   if(e.pointerId !== lookPointerId) return;
   const dx = e.clientX - lookLast.x;
   const dy = e.clientY - lookLast.y;
-  lookLast.x = e.clientX;
-  lookLast.y = e.clientY;
-  cam.yaw   -= dx * 0.0055;
-  cam.pitch -= dy * 0.0042;
+  lookLast.x = e.clientX; lookLast.y = e.clientY;
+  cam.yaw   -= dx*0.0055;
+  cam.pitch -= dy*0.0042;
   cam.pitch = clamp(cam.pitch, CFG.camMinPitch, CFG.camMaxPitch);
 });
-function lookEnd(e){
-  if(e.pointerId !== lookPointerId) return;
-  lookPointerId = null;
-}
+function lookEnd(e){ if(e.pointerId === lookPointerId) lookPointerId = null; }
 renderer.domElement.addEventListener('pointerup', lookEnd);
 renderer.domElement.addEventListener('pointercancel', lookEnd);
 
 const btnJump = document.getElementById('btnJump');
 const btnMine = document.getElementById('btnMine');
+const btnShop = document.getElementById('btnShop');
 
 function bindHold(el, onDown, onUp){
   el.addEventListener('pointerdown', e => {
@@ -1542,6 +1490,7 @@ function bindHold(el, onDown, onUp){
 }
 bindHold(btnJump, () => { input.jump = true; input.jumpPressed = true; }, () => { input.jump = false; });
 bindHold(btnMine, () => { input.mine = true; }, () => { input.mine = false; });
+btnShop.addEventListener('click', toggleShop);
 
 function readKeyboard(){
   let mx=0, my=0;
@@ -1551,8 +1500,7 @@ function readKeyboard(){
   if(keys['KeyD']||keys['ArrowRight']) mx += 1;
   if(mx||my){
     const l = Math.hypot(mx,my);
-    input.move.x = mx/l;
-    input.move.y = my/l;
+    input.move.x = mx/l; input.move.y = my/l;
   } else if(stickPointerId === null){
     input.move.x = 0; input.move.y = 0;
   }
@@ -1560,18 +1508,13 @@ function readKeyboard(){
   input.mine = input.mine || !!keys['KeyE'];
 }
 
-/* ==========================================================================
-   БЛОК 13. ОБНОВЛЕНИЕ ИГРОКА
-   ========================================================================== */
-
+/* ========== ОБНОВЛЕНИЕ ИГРОКА ========== */
 function updatePlayer(dt){
   readKeyboard();
-
   const forwardX = Math.sin(cam.yaw);
   const forwardZ = Math.cos(cam.yaw);
   const rightX   = Math.cos(cam.yaw);
   const rightZ   = -Math.sin(cam.yaw);
-
   let wx = forwardX*input.move.y + rightX*input.move.x;
   let wz = forwardZ*input.move.y + rightZ*input.move.x;
   const wlen = Math.hypot(wx,wz);
@@ -1593,7 +1536,6 @@ function updatePlayer(dt){
   player.pos.x += player.vel.x * dt;
   player.pos.z += player.vel.z * dt;
   player.pos.y += player.vel.y * dt;
-
   resolveCollisions(player.pos, 0.42);
 
   const gy = terrainHeight(player.pos.x, player.pos.z);
@@ -1612,34 +1554,30 @@ function updatePlayer(dt){
     const target = Math.atan2(wx,wz);
     player.facing = angleLerp(player.facing, target, 1 - Math.exp(-14*dt));
   }
-
   character.root.position.copy(player.pos);
   character.root.rotation.y = player.facing;
 }
 
-/* ==========================================================================
-   БЛОК 14. АНИМАЦИЯ
-   ========================================================================== */
-
+/* ========== АНИМАЦИЯ ========== */
 function updateCharacter(dt){
-  const t = performance.now() * 0.001;
+  const t = performance.now()*0.001;
   const speed = Math.hypot(player.vel.x, player.vel.z);
   const moving = speed > 0.35;
 
-  if(moving) character.walkPhase += dt * (7.5 + speed*1.4);
+  if(moving) character.walkPhase += dt*(7.5 + speed*1.4);
   else character.walkPhase = damp(character.walkPhase % (Math.PI*2), 0, 8, dt);
 
   const wp = character.walkPhase;
   const amp = clamp(speed / CFG.moveSpeed, 0, 1.6) * 0.72;
 
-  character.legL.rotation.x = Math.sin(wp) * amp;
-  character.legR.rotation.x = -Math.sin(wp) * amp;
+  character.legL.rotation.x = Math.sin(wp)*amp;
+  character.legR.rotation.x = -Math.sin(wp)*amp;
 
-  let armSwingL = -Math.sin(wp) * amp * 0.8;
-  let armSwingR =  Math.sin(wp) * amp * 0.8;
+  let armSwingL = -Math.sin(wp)*amp*0.8;
+  let armSwingR =  Math.sin(wp)*amp*0.8;
 
   if(character.swingActive){
-    character.swing += dt * 6.5;
+    character.swing += dt*6.5;
     if(character.swing > Math.PI*2) character.swing = 0;
     const s = Math.sin(character.swing);
     armSwingR = -1.5 + s*1.9;
@@ -1657,11 +1595,11 @@ function updateCharacter(dt){
   character.root.rotation.z = damp(character.root.rotation.z,
     moving ? -clamp(player.vel.x*0.012, -0.06, 0.06) : 0, 8, dt);
 
-  const headYaw = clamp(angleLerp(0, cam.yaw - player.facing, 1) * 0.12, -0.3, 0.3);
+  const headYaw = clamp(angleLerp(0, cam.yaw - player.facing, 1)*0.12, -0.3, 0.3);
   character.head.rotation.y = damp(character.head.rotation.y, headYaw, 6, dt);
 
   const flapSpeed = moving ? 6.5 : 2.6;
-  const flap = Math.sin(t*flapSpeed) * (moving ? 0.22 : 0.11);
+  const flap = Math.sin(t*flapSpeed)*(moving ? 0.22 : 0.11);
   character.wingL.rotation.z =  0.12 + flap;
   character.wingR.rotation.z = -0.12 - flap;
 
@@ -1673,18 +1611,12 @@ function updateCharacter(dt){
   character.halo.material.opacity = 0.07 + Math.sin(t*2.2)*0.035;
   character.halo.scale.setScalar(1 + Math.sin(t*2.2)*0.06);
 
-  for(const e of character.eyes){
-    e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
-  }
+  for(const e of character.eyes) e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
 }
 
-/* ==========================================================================
-   БЛОК 15. КАМЕРА
-   ========================================================================== */
-
+/* ========== КАМЕРА ========== */
 const camRaycaster = new THREE.Raycaster();
 const camDirVec = new THREE.Vector3();
-
 function updateCamera(dt){
   cam.target.set(player.pos.x, player.pos.y + CFG.camHeight, player.pos.z);
   const cp = Math.cos(cam.pitch);
@@ -1715,19 +1647,14 @@ function updateCamera(dt){
   }
 }
 
-/* ==========================================================================
-   БЛОК 16. ДОБЫЧА
-   ========================================================================== */
-
+/* ========== ДОБЫЧА ========== */
 const oreBarEl = document.getElementById('oreBar');
 const oreBarFill = oreBarEl.querySelector('i');
-
 function findTargetOre(){
   let best = null, bestScore = Infinity;
   const camDir = new THREE.Vector3();
   camera.getWorldDirection(camDir);
   const px = player.pos.x, pz = player.pos.z;
-
   for(const node of oreNodes){
     if(!node.alive) continue;
     const dx = node.pos.x - px;
@@ -1742,12 +1669,10 @@ function findTargetOre(){
   }
   return best;
 }
-
 function updateMining(dt){
   const target = findTargetOre();
   if(!target){
     player.mining = null;
-    player.mineProgress = 0;
     character.swingActive = false;
     oreBarEl.style.display = 'none';
     return;
@@ -1760,9 +1685,7 @@ function updateMining(dt){
   target.group.position.x = target.pos.x + shake;
   target.group.position.z = target.pos.z + shake;
 
-  if(Math.random() < 0.55){
-    emitParticles(target.pos, target.type.color, 2, 2.4, 0.6, 0.09);
-  }
+  if(Math.random() < 0.55) emitParticles(target.pos, target.type.color, 2, 2.4, 0.6, 0.09);
 
   const screenPos = target.pos.clone().project(camera);
   if(screenPos.z < 1){
@@ -1773,25 +1696,21 @@ function updateMining(dt){
   } else {
     oreBarEl.style.display = 'none';
   }
-
   if(target.hp <= 0) breakOre(target);
 }
-
 function breakOre(node){
   const delay = rand(CFG.oreRespawnMin, CFG.oreRespawnMax);
   node.alive = false;
   node.group.visible = false;
   node.respawnAt = performance.now()/1000 + delay;
-
   emitParticles(node.pos, node.type.color, 42, 4.5, 1.1, 0.16);
   emitParticles(node.pos, 0xffffff, 14, 3.2, 0.7, 0.1);
 
   const amount = randInt(1,3);
   player.inventory[node.type.id] = (player.inventory[node.type.id]||0) + amount;
-  const gained = node.type.value * amount;
-  player.gems += gained;
-  player.xp += Math.ceil(node.type.value * 0.9);
-  toast(`+${amount} ${node.type.name}  ·  +${gained} 💎`);
+  const xpGain = Math.ceil(node.type.value * 0.9);
+  player.xp += xpGain;
+  toast(`+${amount} ${node.type.name} в инвентарь`);
   popSlot(node.type.id);
 
   while(player.xp >= player.xpNext){
@@ -1800,25 +1719,17 @@ function breakOre(node){
     player.xpNext = Math.floor(player.xpNext*1.35 + 40);
     toast(`⬆ УРОВЕНЬ ${player.level}!`);
   }
-
-  // Синхронизация с другими игроками
   if(NET.socket && NET.ready){
     const idx = oreNodes.indexOf(node);
     if(idx >= 0) NET.socket.emit('oreBroken', { index: idx, delay });
   }
-
   updateHUD();
   saveGame();
-
-  player.mining = null;
-  player.mineProgress = 0;
   character.swingActive = false;
   oreBarEl.style.display = 'none';
 }
-
 function updateOres(dt){
   const now = performance.now()/1000;
-  const t = now;
   for(const node of oreNodes){
     if(!node.alive){
       if(now >= node.respawnAt){
@@ -1828,33 +1739,27 @@ function updateOres(dt){
         node.group.position.set(node.pos.x, node.pos.y, node.pos.z);
         node.group.scale.setScalar(0.01);
         emitParticles(node.pos, node.type.color, 18, 2.0, 0.8, 0.1);
-      } else {
-        continue;
-      }
+      } else continue;
     }
     if(node.group.scale.x < 1){
       const s = Math.min(1, node.group.scale.x + dt*4);
       node.group.scale.setScalar(s);
     }
-    node.group.position.y = node.pos.y + Math.sin(t*1.5 + node.phase)*0.09;
+    node.group.position.y = node.pos.y + Math.sin(now*1.5 + node.phase)*0.09;
     if(player.mining !== node){
-      node.group.rotation.y += dt * 0.35;
+      node.group.rotation.y += dt*0.35;
       node.group.position.x = node.pos.x;
       node.group.position.z = node.pos.z;
     }
   }
 }
 
-/* ==========================================================================
-   БЛОК 17. СВЕТ
-   ========================================================================== */
-
-function updateLights(dt){
+/* ========== СВЕТ ========== */
+function updateLights(){
   const px = player.pos.x, pz = player.pos.z;
   const sorted = lanterns
     .map(l => ({ l, d: (l.pos.x-px)**2 + (l.pos.z-pz)**2 }))
     .sort((a,b) => a.d - b.d);
-
   for(let i=0;i<lightPool.length;i++){
     const light = lightPool[i];
     if(i < sorted.length){
@@ -1862,17 +1767,13 @@ function updateLights(dt){
       light.position.copy(src.pos);
       light.color.copy(src.color);
       light.intensity = src.intensity;
-    } else {
-      light.intensity = 0;
-    }
+    } else light.intensity = 0;
   }
-
   if(QUALITY.shadows){
     sun.target.position.set(player.pos.x, 0, player.pos.z);
     sun.position.set(player.pos.x+4, 34, player.pos.z+6);
     sun.target.updateMatrixWorld();
   }
-
   const t = performance.now()*0.001;
   for(let i=0;i<lightPool.length;i++){
     if(lightPool[i].intensity > 0){
@@ -1882,14 +1783,12 @@ function updateLights(dt){
   }
 }
 
-/* ==========================================================================
-   БЛОК 18. UI
-   ========================================================================== */
-
+/* ========== UI ========== */
 const gemCountEl = document.getElementById('gemCount');
 const lvlNumEl = document.getElementById('lvlNum');
 const xpFillEl = document.getElementById('xpFill');
 const fpsEl = document.getElementById('fps');
+const netStatEl = document.getElementById('netStat');
 const toastsEl = document.getElementById('toasts');
 const invEl = document.getElementById('invWrap');
 const playerListEl = document.getElementById('playerList');
@@ -1913,7 +1812,7 @@ function buildInventoryUI(){
 buildInventoryUI();
 
 function updateHUD(){
-  gemCountEl.textContent = player.gems.toLocaleString('ru-RU');
+  gemCountEl.textContent = player.coins.toLocaleString('ru-RU');
   lvlNumEl.textContent = player.level;
   xpFillEl.style.width = clamp((player.xp/player.xpNext)*100, 0, 100) + '%';
   for(const type of ORE_TYPES){
@@ -1923,25 +1822,22 @@ function updateHUD(){
     el.querySelector('.cnt').textContent = cnt;
     el.style.opacity = cnt > 0 ? '1' : '0.42';
   }
+  const shopWallet = document.getElementById('shopWallet');
+  if(shopWallet) shopWallet.textContent = player.coins.toLocaleString('ru-RU');
 }
-
 function updatePlayerListUI(){
   const total = remotePlayers.size + 1;
   let html = `<div class="tag">ИГРОКИ (${total}/3)</div>`;
   html += `<div class="you">● ${NET.name || 'Вы'}</div>`;
-  for(const [, rp] of remotePlayers){
-    html += `<div>● ${rp.name}</div>`;
-  }
+  for(const [, rp] of remotePlayers) html += `<div>● ${rp.name}</div>`;
   playerListEl.innerHTML = html;
 }
-
 function popSlot(id){
   const el = slotEls[id];
   if(!el) return;
   el.classList.add('pop');
   setTimeout(() => el.classList.remove('pop'), 260);
 }
-
 function toast(text){
   const el = document.createElement('div');
   el.className = 'toast';
@@ -1951,11 +1847,117 @@ function toast(text){
   while(toastsEl.children.length > 4) toastsEl.firstChild.remove();
 }
 
+/* ========== МАГАЗИН ========== */
+const shopEl = document.getElementById('shop');
+const tabSell = document.getElementById('tab-sell');
+const tabUpgrade = document.getElementById('tab-upgrade');
+
+function toggleShop(){ shopEl.classList.toggle('show'); if(shopEl.classList.contains('show')) renderShop(); }
+function closeShop(){ shopEl.classList.remove('show'); }
+document.getElementById('closeShop').addEventListener('click', closeShop);
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+    document.querySelectorAll('.shopTab').forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('on');
+  });
+});
+
+function renderSellTab(){
+  tabSell.innerHTML = '';
+  for(const type of ORE_TYPES){
+    const cnt = player.inventory[type.id] || 0;
+    const hex = '#' + new THREE.Color(type.color).getHexString();
+    const row = document.createElement('div');
+    row.className = 'sellRow';
+    row.innerHTML = `
+      <div class="gemIcon" style="background:${hex};color:${hex}"></div>
+      <div class="info">
+        <div class="nm">${type.name}</div>
+        <div class="sub">Цена: ${type.sellPrice} 💎 · Есть: <b>${cnt}</b> шт</div>
+      </div>
+      <div class="btns">
+        <button class="sellBtn" data-id="${type.id}" data-count="1" ${cnt<1?'disabled':''}>×1</button>
+        <button class="sellBtn primary" data-id="${type.id}" data-count="all" ${cnt<1?'disabled':''}>ВСЁ</button>
+      </div>
+    `;
+    tabSell.appendChild(row);
+  }
+  tabSell.querySelectorAll('.sellBtn').forEach(btn => {
+    btn.addEventListener('click', () => sellOre(btn.dataset.id, btn.dataset.count));
+  });
+}
+function sellOre(id, count){
+  const type = ORE_TYPES.find(t => t.id === id);
+  if(!type) return;
+  const have = player.inventory[id] || 0;
+  if(have <= 0) return;
+  const toSell = (count === 'all') ? have : Math.min(1, have);
+  const earned = toSell * type.sellPrice;
+  player.inventory[id] = have - toSell;
+  player.coins += earned;
+  toast(`💰 Продано ${toSell}× ${type.name} = +${earned} 💎`);
+  emitParticles(character.root.position.clone().setY(character.root.position.y+1.6), 0x7ef5ff, 20, 2.5, 0.9, 0.13);
+  updateHUD();
+  renderShop();
+  saveGame();
+}
+
+function renderUpgradeTab(){
+  tabUpgrade.innerHTML = '';
+  for(const up of UPGRADES){
+    const lvl = player.upgrades[up.id] || 0;
+    const maxed = lvl >= up.max;
+    const cost = maxed ? 0 : upgradeCost(up);
+    const canBuy = !maxed && player.coins >= cost;
+    const el = document.createElement('div');
+    el.className = 'upgrade';
+    el.innerHTML = `
+      <div class="ico">${up.icon}</div>
+      <div class="info">
+        <div class="nm">${up.name}</div>
+        <div class="desc">${up.desc}</div>
+        <div class="lvl">Уровень: ${lvl} / ${up.max}</div>
+      </div>
+      <button class="buyBtn" data-id="${up.id}" ${(!canBuy)?'disabled':''}>
+        ${maxed ? 'МАКС' : `${cost} 💎`}
+      </button>
+    `;
+    tabUpgrade.appendChild(el);
+  }
+  tabUpgrade.querySelectorAll('.buyBtn').forEach(btn => {
+    btn.addEventListener('click', () => buyUpgrade(btn.dataset.id));
+  });
+}
+function buyUpgrade(id){
+  const up = UPGRADES.find(u => u.id === id);
+  if(!up) return;
+  const lvl = player.upgrades[up.id] || 0;
+  if(lvl >= up.max){ toast('Уже максимум!'); return; }
+  const cost = upgradeCost(up);
+  if(player.coins < cost){ toast('Недостаточно 💎'); return; }
+  player.coins -= cost;
+  player.upgrades[up.id] = lvl + 1;
+  applyUpgrades();
+  toast(`⬆ ${up.name} улучшен до ${lvl+1}!`);
+  updateHUD();
+  renderShop();
+  saveGame();
+}
+
+function renderShop(){
+  renderSellTab();
+  renderUpgradeTab();
+  document.getElementById('shopWallet').textContent = player.coins.toLocaleString('ru-RU');
+}
+
+/* ========== НАСТРОЙКИ ========== */
 const settingsEl = document.getElementById('settings');
-const gearEl = document.getElementById('gear');
+document.getElementById('gear').addEventListener('click', () => settingsEl.classList.toggle('show'));
+document.getElementById('closeSet').addEventListener('click', () => settingsEl.classList.remove('show'));
 function toggleSettings(){ settingsEl.classList.toggle('show'); }
-gearEl.addEventListener('click', toggleSettings);
-document.getElementById('closeSet').addEventListener('click', toggleSettings);
 
 function bindSwitch(id, initial, onChange){
   const el = document.getElementById(id);
@@ -1970,7 +1972,6 @@ bindSwitch('swShadow', QUALITY.shadows, v => {
   QUALITY.shadows = v;
   renderer.shadowMap.enabled = v;
   sun.castShadow = v;
-  sun.shadow.mapSize.set(v ? 1024 : 512, v ? 1024 : 512);
   if(sun.shadow.map){ sun.shadow.map.dispose(); sun.shadow.map = null; }
   scene.traverse(o => { if(o.isMesh && o.material) o.material.needsUpdate = true; });
 });
@@ -1980,38 +1981,36 @@ bindSwitch('swParticles', QUALITY.particles, v => {
   particles.points.visible = v;
   if(dustPoints) dustPoints.visible = v;
 });
-bindSwitch('swTorch', torchOn, v => { torchOn = v; torch.intensity = v ? 45 : 0; });
+bindSwitch('swTorch', torchOn, v => { torchOn = v; torch.intensity = v ? (45 + (player.upgrades.torch||0)*20) : 0; });
 
 function toggleTorch(){
   torchOn = !torchOn;
-  torch.intensity = torchOn ? 45 : 0;
+  torch.intensity = torchOn ? (45 + (player.upgrades.torch||0)*20) : 0;
   document.getElementById('swTorch').classList.toggle('on', torchOn);
   toast(torchOn ? '🔦 Фонарик включён' : '🔦 Фонарик выключен');
 }
 
-/* ==========================================================================
-   БЛОК 19. СОХРАНЕНИЕ
-   ========================================================================== */
-
+/* ========== СОХРАНЕНИЕ ========== */
 function saveGame(){
   try {
-    localStorage.setItem('blackmine_save', JSON.stringify({
-      gems: player.gems, level: player.level, xp: player.xp, xpNext: player.xpNext,
-      inventory: player.inventory,
-      pos: { x: player.pos.x, y: player.pos.y, z: player.pos.z },
+    localStorage.setItem('blackmine_save_v2', JSON.stringify({
+      coins:player.coins, level:player.level, xp:player.xp, xpNext:player.xpNext,
+      inventory:player.inventory, upgrades:player.upgrades,
+      pos:{ x:player.pos.x, y:player.pos.y, z:player.pos.z },
     }));
   } catch(_){}
 }
 function loadGame(){
   try {
-    const raw = localStorage.getItem('blackmine_save');
+    const raw = localStorage.getItem('blackmine_save_v2') || localStorage.getItem('blackmine_save');
     if(!raw) return;
     const d = JSON.parse(raw);
-    player.gems = d.gems ?? 0;
+    player.coins = d.coins ?? d.gems ?? 0;
     player.level = d.level ?? 1;
     player.xp = d.xp ?? 0;
     player.xpNext = d.xpNext ?? 100;
     if(d.inventory) Object.assign(player.inventory, d.inventory);
+    if(d.upgrades) Object.assign(player.upgrades, d.upgrades);
     if(d.pos){
       player.pos.set(
         clamp(d.pos.x, -40, 40),
@@ -2019,25 +2018,16 @@ function loadGame(){
         clamp(d.pos.z, -40, 40)
       );
     }
+    applyUpgrades();
   } catch(_){}
 }
 setInterval(saveGame, 8000);
 window.addEventListener('beforeunload', saveGame);
 
-/* ==========================================================================
-   БЛОК 20. ЗАГРУЗЧИК
-   ========================================================================== */
-
+/* ========== ЗАГРУЗЧИК ========== */
 const loadBar = document.getElementById('loadBar');
 const loadTxt = document.getElementById('loadTxt');
-const loadSteps = [
-  'Генерация пещеры…',
-  'Создание рудных жил…',
-  'Настройка освещения…',
-  'Сборка персонажа…',
-  'Компиляция шейдеров…',
-  'Готово!',
-];
+const loadSteps = ['Генерация пещеры…','Рудные жилы…','Освещение…','Персонаж…','Магазин…','Готово!'];
 let loadStep = 0;
 function advanceLoad(){
   const pct = ((loadStep+1)/loadSteps.length)*100;
@@ -2046,14 +2036,9 @@ function advanceLoad(){
   loadStep++;
 }
 
-/* ==========================================================================
-   БЛОК 21. ГЛАВНЫЙ ЦИКЛ
-   ========================================================================== */
-
+/* ========== ЦИКЛ ========== */
 let lastTime = performance.now();
-let frames = 0;
-let fpsTimer = 0;
-let fpsValue = 60;
+let frames = 0, fpsTimer = 0, fpsValue = 60;
 let started = false;
 
 function animate(now){
@@ -2068,17 +2053,13 @@ function animate(now){
   updateOres(dt);
   updateMining(dt);
   updateParticles(dt);
-  updateLights(dt);
+  updateLights();
   updateRemotePlayers(dt);
 
-  // Отправка состояния в сеть
   NET.sendTimer += dt;
-  if(NET.sendTimer >= NET.sendRate){
-    NET.sendTimer = 0;
-    netEmitUpdate();
-  }
+  if(NET.sendTimer >= NET.sendRate){ NET.sendTimer = 0; netEmitUpdate(); }
 
-  if(dustPoints && QUALITY.particles) dustPoints.rotation.y += dt * 0.008;
+  if(dustPoints && QUALITY.particles) dustPoints.rotation.y += dt*0.008;
   shaftMat.opacity = 0.045 + Math.sin(now*0.0012)*0.018;
 
   if(QUALITY.bloom) composer.render();
@@ -2089,21 +2070,11 @@ function animate(now){
     fpsValue = Math.round(frames/fpsTimer);
     fpsEl.textContent = fpsValue + ' FPS';
     frames = 0; fpsTimer = 0;
-
-    if(fpsValue < 26 && QUALITY.shadows && started){
-      QUALITY.shadows = false;
-      renderer.shadowMap.enabled = false;
-      sun.castShadow = false;
-      document.getElementById('swShadow').classList.remove('on');
-      toast('⚙ Тени отключены для производительности');
-    }
+    if(NET.ready) netStatEl.textContent = `NET ${NET.latency} ms`;
   }
 }
 
-/* ==========================================================================
-   БЛОК 22. СТАРТ
-   ========================================================================== */
-
+/* ========== СТАРТ ========== */
 function onResize(){
   const w = window.innerWidth, h = window.innerHeight;
   camera.aspect = w/h;
@@ -2115,10 +2086,7 @@ function onResize(){
 window.addEventListener('resize', onResize);
 window.addEventListener('orientationchange', () => setTimeout(onResize, 220));
 
-let loadingComplete = false;
-let networkReady = false;
-let gameStarted = false;
-
+let loadingComplete = false, networkReady = false, gameStarted = false;
 function tryStart(){
   if(loadingComplete && networkReady && !gameStarted){
     gameStarted = true;
@@ -2127,21 +2095,17 @@ function tryStart(){
     document.getElementById('loader').classList.add('hide');
   }
 }
-
 function startGame(){
   loadGame();
   updateHUD();
   updatePlayerListUI();
 
-  // Табличка над локальным игроком
   const myPlate = makeNameplate(NET.name + ' (Вы)', true);
   scene.add(myPlate);
-  const myPlateUpdater = () => {
+  setInterval(() => {
     myPlate.position.copy(character.root.position);
     myPlate.position.y += 2.5;
-  };
-  // Обновляем в главном цикле через таймер (проще)
-  setInterval(myPlateUpdater, 1000/30);
+  }, 1000/30);
 
   character.root.position.copy(player.pos);
   cam.currentPos.set(player.pos.x, player.pos.y+3, player.pos.z+8);
@@ -2150,16 +2114,11 @@ function startGame(){
   started = true;
   lastTime = performance.now();
 
-  setTimeout(() => {
-    const h = document.getElementById('hint');
-    if(h) h.style.opacity = '0';
-  }, 9000);
-
+  setTimeout(() => { const h = document.getElementById('hint'); if(h) h.style.opacity = '0'; }, 9000);
   toast(`⛏ Комната: ${NET.room}`);
-  setTimeout(() => toast('Подойди к руде и зажми кнопку ⛏'), 2000);
+  setTimeout(() => toast('🏪 Кнопка магазина справа — продавай руду!'), 2500);
 }
 
-// Прогресс загрузки
 const stepInterval = setInterval(() => {
   advanceLoad();
   if(loadStep >= loadSteps.length){
@@ -2172,24 +2131,16 @@ const stepInterval = setInterval(() => {
 renderer.compile(scene, camera);
 requestAnimationFrame(animate);
 
-// Пауза при сворачивании
-document.addEventListener('visibilitychange', () => {
-  if(document.hidden) saveGame();
-  lastTime = performance.now();
-});
+document.addEventListener('visibilitychange', () => { if(document.hidden) saveGame(); lastTime = performance.now(); });
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault(), { passive:false });
 
-/* ==========================================================================
-   ЛОББИ ЛОГИКА
-   ========================================================================== */
-
-const lobbyEl       = document.getElementById('lobby');
-const nameInput     = document.getElementById('nameInput');
-const roomInput     = document.getElementById('roomInput');
-const joinBtn       = document.getElementById('joinBtn');
-const lobbyStatus   = document.getElementById('lobbyStatus');
+/* ========== ЛОББИ ========== */
+const nameInput = document.getElementById('nameInput');
+const roomInput = document.getElementById('roomInput');
+const joinBtn = document.getElementById('joinBtn');
+const lobbyStatus = document.getElementById('lobbyStatus');
 
 nameInput.value = localStorage.getItem('blackmine_name') || '';
 roomInput.value = localStorage.getItem('blackmine_room') || '';
@@ -2202,36 +2153,26 @@ function setStatus(txt, isErr){
 joinBtn.addEventListener('click', async () => {
   const name = (nameInput.value || '').trim().slice(0,14) || 'Игрок';
   const room = (roomInput.value || '').trim().toUpperCase().slice(0,8) || 'MINE';
-
   localStorage.setItem('blackmine_name', name);
   localStorage.setItem('blackmine_room', room);
 
   joinBtn.disabled = true;
-  setStatus('Подключение к серверу…');
-
+  setStatus('Подключение…');
   try {
     await connectNetwork(name, room);
-    setStatus(`В комнате: ${room}. Ожидание других игроков…`);
+    setStatus(`Комната: ${room}. Играем!`);
     networkReady = true;
     tryStart();
   } catch(err){
     joinBtn.disabled = false;
-    setStatus(err.message || 'Ошибка подключения', true);
+    setStatus(err.message || 'Ошибка', true);
     console.error(err);
   }
 });
-
-// Enter на инпутах
 for(const el of [nameInput, roomInput]){
-  el.addEventListener('keydown', e => {
-    if(e.key === 'Enter') joinBtn.click();
-  });
+  el.addEventListener('keydown', e => { if(e.key === 'Enter') joinBtn.click(); });
 }
-
-// Фокус на имени
 setTimeout(() => { if(!nameInput.value) nameInput.focus(); }, 300);
-
-/* КОНЕЦ */
 </script>
 </body>
 </html>
