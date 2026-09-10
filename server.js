@@ -12,7 +12,7 @@ const io = new Server(server, {
   maxHttpBufferSize: 1e5,
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 app.get('/health', (_, res) => res.send('OK'));
 
