@@ -16,8 +16,6 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;background:#0707
   color:#e8e8f0;touch-action:none;user-select:none;-webkit-user-select:none;
   overscroll-behavior:none;-webkit-text-size-adjust:100%}
 canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
-
-/* ---------- Лобби ---------- */
 #lobby{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(circle at 50% 40%,#16161f 0%,#07070c 70%);
   padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right))
@@ -46,8 +44,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #lobbyStatus{margin-top:14px;font-size:.75rem;color:#7a7a92;min-height:1.2em;letter-spacing:.05em}
 #lobbyStatus.err{color:#ff6a8a}
 #lobbyHint{margin-top:16px;font-size:.68rem;color:#4a4a62;letter-spacing:.06em;line-height:1.55}
-
-/* ---------- Загрузка ---------- */
 #loader{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:22px;
   background:radial-gradient(circle at 50% 40%,#16161f 0%,#07070c 70%);
@@ -63,8 +59,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   background:linear-gradient(90deg,#4fc3ff,#b06cff,#ff5c8a);
   box-shadow:0 0 18px rgba(176,108,255,.7);transition:width .25s}
 #loadTxt{font-size:.72rem;color:#6a6a86;letter-spacing:.12em}
-
-/* ---------- HUD ---------- */
 #hud{position:fixed;inset:0;pointer-events:none;z-index:10}
 .topbar{position:absolute;top:calc(env(safe-area-inset-top) + 10px);
   left:calc(env(safe-area-inset-left) + 12px);
@@ -77,6 +71,13 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #currency .gem{width:16px;height:16px;border-radius:4px;
   background:linear-gradient(135deg,#7ef0ff,#3ba9ff);
   box-shadow:0 0 12px #4fc3ff;transform:rotate(45deg)}
+#hpBox{display:flex;align-items:center;gap:8px;padding:7px 12px;margin-top:6px}
+#hpBox .heart{font-size:1rem}
+#hpBar{width:110px;height:10px;border-radius:99px;background:#2a0a1a;overflow:hidden;
+  border:1px solid rgba(255,80,80,.3)}
+#hpBar i{display:block;height:100%;width:100%;
+  background:linear-gradient(90deg,#ff2a4a,#ff8a2a);transition:width .2s}
+#hpTxt{font-size:.72rem;font-weight:800;color:#fff}
 #levelBox{padding:8px 14px;min-width:140px}
 #levelBox .row{display:flex;justify-content:space-between;font-size:.68rem;
   letter-spacing:.1em;color:#9a9ab4;margin-bottom:5px}
@@ -170,8 +171,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #hint{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 150px);left:50%;
   transform:translateX(-50%);font-size:.68rem;color:#6a6a86;letter-spacing:.08em;
   text-align:center;transition:opacity .6s;padding:0 14px;max-width:92vw}
-
-/* ---------- Магазин ---------- */
 #shop{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;
   background:rgba(0,0,0,.75);backdrop-filter:blur(10px);padding:16px;overflow-y:auto}
 #shop.show{display:flex}
@@ -188,8 +187,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 .tab.on{background:linear-gradient(90deg,#b06cff,#ff5c8a);color:#fff;border-color:transparent}
 .shopTab{display:none}
 .shopTab.on{display:block}
-
-/* Строка продажи */
 .sellRow{display:flex;align-items:center;gap:10px;padding:10px;margin-bottom:8px;
   background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07);border-radius:12px}
 .sellRow .gemIcon{width:22px;height:22px;border-radius:6px;transform:rotate(45deg);
@@ -204,8 +201,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 .sellBtn:active{transform:scale(.94)}
 .sellBtn.primary{background:linear-gradient(90deg,#b06cff,#ff5c8a);border-color:transparent}
 .sellBtn:disabled{opacity:.35;cursor:not-allowed}
-
-/* Улучшения */
 .upgrade{padding:12px;margin-bottom:10px;background:rgba(0,0,0,.28);
   border:1px solid rgba(255,255,255,.07);border-radius:12px;
   display:flex;gap:12px;align-items:center}
@@ -226,7 +221,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #closeShop{margin-top:16px;width:100%;padding:13px;border-radius:12px;border:none;
   font-weight:800;letter-spacing:.1em;font-size:.82rem;color:#fff;
   background:linear-gradient(90deg,#4fc3ff,#b06cff);cursor:pointer}
-/* ---------- Чат ---------- */
 #chat{position:fixed;right:calc(env(safe-area-inset-right) + 14px);
   bottom:calc(env(safe-area-inset-bottom) + 250px);
   width:min(300px,72vw);max-height:44vh;z-index:65;
@@ -262,7 +256,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   border-radius:99px;background:#ff2a5a;color:#fff;font-size:.6rem;
   font-weight:800;display:none;align-items:center;justify-content:center;
   padding:0 4px;box-shadow:0 0 8px #ff2a5a;pointer-events:none}
-  
 @media (max-width: 500px), (max-height: 620px){
   #stick{width:114px;height:114px}
   #knob{width:50px;height:50px;margin:-25px 0 0 -25px}
@@ -273,6 +266,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   #invWrap{gap:5px;padding:6px}
   #rightBtns{gap:10px;bottom:calc(env(safe-area-inset-bottom) + 78px)}
   #hint{font-size:.62rem}
+  #hpBar{width:90px}
 }
 @media (max-height: 480px){
   #stick{width:96px;height:96px}
@@ -285,7 +279,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 </head>
 <body>
 
-<!-- ЛОББИ -->
 <div id="lobby">
   <div class="card">
     <h1>BLACK MINE</h1>
@@ -298,7 +291,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 </div>
 
-<!-- ЗАГРУЗКА -->
 <div id="loader">
   <h1>BLACK MINE</h1>
   <div class="sub">MULTIPLAYER</div>
@@ -306,11 +298,15 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   <div id="loadTxt">Инициализация…</div>
 </div>
 
-<!-- HUD -->
 <div id="hud">
   <div class="topbar">
     <div>
       <div class="panel" id="currency"><span class="gem"></span><span id="gemCount">0</span></div>
+      <div class="panel" id="hpBox">
+        <span class="heart">❤️</span>
+        <div id="hpBar"><i id="hpFill"></i></div>
+        <span id="hpTxt">100</span>
+      </div>
       <div id="fps">-- FPS</div>
       <div id="netStat">NET -- ms</div>
     </div>
@@ -327,7 +323,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 
   <div id="toasts"></div>
-  <div id="hint">Джойстик — движение · Свайп — камера · ⛏ добыча · 🏪 магазин</div>
+  <div id="hint">⛏ бей руду и мобов · 🏪 магазин · 💬 чат</div>
 
   <div id="invWrap" class="panel"></div>
   <div id="oreBar"><i></i></div>
@@ -335,26 +331,24 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   <div id="stick"><div id="knob"></div></div>
 
   <div id="rightBtns">
-  <div class="btn" id="btnChat" style="position:relative">💬<span id="chatBadge">0</span></div>
-  <div class="btn" id="btnShop">🏪</div>
-  <div class="btn" id="btnMine">⛏</div>
-  <div class="btn" id="btnJump">▲</div>
-</div>
-
-<!-- ЧАТ -->
-<div id="chat">
-  <div id="chatHead"><span>💬 ЧАТ</span><span class="x" id="chatClose">✕</span></div>
-  <div id="chatLog"></div>
-  <div id="chatInput">
-    <input id="chatField" maxlength="120" placeholder="Сообщение…" autocomplete="off">
-    <button id="chatSend">→</button>
+    <div class="btn" id="btnChat" style="position:relative">💬<span id="chatBadge">0</span></div>
+    <div class="btn" id="btnShop">🏪</div>
+    <div class="btn" id="btnMine">⛏</div>
+    <div class="btn" id="btnJump">▲</div>
   </div>
-</div>
+
+  <div id="chat">
+    <div id="chatHead"><span>💬 ЧАТ</span><span class="x" id="chatClose">✕</span></div>
+    <div id="chatLog"></div>
+    <div id="chatInput">
+      <input id="chatField" maxlength="120" placeholder="Сообщение…" autocomplete="off">
+      <button id="chatSend">→</button>
+    </div>
+  </div>
 
   <div class="panel" id="gear">⚙</div>
 </div>
 
-<!-- НАСТРОЙКИ -->
 <div id="settings">
   <div class="card">
     <h2>НАСТРОЙКИ</h2>
@@ -366,7 +360,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 </div>
 
-<!-- МАГАЗИН -->
 <div id="shop">
   <div class="card">
     <h2>
@@ -377,10 +370,8 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
       <div class="tab on" data-tab="sell">ПРОДАТЬ</div>
       <div class="tab" data-tab="upgrade">УЛУЧШЕНИЯ</div>
     </div>
-
     <div class="shopTab on" id="tab-sell"></div>
     <div class="shopTab" id="tab-upgrade"></div>
-
     <button id="closeShop">ЗАКРЫТЬ</button>
   </div>
 </div>
@@ -403,17 +394,21 @@ import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass }      from 'three/addons/postprocessing/OutputPass.js';
 
-/* ========== КОНФИГ ========== */
+/* ========== КОНФИГ (НЕРФ) ========== */
 const CFG = {
   worldRadius: 58, groundSize: 150, groundSegments: 150,
   ceilingHeight: 22, holeRadius: 7,
-  gravity: -24, moveSpeed: 5.2, runMul: 1.8, jumpSpeed: 8.0,
+  gravity: -24,
+  moveSpeed_BASE: 4.2, runMul: 1.8, jumpSpeed_BASE: 6.8,
+  moveSpeed: 4.2, jumpSpeed: 6.8,
   airControl: 0.55, friction: 12,
   camDist: 5.6, camHeight: 1.5,
   camMinPitch: -0.95, camMaxPitch: 0.72, camSmooth: 14,
-  mineRange: 3.8, mineDPS: 1.0,
-  oreCount: 95, oreRespawnMin: 20, oreRespawnMax: 42,
+  mineRange_BASE: 3.0, mineDPS_BASE: 0.5,
+  mineRange: 3.0, mineDPS: 0.5,
+  oreCount: 95, oreRespawnMin: 30, oreRespawnMax: 60,
   lanternCount: 14, lightPoolSize: 5, maxParticles: 420,
+  mobSpawnInterval: 8000, maxMobs: 5,
 };
 
 const isMobile = /Android|iPhone|iPad|iPod|Mobile|Pova/i.test(navigator.userAgent);
@@ -463,7 +458,6 @@ composer.addPass(new OutputPass());
 /* ========== ТЕКСТУРЫ ========== */
 const TEX = {};
 function makeCanvas(s){const c=document.createElement('canvas');c.width=c.height=s;return c;}
-
 function splatterTexture(base, ink, blobs, size=512){
   const c = makeCanvas(size), g = c.getContext('2d');
   g.fillStyle = base; g.fillRect(0,0,size,size);
@@ -483,7 +477,6 @@ function splatterTexture(base, ink, blobs, size=512){
   t.anisotropy = renderer.capabilities.getMaxAnisotropy();
   return t;
 }
-
 function rockTexture(size=512, base='#3b3733', dark='#161412'){
   const c = makeCanvas(size), g = c.getContext('2d');
   g.fillStyle = base; g.fillRect(0,0,size,size);
@@ -507,7 +500,6 @@ function rockTexture(size=512, base='#3b3733', dark='#161412'){
   t.anisotropy = renderer.capabilities.getMaxAnisotropy();
   return t;
 }
-
 function wingTexture(size=256){
   const c = makeCanvas(size), g = c.getContext('2d');
   g.clearRect(0,0,size,size);
@@ -530,7 +522,6 @@ function wingTexture(size=256){
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
 }
-
 TEX.jacket = splatterTexture('#efefef','#0b0b0d',110);
 TEX.pants  = splatterTexture('#e6e6e6','#0b0b0d',95);
 TEX.rock   = rockTexture(512,'#3a3632','#141210');
@@ -544,7 +535,6 @@ const hemi = new THREE.HemisphereLight(0x4a5a80, 0x140f0a, 0.38);
 scene.add(hemi);
 const ambient = new THREE.AmbientLight(0x2a2a3a, 0.5);
 scene.add(ambient);
-
 const sun = new THREE.DirectionalLight(0xffe9b8, 1.55);
 sun.position.set(4,34,6);
 sun.castShadow = QUALITY.shadows;
@@ -557,13 +547,11 @@ if(QUALITY.shadows){
   sun.shadow.bias=-0.0016; sun.shadow.normalBias=0.03;
 }
 scene.add(sun); scene.add(sun.target);
-
 const torch = new THREE.SpotLight(0xfff0d0, 0, 26, Math.PI/5.2, 0.45, 1.4);
 torch.position.set(0,1.6,0);
 torch.target.position.set(0,0,-1);
 scene.add(torch); scene.add(torch.target);
 let torchOn = false;
-
 const lightPool = [];
 for(let i=0;i<CFG.lightPoolSize;i++){
   const l = new THREE.PointLight(0xffa64d, 0, 16, 2);
@@ -591,7 +579,6 @@ function terrainHeight(x,z){
   h += edge*edge*7.5;
   return h;
 }
-
 const groundGeo = new THREE.PlaneGeometry(CFG.groundSize, CFG.groundSize, CFG.groundSegments, CFG.groundSegments);
 groundGeo.rotateX(-Math.PI/2);
 {
@@ -607,26 +594,22 @@ const groundMat = new THREE.MeshStandardMaterial({ map: TEX.rock, color:0x9a9186
 const ground = new THREE.Mesh(groundGeo, groundMat);
 ground.receiveShadow = QUALITY.shadows;
 world.add(ground); collidables.push(ground);
-
 const wallGeo = new THREE.CylinderGeometry(CFG.worldRadius+2, CFG.worldRadius+4, 46, 56, 1, true);
 const wallMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x6e6659, roughness:1, metalness:0, side:THREE.BackSide });
 const walls = new THREE.Mesh(wallGeo, wallMat);
 walls.position.y = 12;
 world.add(walls); collidables.push(walls);
-
 const ceilGeo = new THREE.RingGeometry(CFG.holeRadius, CFG.worldRadius+6, 72, 1);
 ceilGeo.rotateX(Math.PI/2);
 const ceilMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x5b544a, roughness:1, metalness:0, side:THREE.DoubleSide });
 const ceiling = new THREE.Mesh(ceilGeo, ceilMat);
 ceiling.position.y = CFG.ceilingHeight;
 world.add(ceiling);
-
 const skyDisc = new THREE.Mesh(new THREE.CircleGeometry(CFG.holeRadius+0.5, 40),
   new THREE.MeshBasicMaterial({ color:0xa8d8ff, fog:false }));
 skyDisc.rotation.x = Math.PI/2;
 skyDisc.position.y = CFG.ceilingHeight+8;
 scene.add(skyDisc);
-
 const shaftMat = new THREE.MeshBasicMaterial({
   color:0xffe9b8, transparent:true, opacity:0.055, blending:THREE.AdditiveBlending,
   depthWrite:false, side:THREE.DoubleSide, fog:false,
@@ -634,7 +617,6 @@ const shaftMat = new THREE.MeshBasicMaterial({
 const shaft = new THREE.Mesh(new THREE.ConeGeometry(CFG.holeRadius, CFG.ceilingHeight+8, 28, 1, true), shaftMat);
 shaft.position.y = (CFG.ceilingHeight+8)/2;
 scene.add(shaft);
-
 {
   const stalMat = new THREE.MeshStandardMaterial({ map:TEX.rock2, color:0x4a443c, roughness:1 });
   const stalGeo = new THREE.ConeGeometry(1,1,6);
@@ -655,7 +637,6 @@ scene.add(shaft);
   inst.count = n;
   world.add(inst);
 }
-
 function buildSupport(x,z,rotY,scale=1){
   const g = new THREE.Group();
   const woodMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x6b4a2c, roughness:0.9, metalness:0.02 });
@@ -690,7 +671,6 @@ for(let i=0;i<9;i++){
   const r = rand(16,34);
   buildSupport(Math.cos(a)*r, Math.sin(a)*r, a+Math.PI/2, rand(0.9,1.25));
 }
-
 function buildRail(angle, length){
   const g = new THREE.Group();
   const metalMat = new THREE.MeshStandardMaterial({ color:0x555a60, roughness:0.45, metalness:0.9 });
@@ -717,7 +697,6 @@ function buildRail(angle, length){
 }
 const railA = buildRail(0.35, 30);
 railA.position.set(0, terrainHeight(0,0), 0);
-
 function buildCart(x,z,rotY){
   const g = new THREE.Group();
   const metal = new THREE.MeshStandardMaterial({ color:0x4a4a52, roughness:0.5, metalness:0.85 });
@@ -735,7 +714,6 @@ function buildCart(x,z,rotY){
   return g;
 }
 buildCart(4.5, 7.5, 0.35);
-
 {
   const boulderMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x8a8074, roughness:1, metalness:0.02 });
   for(let i=0;i<42;i++){
@@ -753,7 +731,6 @@ buildCart(4.5, 7.5, 0.35);
     if(s>1.0) solids.push({ x, z, r:s*0.85 });
   }
 }
-
 {
   const crateMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x7a5533, roughness:0.95 });
   const barrelMat = new THREE.MeshStandardMaterial({ color:0x3f4a3a, roughness:0.7, metalness:0.5 });
@@ -779,7 +756,6 @@ buildCart(4.5, 7.5, 0.35);
     }
   }
 }
-
 function addLantern(x,y,z){
   const g = new THREE.Group();
   const chainMat = new THREE.MeshStandardMaterial({ color:0x2a2a2a, roughness:0.7, metalness:0.8 });
@@ -812,7 +788,6 @@ for(let i=0;i<CFG.lanternCount;i++){
 }
 addLantern(-6.5, terrainHeight(-6.5,4)+3.2, 4);
 addLantern( 6.5, terrainHeight( 6.5,4)+3.2, 4);
-
 {
   const colors = [0x6ef0ff,0xb06cff,0x4fc3ff,0xff5c8a];
   for(let i=0;i<26;i++){
@@ -839,28 +814,25 @@ addLantern( 6.5, terrainHeight( 6.5,4)+3.2, 4);
   }
 }
 
-/* ========== РУДА ========== */
+/* ========== РУДА (НОВЫЕ ЦЕНЫ) ========== */
 const ORE_TYPES = [
-  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  sellPrice:2,  hard:1.0, weight:34 },
-  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:3,  sellPrice:6,  hard:1.7, weight:26 },
-  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:4,  sellPrice:9,  hard:2.0, weight:18 },
-  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:9,  sellPrice:22, hard:2.5, weight:12 },
-  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:15, sellPrice:40, hard:3.0, weight:8  },
-  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:28, sellPrice:75, hard:3.8, weight:4  },
+  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  sellPrice:1,  hard:1.0, weight:34 },
+  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:2,  sellPrice:3,  hard:1.8, weight:26 },
+  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:3,  sellPrice:6,  hard:2.2, weight:18 },
+  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:6,  sellPrice:14, hard:2.8, weight:12 },
+  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:10, sellPrice:28, hard:3.5, weight:8  },
+  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:18, sellPrice:55, hard:4.5, weight:4  },
 ];
-
 const oreNodes = [];
 const oreGroup = new THREE.Group();
 world.add(oreGroup);
 const rockOreMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x5c554c, roughness:0.95, metalness:0.05 });
-
 function weightedOrePick(){
   const total = ORE_TYPES.reduce((s,o)=>s+o.weight,0);
   let r = Math.random()*total;
   for(const o of ORE_TYPES){ r -= o.weight; if(r<=0) return o; }
   return ORE_TYPES[0];
 }
-
 function createOreNode(type){
   const g = new THREE.Group();
   const size = rand(0.55,1.05);
@@ -891,7 +863,6 @@ function createOreNode(type){
   g.add(halo);
   return g;
 }
-
 function spawnOreAt(x,z,type){
   const g = createOreNode(type);
   const y = terrainHeight(x,z);
@@ -906,7 +877,6 @@ function spawnOreAt(x,z,type){
   oreNodes.push(node);
   return node;
 }
-
 function findOreSpawn(){
   for(let attempt=0;attempt<40;attempt++){
     const a = Math.random()*Math.PI*2;
@@ -998,7 +968,6 @@ function updateParticles(dt){
     particles.points.geometry.attributes.color.needsUpdate = true;
   }
 }
-
 let dustPoints = null;
 {
   const N = 340;
@@ -1021,6 +990,256 @@ let dustPoints = null;
   scene.add(dustPoints);
 }
 
+/* ========== МОБЫ ========== */
+const MOB_TYPES = {
+  bat:    { name:'Летучая мышь', hp:25,  damage:5,  speed:4.0, xp:5,   coins:[5,15],    scale:0.55, color:0x6a2a8a, isBoss:false },
+  spider: { name:'Паук',         hp:60,  damage:12, speed:2.5, xp:15,  coins:[20,50],   scale:0.85, color:0x2a0a1a, isBoss:false },
+  golem:  { name:'ГОЛЕМ-БОСС',   hp:600, damage:25, speed:1.5, xp:100, coins:[200,500], scale:1.8,  color:0x5a5a4a, isBoss:true  },
+};
+const mobs = [];
+const mobGroup = new THREE.Group();
+scene.add(mobGroup);
+
+function createMobMesh(type){
+  const g = new THREE.Group();
+  const mainMat = new THREE.MeshStandardMaterial({
+    color:type.color, roughness:0.7, metalness:0.1,
+    emissive:type.color, emissiveIntensity:0.15,
+  });
+  if (type === MOB_TYPES.bat) {
+    const body = new THREE.Mesh(new THREE.SphereGeometry(0.3, 10, 8), mainMat);
+    body.scale.set(1, 0.7, 1.2);
+    g.add(body);
+    for (const s of [-1, 1]) {
+      const wing = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.4),
+        new THREE.MeshStandardMaterial({ color:0x1a0a1a, side:THREE.DoubleSide, transparent:true, opacity:0.9 }));
+      wing.position.set(s * 0.4, 0.05, 0);
+      wing.userData.wingSide = s;
+      g.add(wing);
+    }
+    for (const s of [-1, 1]) {
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6),
+        new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false }));
+      eye.position.set(s * 0.1, 0.08, 0.28);
+      g.add(eye);
+    }
+  } else if (type === MOB_TYPES.spider) {
+    const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 12, 8), mainMat);
+    body.scale.set(1.3, 0.7, 1.2);
+    g.add(body);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), mainMat);
+    head.position.set(0, 0.15, 0.4);
+    g.add(head);
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2;
+      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.6, 5), mainMat);
+      leg.position.set(Math.cos(angle) * 0.35, -0.05, Math.sin(angle) * 0.35);
+      leg.rotation.z = Math.PI / 2;
+      leg.rotation.y = angle;
+      g.add(leg);
+    }
+    for (const s of [-1, 1]) {
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.06, 6, 6),
+        new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false }));
+      eye.position.set(s * 0.08, 0.2, 0.55);
+      g.add(eye);
+    }
+  } else {
+    const body = new THREE.Mesh(new THREE.BoxGeometry(1, 1.4, 0.8), mainMat);
+    body.position.y = 0.7;
+    g.add(body);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 0.7), mainMat);
+    head.position.y = 1.7;
+    g.add(head);
+    for (const s of [-1, 1]) {
+      const eye = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.08, 0.05),
+        new THREE.MeshBasicMaterial({ color:0xff5a2a, fog:false }));
+      eye.position.set(s * 0.15, 1.75, 0.38);
+      g.add(eye);
+    }
+    for (const s of [-1, 1]) {
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(0.35, 1.1, 0.35), mainMat);
+      arm.position.set(s * 0.75, 0.9, 0);
+      g.add(arm);
+    }
+    for (const s of [-1, 1]) {
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.8, 0.4), mainMat);
+      leg.position.set(s * 0.3, 0.4, 0);
+      g.add(leg);
+    }
+  }
+  return g;
+}
+
+function createHPBar(maxHp, isBoss){
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = isBoss ? 32 : 16;
+  const g = c.getContext('2d');
+  const tex = new THREE.CanvasTexture(c);
+  const mat = new THREE.SpriteMaterial({ map:tex, transparent:true, depthTest:false, fog:false });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(isBoss ? 2.4 : 1.2, isBoss ? 0.3 : 0.15, 1);
+  sprite.userData = { canvas:c, ctx:g, isBoss };
+  updateHPBar(sprite, maxHp, maxHp);
+  return sprite;
+}
+function updateHPBar(bar, hp, maxHp){
+  const c = bar.userData.canvas, g = bar.userData.ctx;
+  g.clearRect(0,0,c.width,c.height);
+  g.fillStyle = 'rgba(0,0,0,0.7)';
+  g.fillRect(0,0,c.width,c.height);
+  g.strokeStyle = bar.userData.isBoss ? '#ff5a2a' : '#ffffff';
+  g.lineWidth = 2;
+  g.strokeRect(1,1,c.width-2,c.height-2);
+  const pct = clamp(hp/maxHp, 0, 1);
+  const grad = g.createLinearGradient(0,0,c.width,0);
+  grad.addColorStop(0,'#ff2a4a');
+  grad.addColorStop(1,'#ff8a2a');
+  g.fillStyle = grad;
+  g.fillRect(2,2,(c.width-4)*pct,c.height-4);
+  bar.material.map.needsUpdate = true;
+}
+
+function spawnMobAt(x, z, typeKey){
+  const type = MOB_TYPES[typeKey];
+  const mesh = createMobMesh(type);
+  mesh.scale.setScalar(type.scale);
+  const y = terrainHeight(x, z);
+  mesh.position.set(x, y, z);
+  mobGroup.add(mesh);
+  const bar = createHPBar(type.hp, type.isBoss);
+  scene.add(bar);
+  mobs.push({
+    type, key:typeKey, hp:type.hp, maxHp:type.hp,
+    pos:new THREE.Vector3(x, y, z),
+    mesh, bar,
+    attackCooldown:0,
+    phase:Math.random()*Math.PI*2,
+    isBoss:type.isBoss,
+    walking:0,
+  });
+}
+function findMobSpawn(distMin, distMax){
+  for(let i=0;i<30;i++){
+    const a = Math.random()*Math.PI*2;
+    const r = rand(distMin, distMax);
+    const x = Math.cos(a)*r, z = Math.sin(a)*r;
+    if(solids.some(s => Math.hypot(s.x-x, s.z-z) < s.r + 2)) continue;
+    if(Math.hypot(x - player.pos.x, z - player.pos.z) < 8) continue;
+    return { x, z };
+  }
+  return null;
+}
+function trySpawnMob(){
+  if(mobs.length >= CFG.maxMobs) return;
+  const r = Math.random();
+  let key = 'bat';
+  if(r < 0.10) key = 'golem';
+  else if(r < 0.35) key = 'spider';
+  if(key === 'golem' && mobs.some(m => m.isBoss)) return;
+  const distMin = key === 'golem' ? 20 : 12;
+  const distMax = key === 'golem' ? 35 : 45;
+  const pos = findMobSpawn(distMin, distMax);
+  if(!pos) return;
+  spawnMobAt(pos.x, pos.z, key);
+}
+function killMob(mob){
+  emitParticles(mob.pos.clone().setY(mob.pos.y + 0.5), mob.type.color, 30, 4, 1, 0.18);
+  const coins = randInt(mob.type.coins[0], mob.type.coins[1]);
+  player.coins += coins;
+  player.xp += mob.type.xp;
+  toast(`⚔️ ${mob.type.name} убит! +${coins} 💎 +${mob.type.xp} XP`);
+  while(player.xp >= player.xpNext){
+    player.xp -= player.xpNext;
+    player.level++;
+    player.xpNext = Math.floor(player.xpNext*1.35 + 40);
+    toast(`⬆ УРОВЕНЬ ${player.level}!`);
+  }
+  mobGroup.remove(mob.mesh);
+  scene.remove(mob.bar);
+  mobs.splice(mobs.indexOf(mob), 1);
+  updateHUD();
+  saveGame();
+}
+function damageMob(mob, dmg){
+  mob.hp -= dmg;
+  updateHPBar(mob.bar, mob.hp, mob.maxHp);
+  if(mob.hp <= 0) killMob(mob);
+}
+function damagePlayer(dmg){
+  if(performance.now() < player.invulnUntil) return;
+  player.hp -= dmg;
+  player.lastDamageTime = performance.now();
+  emitParticles(player.pos.clone().setY(player.pos.y + 1.5), 0xff2a4a, 8, 2.5, 0.6, 0.1);
+  updateHUD();
+  if(player.hp <= 0){
+    player.pos.set(0, terrainHeight(0,0) + 0.1, 5.5);
+    player.hp = Math.floor(player.hpMax * 0.5);
+    player.invulnUntil = performance.now() + 3000;
+    toast('💀 Вы погибли! Возрождение на спавне');
+    updateHUD();
+  }
+}
+function updateMobs(dt){
+  const now = performance.now();
+  const t = now * 0.001;
+  for(let i = mobs.length - 1; i >= 0; i--){
+    const mob = mobs[i];
+    const dx = player.pos.x - mob.pos.x;
+    const dz = player.pos.z - mob.pos.z;
+    const dist = Math.hypot(dx, dz);
+    if(dist > 60){
+      mobGroup.remove(mob.mesh);
+      scene.remove(mob.bar);
+      mobs.splice(i, 1);
+      continue;
+    }
+    const aggroRange = mob.isBoss ? 25 : 18;
+    if(dist < aggroRange && dist > 1.2){
+      const nx = dx/dist, nz = dz/dist;
+      mob.pos.x += nx * mob.type.speed * dt;
+      mob.pos.z += nz * mob.type.speed * dt;
+      mob.walking += dt * 8;
+    } else {
+      mob.walking = damp(mob.walking, 0, 5, dt);
+    }
+    for(const s of solids){
+      const ddx = mob.pos.x - s.x, ddz = mob.pos.z - s.z;
+      const dd = Math.hypot(ddx, ddz);
+      const min = s.r + (mob.isBoss ? 1.0 : 0.4);
+      if(dd < min && dd > 0.001){
+        const push = (min - dd) / dd;
+        mob.pos.x += ddx * push;
+        mob.pos.z += ddz * push;
+      }
+    }
+    const groundY = terrainHeight(mob.pos.x, mob.pos.z);
+    let y = groundY;
+    if(mob.key === 'bat') y += 1.2 + Math.sin(t*3 + mob.phase)*0.3;
+    else if(mob.key === 'spider') y += 0.15 + Math.abs(Math.sin(mob.walking))*0.08;
+    mob.mesh.position.set(mob.pos.x, y, mob.pos.z);
+    mob.mesh.rotation.y = Math.atan2(dx, dz);
+    mob.pos.y = y;
+    if(mob.key === 'bat'){
+      mob.mesh.children.forEach(c => {
+        if(c.isMesh && c.userData.wingSide){
+          c.rotation.z = Math.sin(t*8 + mob.phase) * 0.6;
+        }
+      });
+    }
+    mob.bar.position.set(mob.pos.x, mob.pos.y + (mob.isBoss ? 2.6 : 0.9), mob.pos.z);
+    mob.attackCooldown -= dt;
+    if(dist < 1.6 && mob.attackCooldown <= 0){
+      damagePlayer(mob.type.damage);
+      mob.attackCooldown = 1.2;
+    }
+  }
+  if(player.hp < player.hpMax && now - player.lastDamageTime > 5000){
+    player.hp = Math.min(player.hpMax, player.hp + 3 * dt);
+    updateHUD();
+  }
+}
+
 /* ========== ПЕРСОНАЖ ========== */
 function makeCharacter(){
   const char = {
@@ -1030,7 +1249,6 @@ function makeCharacter(){
     eyes:[], halo:null,
     walkPhase:0, swing:0, swingActive:false,
   };
-
   const skinMat = new THREE.MeshStandardMaterial({ color:0xe8c9a8, roughness:0.75 });
   const shirtMat = new THREE.MeshStandardMaterial({ map:TEX.jacket, color:0xffffff, roughness:0.82, metalness:0.03 });
   const pantsMat = new THREE.MeshStandardMaterial({ map:TEX.pants, color:0xf0f0f0, roughness:0.9, metalness:0.02 });
@@ -1039,34 +1257,27 @@ function makeCharacter(){
   const hatMat   = new THREE.MeshStandardMaterial({ color:0x0a0a0d, roughness:0.5, metalness:0.25 });
   const maskMat  = new THREE.MeshStandardMaterial({ color:0x12203f, roughness:0.6, metalness:0.15 });
   const eyeMat   = new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false });
-
   const torso = new THREE.Mesh(new THREE.BoxGeometry(0.78,0.88,0.42), shirtMat);
   torso.position.y = 1.28;
   torso.castShadow = QUALITY.shadows;
   char.root.add(torso);
-
   const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.20,0.90,0.03), blackMat);
   stripe.position.set(0,1.28,0.225);
   char.root.add(stripe);
-
   const zipper = new THREE.Mesh(new THREE.BoxGeometry(0.035,0.86,0.02), blackMat);
   zipper.position.set(0,1.28,0.245);
   char.root.add(zipper);
-
   const badge = new THREE.Mesh(new THREE.CircleGeometry(0.11,20),
     new THREE.MeshBasicMaterial({ color:0x3aa0e8, fog:false }));
   badge.position.set(0.24,1.45,0.235);
   char.root.add(badge);
-
   const head = new THREE.Group();
   head.position.y = 1.72;
   char.root.add(head);
-
   const skull = new THREE.Mesh(new THREE.BoxGeometry(0.58,0.54,0.54), skinMat);
   skull.position.y = 0.27;
   skull.castShadow = QUALITY.shadows;
   head.add(skull);
-
   for(const sx of [-0.14,0.14]){
     const eye = new THREE.Mesh(new THREE.BoxGeometry(0.13,0.055,0.03), eyeMat);
     eye.position.set(sx,0.34,0.276);
@@ -1080,7 +1291,6 @@ function makeCharacter(){
     gl.position.set(sx,0.34,0.30);
     head.add(gl);
   }
-
   const mask = new THREE.Mesh(new THREE.BoxGeometry(0.55,0.24,0.10), maskMat);
   mask.position.set(0,0.14,0.255);
   head.add(mask);
@@ -1089,12 +1299,10 @@ function makeCharacter(){
     strap.position.set(sx,0.16,0.02);
     head.add(strap);
   }
-
   const hairBase = new THREE.Mesh(new THREE.SphereGeometry(0.34,14,12), hairMat);
   hairBase.position.set(0,0.42,-0.02);
   hairBase.scale.set(1.03,0.85,1.03);
   head.add(hairBase);
-
   const spikeGeo = new THREE.ConeGeometry(0.075,0.42,4);
   for(let i=0;i<22;i++){
     const spike = new THREE.Mesh(spikeGeo, hairMat);
@@ -1112,7 +1320,6 @@ function makeCharacter(){
     spike.scale.setScalar(rand(0.7,1.1));
     head.add(spike);
   }
-
   const hat = new THREE.Group();
   hat.position.y = 0.62;
   head.add(hat);
@@ -1127,7 +1334,6 @@ function makeCharacter(){
     new THREE.MeshStandardMaterial({ color:0x1a1a20, roughness:0.4, metalness:0.4 }));
   band.position.y = 0.05;
   hat.add(band);
-
   function makeArm(side){
     const g = new THREE.Group();
     g.position.set(side*0.50, 1.62, 0);
@@ -1145,7 +1351,6 @@ function makeCharacter(){
   }
   char.armL = makeArm(-1);
   char.armR = makeArm(1);
-
   function makeLeg(side){
     const g = new THREE.Group();
     g.position.set(side*0.20, 0.86, 0);
@@ -1161,11 +1366,9 @@ function makeCharacter(){
   }
   char.legL = makeLeg(-1);
   char.legR = makeLeg(1);
-
   const wingGroup = new THREE.Group();
   wingGroup.position.set(0,1.42,-0.30);
   char.root.add(wingGroup);
-
   const wingMat = new THREE.MeshStandardMaterial({
     map:TEX.wing, transparent:true, alphaTest:0.45, side:THREE.DoubleSide,
     roughness:0.6, metalness:0.1, emissive:0x222230, emissiveIntensity:0.4,
@@ -1180,11 +1383,9 @@ function makeCharacter(){
   wingR.scale.x = -1;
   wingR.rotation.y = -0.42;
   wingGroup.add(wingR);
-
   char.wingGroup = wingGroup;
   char.wingL = wingL;
   char.wingR = wingR;
-
   const halo = new THREE.Mesh(new THREE.RingGeometry(0.45,0.85,32),
     new THREE.MeshBasicMaterial({
       color:0xffffff, transparent:true, opacity:0.10,
@@ -1197,11 +1398,9 @@ function makeCharacter(){
   char.halo = halo;
   char.body = torso;
   char.head = head;
-
   scene.add(char.root);
   return char;
 }
-
 const character = makeCharacter();
 
 function makeNameplate(name, isLocal=false){
@@ -1236,19 +1435,19 @@ const player = {
   vel: new THREE.Vector3(),
   onGround: true,
   facing: Math.PI,
+  hp: 100, hpMax: 100, invulnUntil: 0, lastDamageTime: 0,
+  usedDoubleJump: false,
   coins: 0,
   level: 1, xp: 0, xpNext: 100,
   inventory: { coal:0, iron:0, copper:0, gold:0, amethyst:0, diamond:0 },
-  upgrades: { pickaxe:0, speed:0, jump:0, range:0, torch:0 },
+  upgrades: { pickaxe:0, speed:0, jump:0, range:0, torch:0, greed:0, luck:0, power:0, armor:0, djump:0 },
   mining: null, mineProgress: 0,
 };
-
 const input = {
   move: new THREE.Vector2(0,0),
   jump: false, jumpPressed: false,
   mine: false, run: false,
 };
-
 const cam = {
   yaw: Math.PI, pitch: -0.22,
   dist: CFG.camDist,
@@ -1256,7 +1455,6 @@ const cam = {
   target: new THREE.Vector3(0,1.5,0),
 };
 
-/* ========== КОЛЛИЗИИ ========== */
 function resolveCollisions(pos, radius){
   for(const s of solids){
     const dx = pos.x - s.x, dz = pos.z - s.z;
@@ -1279,42 +1477,30 @@ function resolveCollisions(pos, radius){
 
 /* ========== УЛУЧШЕНИЯ ========== */
 const UPGRADES = [
-  {
-    id:'pickaxe', icon:'⛏', name:'Кирка',
-    desc:'Скорость добычи руды.',
-    max:10, baseCost:30, costMul:1.6,
-    apply:lvl => CFG.mineDPS * (1 + lvl*0.35),
-  },
-  {
-    id:'speed', icon:'👟', name:'Скорость',
-    desc:'Быстрее передвигаешься.',
-    max:10, baseCost:40, costMul:1.65,
-    apply:lvl => CFG.moveSpeed * (1 + lvl*0.12),
-  },
-  {
-    id:'jump', icon:'🦘', name:'Прыжок',
-    desc:'Прыгаешь выше.',
-    max:8, baseCost:35, costMul:1.6,
-    apply:lvl => CFG.jumpSpeed * (1 + lvl*0.1),
-  },
-  {
-    id:'range', icon:'🎯', name:'Радиус добычи',
-    desc:'Добываешь руду с большего расстояния.',
-    max:6, baseCost:50, costMul:1.7,
-    apply:lvl => CFG.mineRange + lvl*0.5,
-  },
-  {
-    id:'torch', icon:'🔦', name:'Фонарик',
-    desc:'Ярче светит фонарик.',
-    max:5, baseCost:25, costMul:1.7,
-    apply:lvl => 45 + lvl*20,
-  },
+  { id:'pickaxe', icon:'⛏',  name:'Кирка',          desc:'+20% к скорости добычи руды.', max:10, baseCost:150,  costMul:1.7,
+    apply:lvl => CFG.mineDPS_BASE * (1 + lvl*0.20) },
+  { id:'speed',   icon:'👟',  name:'Скорость',       desc:'+8% к скорости бега.',         max:10, baseCost:200,  costMul:1.7,
+    apply:lvl => CFG.moveSpeed_BASE * (1 + lvl*0.08) },
+  { id:'jump',    icon:'🦘',  name:'Прыжок',         desc:'+7% к высоте прыжка.',         max:8,  baseCost:180,  costMul:1.7,
+    apply:lvl => CFG.jumpSpeed_BASE * (1 + lvl*0.07) },
+  { id:'range',   icon:'🎯',  name:'Радиус добычи',  desc:'+0.3 м к дистанции.',          max:6,  baseCost:250,  costMul:1.8,
+    apply:lvl => CFG.mineRange_BASE + lvl*0.3 },
+  { id:'torch',   icon:'🔦',  name:'Фонарик',        desc:'Ярче светит.',                 max:5,  baseCost:120,  costMul:1.6,
+    apply:lvl => 30 + lvl*10 },
+  { id:'greed',   icon:'💰',  name:'Жадность',       desc:'+10% к цене продажи руды.',    max:5,  baseCost:400,  costMul:1.9,
+    apply:lvl => lvl * 0.10 },
+  { id:'luck',    icon:'🍀',  name:'Удача',          desc:'+8% шанс получить 2× руды.',   max:5,  baseCost:500,  costMul:1.9,
+    apply:lvl => lvl * 0.08 },
+  { id:'power',   icon:'⚔️',  name:'Сила',           desc:'+20% урона по мобам.',         max:5,  baseCost:350,  costMul:1.8,
+    apply:lvl => 1 + lvl * 0.20 },
+  { id:'armor',   icon:'🛡️',  name:'Броня',          desc:'+15 к максимальному HP.',      max:5,  baseCost:300,  costMul:1.8,
+    apply:lvl => 100 + lvl * 15 },
+  { id:'djump',   icon:'🌀',  name:'Двойной прыжок', desc:'Позволяет прыгнуть в воздухе.', max:1, baseCost:1200, costMul:2.0,
+    apply:lvl => lvl },
 ];
-
 function upgradeCost(up){
-  return Math.floor(up.baseCost * Math.pow(up.costMul, player.upgrades[up.id]));
+  return Math.floor(up.baseCost * Math.pow(up.costMul, player.upgrades[up.id] || 0));
 }
-
 function applyUpgrades(){
   for(const up of UPGRADES){
     const lvl = player.upgrades[up.id] || 0;
@@ -1323,8 +1509,13 @@ function applyUpgrades(){
     else if(up.id === 'speed') CFG.moveSpeed = val;
     else if(up.id === 'jump') CFG.jumpSpeed = val;
     else if(up.id === 'range') CFG.mineRange = val;
-    else if(up.id === 'torch') { if(torchOn) torch.intensity = val; }
+    else if(up.id === 'torch'){ if(torchOn) torch.intensity = val; }
+    else if(up.id === 'armor'){
+      player.hpMax = val;
+      player.hp = Math.min(player.hp, player.hpMax);
+    }
   }
+  updateHUD();
 }
 
 /* ========== СЕТЬ ========== */
@@ -1333,7 +1524,6 @@ const NET = {
   ready:false, sendTimer:0, sendRate:1/18, latency:0,
 };
 const remotePlayers = new Map();
-
 function spawnRemotePlayer(data){
   if(remotePlayers.has(data.id)) return;
   const char = makeCharacter();
@@ -1341,10 +1531,8 @@ function spawnRemotePlayer(data){
   char.root.rotation.y = data.ry || 0;
   char.halo.material.color.setHex(0xb06cff);
   char.halo.material.opacity = 0.08;
-
   const nameplate = makeNameplate(data.name || 'Игрок', false);
   scene.add(nameplate);
-
   remotePlayers.set(data.id, {
     id:data.id, name:data.name || 'Игрок', char, nameplate,
     targetPos:new THREE.Vector3(data.x||0, data.y||0, data.z||5.5),
@@ -1402,10 +1590,7 @@ function netEmitUpdate(){
 }
 function connectNetwork(name, room){
   return new Promise((resolve, reject) => {
-    if(typeof window.io !== 'function'){
-      reject(new Error('Socket.IO не загружен'));
-      return;
-    }
+    if(typeof window.io !== 'function'){ reject(new Error('Socket.IO не загружен')); return; }
     const socket = window.io({
       transports:['websocket','polling'],
       reconnection:true, reconnectionDelay:1200, timeout:8000,
@@ -1414,10 +1599,7 @@ function connectNetwork(name, room){
     const onConnect = () => { NET.selfId = socket.id; socket.emit('joinRoom', { name, room }); };
     const failTimer = setTimeout(() => reject(new Error('Нет ответа от сервера')), 9000);
     socket.on('connect', onConnect);
-    socket.on('roomFull', ({room, max}) => {
-      clearTimeout(failTimer);
-      reject(new Error(`Комната «${room}» заполнена (макс. ${max})`));
-    });
+    socket.on('roomFull', ({room, max}) => { clearTimeout(failTimer); reject(new Error(`Комната «${room}» заполнена (макс. ${max})`)); });
     socket.on('roomJoined', ({room, selfId, players}) => {
       clearTimeout(failTimer);
       NET.selfId = selfId; NET.room = room; NET.name = name; NET.ready = true;
@@ -1446,12 +1628,9 @@ function connectNetwork(name, room){
         emitParticles(node.pos, node.type.color, 30, 4.0, 1.0, 0.14);
       });
       socket.on('chat', ({ name, msg }) => {
-  pushChatMessage(name, msg, false);
-  if(!chatOpen){
-    unreadChat++;
-    setBadge(unreadChat);
-  }
-});
+        pushChatMessage(name, msg, false);
+        if(!chatOpen){ unreadChat++; setBadge(unreadChat); }
+      });
       socket.on('disconnect', () => { NET.ready = false; toast('⚠ Связь потеряна'); });
       socket.io.on('reconnect', () => socket.emit('joinRoom', { name, room }));
       resolve();
@@ -1469,7 +1648,6 @@ window.addEventListener('keydown', e => {
   if(e.code === 'KeyB') toggleShop();
 });
 window.addEventListener('keyup', e => { keys[e.code] = false; });
-
 const stickEl = document.getElementById('stick');
 const knobEl  = document.getElementById('knob');
 let stickPointerId = null;
@@ -1504,7 +1682,6 @@ stickEl.addEventListener('pointerdown', stickStart);
 stickEl.addEventListener('pointermove', stickMove);
 stickEl.addEventListener('pointerup', stickEnd);
 stickEl.addEventListener('pointercancel', stickEnd);
-
 let lookPointerId = null;
 let lookLast = { x:0, y:0 };
 renderer.domElement.addEventListener('pointerdown', e => {
@@ -1525,11 +1702,9 @@ renderer.domElement.addEventListener('pointermove', e => {
 function lookEnd(e){ if(e.pointerId === lookPointerId) lookPointerId = null; }
 renderer.domElement.addEventListener('pointerup', lookEnd);
 renderer.domElement.addEventListener('pointercancel', lookEnd);
-
 const btnJump = document.getElementById('btnJump');
 const btnMine = document.getElementById('btnMine');
 const btnShop = document.getElementById('btnShop');
-
 function bindHold(el, onDown, onUp){
   el.addEventListener('pointerdown', e => {
     e.preventDefault();
@@ -1545,7 +1720,6 @@ function bindHold(el, onDown, onUp){
 bindHold(btnJump, () => { input.jump = true; input.jumpPressed = true; }, () => { input.jump = false; });
 bindHold(btnMine, () => { input.mine = true; }, () => { input.mine = false; });
 btnShop.addEventListener('click', toggleShop);
-
 function readKeyboard(){
   let mx=0, my=0;
   if(keys['KeyW']||keys['ArrowUp'])    my += 1;
@@ -1579,10 +1753,17 @@ function updatePlayer(dt){
   player.vel.x = damp(player.vel.x, wx*speed, CFG.friction*accel, dt);
   player.vel.z = damp(player.vel.z, wz*speed, CFG.friction*accel, dt);
 
-  if(input.jumpPressed && player.onGround){
-    player.vel.y = CFG.jumpSpeed;
-    player.onGround = false;
-    emitParticles(new THREE.Vector3(player.pos.x, player.pos.y+0.1, player.pos.z), 0xbbaaff, 12, 2.2, 0.6, 0.1);
+  if(input.jumpPressed){
+    if(player.onGround){
+      player.vel.y = CFG.jumpSpeed;
+      player.onGround = false;
+      player.usedDoubleJump = false;
+      emitParticles(new THREE.Vector3(player.pos.x, player.pos.y+0.1, player.pos.z), 0xbbaaff, 12, 2.2, 0.6, 0.1);
+    } else if((player.upgrades.djump || 0) > 0 && !player.usedDoubleJump){
+      player.vel.y = CFG.jumpSpeed * 0.9;
+      player.usedDoubleJump = true;
+      emitParticles(new THREE.Vector3(player.pos.x, player.pos.y, player.pos.z), 0x7ef5ff, 16, 2.8, 0.7, 0.12);
+    }
   }
   input.jumpPressed = false;
 
@@ -1600,6 +1781,7 @@ function updatePlayer(dt){
     }
     player.vel.y = 0;
     player.onGround = true;
+    player.usedDoubleJump = false;
   } else {
     player.onGround = false;
   }
@@ -1617,19 +1799,14 @@ function updateCharacter(dt){
   const t = performance.now()*0.001;
   const speed = Math.hypot(player.vel.x, player.vel.z);
   const moving = speed > 0.35;
-
   if(moving) character.walkPhase += dt*(7.5 + speed*1.4);
   else character.walkPhase = damp(character.walkPhase % (Math.PI*2), 0, 8, dt);
-
   const wp = character.walkPhase;
   const amp = clamp(speed / CFG.moveSpeed, 0, 1.6) * 0.72;
-
   character.legL.rotation.x = Math.sin(wp)*amp;
   character.legR.rotation.x = -Math.sin(wp)*amp;
-
   let armSwingL = -Math.sin(wp)*amp*0.8;
   let armSwingR =  Math.sin(wp)*amp*0.8;
-
   if(character.swingActive){
     character.swing += dt*6.5;
     if(character.swing > Math.PI*2) character.swing = 0;
@@ -1637,34 +1814,26 @@ function updateCharacter(dt){
     armSwingR = -1.5 + s*1.9;
     armSwingL = -0.35 + s*0.35;
   }
-
   character.armL.rotation.x = damp(character.armL.rotation.x, armSwingL, 16, dt);
   character.armR.rotation.x = damp(character.armR.rotation.x, armSwingR, 16, dt);
   character.armL.rotation.z = 0.06;
   character.armR.rotation.z = -0.06;
-
   const bob = moving ? Math.abs(Math.sin(wp))*0.055 : Math.sin(t*1.8)*0.018;
   character.root.position.y = player.pos.y + bob;
-
   character.root.rotation.z = damp(character.root.rotation.z,
     moving ? -clamp(player.vel.x*0.012, -0.06, 0.06) : 0, 8, dt);
-
   const headYaw = clamp(angleLerp(0, cam.yaw - player.facing, 1)*0.12, -0.3, 0.3);
   character.head.rotation.y = damp(character.head.rotation.y, headYaw, 6, dt);
-
   const flapSpeed = moving ? 6.5 : 2.6;
   const flap = Math.sin(t*flapSpeed)*(moving ? 0.22 : 0.11);
   character.wingL.rotation.z =  0.12 + flap;
   character.wingR.rotation.z = -0.12 - flap;
-
   const pulse = 1 + Math.sin(t*3.4)*0.045;
   character.wingL.scale.set(pulse, pulse, 1);
   character.wingR.scale.set(-pulse, pulse, 1);
   character.wingGroup.rotation.x = Math.sin(t*1.7)*0.06;
-
   character.halo.material.opacity = 0.07 + Math.sin(t*2.2)*0.035;
   character.halo.scale.setScalar(1 + Math.sin(t*2.2)*0.06);
-
   for(const e of character.eyes) e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
 }
 
@@ -1675,24 +1844,20 @@ function updateCamera(dt){
   cam.target.set(player.pos.x, player.pos.y + CFG.camHeight, player.pos.z);
   const cp = Math.cos(cam.pitch);
   camDirVec.set(Math.sin(cam.yaw)*cp, Math.sin(cam.pitch), Math.cos(cam.yaw)*cp);
-
   let dist = CFG.camDist;
   camRaycaster.set(cam.target, camDirVec.clone().negate());
   camRaycaster.far = CFG.camDist + 0.6;
   const hits = camRaycaster.intersectObjects(collidables, false);
   if(hits.length > 0) dist = Math.max(1.6, hits[0].distance - 0.45);
-
   const desiredX = cam.target.x - camDirVec.x*dist;
   const desiredZ = cam.target.z - camDirVec.z*dist;
   let desiredY = cam.target.y - camDirVec.y*dist;
   const minY = terrainHeight(desiredX, desiredZ) + 0.65;
   if(desiredY < minY) desiredY = minY;
-
   const desired = new THREE.Vector3(desiredX, desiredY, desiredZ);
   cam.currentPos.lerp(desired, 1 - Math.exp(-CFG.camSmooth*dt));
   camera.position.copy(cam.currentPos);
   camera.lookAt(cam.target);
-
   if(torchOn){
     torch.position.set(player.pos.x, player.pos.y+1.55, player.pos.z);
     const dir = new THREE.Vector3();
@@ -1701,56 +1866,72 @@ function updateCamera(dt){
   }
 }
 
-/* ========== ДОБЫЧА ========== */
+/* ========== ДОБЫЧА + БОЙ ========== */
 const oreBarEl = document.getElementById('oreBar');
 const oreBarFill = oreBarEl.querySelector('i');
-function findTargetOre(){
-  let best = null, bestScore = Infinity;
+function findTarget(){
+  let bestTarget = null, bestScore = Infinity;
   const camDir = new THREE.Vector3();
   camera.getWorldDirection(camDir);
   const px = player.pos.x, pz = player.pos.z;
   for(const node of oreNodes){
     if(!node.alive) continue;
-    const dx = node.pos.x - px;
-    const dz = node.pos.z - pz;
+    const dx = node.pos.x - px, dz = node.pos.z - pz;
     const d = Math.hypot(dx, dz);
     if(d > CFG.mineRange) continue;
     const nx = dx/(d||1), nz = dz/(d||1);
     const dot = nx*camDir.x + nz*camDir.z;
     if(dot < 0.10) continue;
     const score = d - dot*2.2;
-    if(score < bestScore){ bestScore = score; best = node; }
+    if(score < bestScore){ bestScore = score; bestTarget = { type:'ore', node }; }
   }
-  return best;
+  for(const mob of mobs){
+    const dx = mob.pos.x - px, dz = mob.pos.z - pz;
+    const d = Math.hypot(dx, dz);
+    const range = CFG.mineRange + 0.6;
+    if(d > range) continue;
+    const nx = dx/(d||1), nz = dz/(d||1);
+    const dot = nx*camDir.x + nz*camDir.z;
+    if(dot < 0.10) continue;
+    const score = d - dot*2.2;
+    if(score < bestScore){ bestScore = score; bestTarget = { type:'mob', mob }; }
+  }
+  return bestTarget;
 }
 function updateMining(dt){
-  const target = findTargetOre();
+  const target = findTarget();
   if(!target){
     player.mining = null;
     character.swingActive = false;
     oreBarEl.style.display = 'none';
     return;
   }
-  player.mining = target;
   character.swingActive = true;
-  target.hp -= CFG.mineDPS * dt;
 
-  const shake = Math.sin(performance.now()*0.05)*0.035;
-  target.group.position.x = target.pos.x + shake;
-  target.group.position.z = target.pos.z + shake;
-
-  if(Math.random() < 0.55) emitParticles(target.pos, target.type.color, 2, 2.4, 0.6, 0.09);
-
-  const screenPos = target.pos.clone().project(camera);
-  if(screenPos.z < 1){
-    oreBarEl.style.display = 'block';
-    oreBarEl.style.left = ((screenPos.x*0.5+0.5)*window.innerWidth) + 'px';
-    oreBarEl.style.top  = ((-screenPos.y*0.5+0.5)*window.innerHeight - 48) + 'px';
-    oreBarFill.style.width = (100 - (target.hp/target.maxHp)*100) + '%';
+  if(target.type === 'ore'){
+    const node = target.node;
+    player.mining = node;
+    node.hp -= CFG.mineDPS * dt;
+    const shake = Math.sin(performance.now()*0.05)*0.035;
+    node.group.position.x = node.pos.x + shake;
+    node.group.position.z = node.pos.z + shake;
+    if(Math.random() < 0.55) emitParticles(node.pos, node.type.color, 2, 2.4, 0.6, 0.09);
+    const sp = node.pos.clone().project(camera);
+    if(sp.z < 1){
+      oreBarEl.style.display = 'block';
+      oreBarEl.style.left = ((sp.x*0.5+0.5)*window.innerWidth) + 'px';
+      oreBarEl.style.top  = ((-sp.y*0.5+0.5)*window.innerHeight - 48) + 'px';
+      oreBarFill.style.width = (100 - (node.hp/node.maxHp)*100) + '%';
+    } else oreBarEl.style.display = 'none';
+    if(node.hp <= 0) breakOre(node);
   } else {
+    const mob = target.mob;
+    const powerMul = 1 + (player.upgrades.power || 0) * 0.20;
+    const dmg = CFG.mineDPS * powerMul * 3 * dt;
+    damageMob(mob, dmg);
+    if(Math.random() < 0.4) emitParticles(mob.pos.clone().setY(mob.pos.y + 0.3), 0xff5a2a, 2, 2.5, 0.5, 0.09);
     oreBarEl.style.display = 'none';
   }
-  if(target.hp <= 0) breakOre(target);
 }
 function breakOre(node){
   const delay = rand(CFG.oreRespawnMin, CFG.oreRespawnMax);
@@ -1759,14 +1940,17 @@ function breakOre(node){
   node.respawnAt = performance.now()/1000 + delay;
   emitParticles(node.pos, node.type.color, 42, 4.5, 1.1, 0.16);
   emitParticles(node.pos, 0xffffff, 14, 3.2, 0.7, 0.1);
-
-  const amount = randInt(1,3);
+  let amount = randInt(1,3);
+  const luckChance = (player.upgrades.luck || 0) * 0.08;
+  if(Math.random() < luckChance){
+    amount *= 2;
+    toast(`🍀 Удача! ×2 руды`);
+  }
   player.inventory[node.type.id] = (player.inventory[node.type.id]||0) + amount;
   const xpGain = Math.ceil(node.type.value * 0.9);
   player.xp += xpGain;
-  toast(`+${amount} ${node.type.name} в инвентарь`);
+  toast(`+${amount} ${node.type.name}`);
   popSlot(node.type.id);
-
   while(player.xp >= player.xpNext){
     player.xp -= player.xpNext;
     player.level++;
@@ -1841,12 +2025,13 @@ function updateLights(){
 const gemCountEl = document.getElementById('gemCount');
 const lvlNumEl = document.getElementById('lvlNum');
 const xpFillEl = document.getElementById('xpFill');
+const hpFillEl = document.getElementById('hpFill');
+const hpTxtEl = document.getElementById('hpTxt');
 const fpsEl = document.getElementById('fps');
 const netStatEl = document.getElementById('netStat');
 const toastsEl = document.getElementById('toasts');
 const invEl = document.getElementById('invWrap');
 const playerListEl = document.getElementById('playerList');
-
 const slotEls = {};
 function buildInventoryUI(){
   invEl.innerHTML = '';
@@ -1864,11 +2049,13 @@ function buildInventoryUI(){
   }
 }
 buildInventoryUI();
-
 function updateHUD(){
   gemCountEl.textContent = player.coins.toLocaleString('ru-RU');
   lvlNumEl.textContent = player.level;
   xpFillEl.style.width = clamp((player.xp/player.xpNext)*100, 0, 100) + '%';
+  const hpPct = clamp((player.hp/player.hpMax)*100, 0, 100);
+  hpFillEl.style.width = hpPct + '%';
+  hpTxtEl.textContent = Math.max(0, Math.round(player.hp)) + ' / ' + player.hpMax;
   for(const type of ORE_TYPES){
     const el = slotEls[type.id];
     if(!el) continue;
@@ -1905,11 +2092,9 @@ function toast(text){
 const shopEl = document.getElementById('shop');
 const tabSell = document.getElementById('tab-sell');
 const tabUpgrade = document.getElementById('tab-upgrade');
-
 function toggleShop(){ shopEl.classList.toggle('show'); if(shopEl.classList.contains('show')) renderShop(); }
 function closeShop(){ shopEl.classList.remove('show'); }
 document.getElementById('closeShop').addEventListener('click', closeShop);
-
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
@@ -1918,11 +2103,12 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('tab-' + tab.dataset.tab).classList.add('on');
   });
 });
-
 function renderSellTab(){
   tabSell.innerHTML = '';
+  const greedMul = 1 + (player.upgrades.greed || 0) * 0.10;
   for(const type of ORE_TYPES){
     const cnt = player.inventory[type.id] || 0;
+    const price = Math.floor(type.sellPrice * greedMul);
     const hex = '#' + new THREE.Color(type.color).getHexString();
     const row = document.createElement('div');
     row.className = 'sellRow';
@@ -1930,7 +2116,7 @@ function renderSellTab(){
       <div class="gemIcon" style="background:${hex};color:${hex}"></div>
       <div class="info">
         <div class="nm">${type.name}</div>
-        <div class="sub">Цена: ${type.sellPrice} 💎 · Есть: <b>${cnt}</b> шт</div>
+        <div class="sub">Цена: ${price} 💎 · Есть: <b>${cnt}</b> шт</div>
       </div>
       <div class="btns">
         <button class="sellBtn" data-id="${type.id}" data-count="1" ${cnt<1?'disabled':''}>×1</button>
@@ -1948,8 +2134,9 @@ function sellOre(id, count){
   if(!type) return;
   const have = player.inventory[id] || 0;
   if(have <= 0) return;
+  const greedMul = 1 + (player.upgrades.greed || 0) * 0.10;
   const toSell = (count === 'all') ? have : Math.min(1, have);
-  const earned = toSell * type.sellPrice;
+  const earned = Math.floor(toSell * type.sellPrice * greedMul);
   player.inventory[id] = have - toSell;
   player.coins += earned;
   toast(`💰 Продано ${toSell}× ${type.name} = +${earned} 💎`);
@@ -1958,7 +2145,6 @@ function sellOre(id, count){
   renderShop();
   saveGame();
 }
-
 function renderUpgradeTab(){
   tabUpgrade.innerHTML = '';
   for(const up of UPGRADES){
@@ -1995,12 +2181,11 @@ function buyUpgrade(id){
   player.coins -= cost;
   player.upgrades[up.id] = lvl + 1;
   applyUpgrades();
-  toast(`⬆ ${up.name} улучшен до ${lvl+1}!`);
+  toast(`⬆ ${up.name} → ур. ${lvl+1}!`);
   updateHUD();
   renderShop();
   saveGame();
 }
-
 function renderShop(){
   renderSellTab();
   renderUpgradeTab();
@@ -2012,7 +2197,6 @@ const settingsEl = document.getElementById('settings');
 document.getElementById('gear').addEventListener('click', () => settingsEl.classList.toggle('show'));
 document.getElementById('closeSet').addEventListener('click', () => settingsEl.classList.remove('show'));
 function toggleSettings(){ settingsEl.classList.toggle('show'); }
-
 function bindSwitch(id, initial, onChange){
   const el = document.getElementById(id);
   el.classList.toggle('on', initial);
@@ -2035,19 +2219,18 @@ bindSwitch('swParticles', QUALITY.particles, v => {
   particles.points.visible = v;
   if(dustPoints) dustPoints.visible = v;
 });
-bindSwitch('swTorch', torchOn, v => { torchOn = v; torch.intensity = v ? (45 + (player.upgrades.torch||0)*20) : 0; });
-
+bindSwitch('swTorch', torchOn, v => { torchOn = v; torch.intensity = v ? (30 + (player.upgrades.torch||0)*10) : 0; });
 function toggleTorch(){
   torchOn = !torchOn;
-  torch.intensity = torchOn ? (45 + (player.upgrades.torch||0)*20) : 0;
+  torch.intensity = torchOn ? (30 + (player.upgrades.torch||0)*10) : 0;
   document.getElementById('swTorch').classList.toggle('on', torchOn);
   toast(torchOn ? '🔦 Фонарик включён' : '🔦 Фонарик выключен');
 }
 
-/* ========== СОХРАНЕНИЕ ========== */
+/* ========== СОХРАНЕНИЕ (v3 с миграцией) ========== */
 function saveGame(){
   try {
-    localStorage.setItem('blackmine_save_v2', JSON.stringify({
+    localStorage.setItem('blackmine_save_v3', JSON.stringify({
       coins:player.coins, level:player.level, xp:player.xp, xpNext:player.xpNext,
       inventory:player.inventory, upgrades:player.upgrades,
       pos:{ x:player.pos.x, y:player.pos.y, z:player.pos.z },
@@ -2056,21 +2239,40 @@ function saveGame(){
 }
 function loadGame(){
   try {
-    const raw = localStorage.getItem('blackmine_save_v2') || localStorage.getItem('blackmine_save');
-    if(!raw) return;
-    const d = JSON.parse(raw);
-    player.coins = d.coins ?? d.gems ?? 0;
-    player.level = d.level ?? 1;
-    player.xp = d.xp ?? 0;
-    player.xpNext = d.xpNext ?? 100;
-    if(d.inventory) Object.assign(player.inventory, d.inventory);
-    if(d.upgrades) Object.assign(player.upgrades, d.upgrades);
-    if(d.pos){
-      player.pos.set(
-        clamp(d.pos.x, -40, 40),
-        terrainHeight(d.pos.x, d.pos.z),
-        clamp(d.pos.z, -40, 40)
-      );
+    const raw = localStorage.getItem('blackmine_save_v3');
+    if(raw){
+      const d = JSON.parse(raw);
+      player.coins = d.coins ?? 0;
+      player.level = d.level ?? 1;
+      player.xp = d.xp ?? 0;
+      player.xpNext = d.xpNext ?? 100;
+      if(d.inventory) Object.assign(player.inventory, d.inventory);
+      if(d.upgrades) Object.assign(player.upgrades, d.upgrades);
+      if(d.pos){
+        player.pos.set(
+          clamp(d.pos.x, -40, 40),
+          terrainHeight(d.pos.x, d.pos.z),
+          clamp(d.pos.z, -40, 40)
+        );
+      }
+    } else {
+      // Миграция из v2 — оставляем монеты, инвентарь, но апгрейды сбрасываются
+      const oldRaw = localStorage.getItem('blackmine_save_v2') || localStorage.getItem('blackmine_save');
+      if(oldRaw){
+        const old = JSON.parse(oldRaw);
+        player.coins = old.coins ?? old.gems ?? 0;
+        player.level = old.level ?? 1;
+        player.xp = old.xp ?? 0;
+        if(old.inventory) Object.assign(player.inventory, old.inventory);
+        if(old.pos){
+          player.pos.set(
+            clamp(old.pos.x, -40, 40),
+            terrainHeight(old.pos.x, old.pos.z),
+            clamp(old.pos.z, -40, 40)
+          );
+        }
+        // ВАЖНО: upgrades НЕ переносятся — перебалансировка
+      }
     }
     applyUpgrades();
   } catch(_){}
@@ -2081,7 +2283,7 @@ window.addEventListener('beforeunload', saveGame);
 /* ========== ЗАГРУЗЧИК ========== */
 const loadBar = document.getElementById('loadBar');
 const loadTxt = document.getElementById('loadTxt');
-const loadSteps = ['Генерация пещеры…','Рудные жилы…','Освещение…','Персонаж…','Магазин…','Готово!'];
+const loadSteps = ['Генерация пещеры…','Рудные жилы…','Освещение…','Персонаж…','Магазин…','Мобы…','Готово!'];
 let loadStep = 0;
 function advanceLoad(){
   const pct = ((loadStep+1)/loadSteps.length)*100;
@@ -2094,7 +2296,7 @@ function advanceLoad(){
 let lastTime = performance.now();
 let frames = 0, fpsTimer = 0, fpsValue = 60;
 let started = false;
-
+let mobSpawnTimer = 0;
 function animate(now){
   requestAnimationFrame(animate);
   const dt = Math.min((now - lastTime)/1000, 0.05);
@@ -2106,9 +2308,16 @@ function animate(now){
   updateCamera(dt);
   updateOres(dt);
   updateMining(dt);
+  updateMobs(dt);
   updateParticles(dt);
   updateLights();
   updateRemotePlayers(dt);
+
+  mobSpawnTimer += dt * 1000;
+  if(mobSpawnTimer >= CFG.mobSpawnInterval){
+    mobSpawnTimer = 0;
+    trySpawnMob();
+  }
 
   NET.sendTimer += dt;
   if(NET.sendTimer >= NET.sendRate){ NET.sendTimer = 0; netEmitUpdate(); }
@@ -2139,7 +2348,6 @@ function onResize(){
 }
 window.addEventListener('resize', onResize);
 window.addEventListener('orientationchange', () => setTimeout(onResize, 220));
-
 let loadingComplete = false, networkReady = false, gameStarted = false;
 function tryStart(){
   if(loadingComplete && networkReady && !gameStarted){
@@ -2153,26 +2361,22 @@ function startGame(){
   loadGame();
   updateHUD();
   updatePlayerListUI();
-
   const myPlate = makeNameplate(NET.name + ' (Вы)', true);
   scene.add(myPlate);
   setInterval(() => {
     myPlate.position.copy(character.root.position);
     myPlate.position.y += 2.5;
   }, 1000/30);
-
   character.root.position.copy(player.pos);
   cam.currentPos.set(player.pos.x, player.pos.y+3, player.pos.z+8);
   camera.position.copy(cam.currentPos);
-
   started = true;
   lastTime = performance.now();
-
   setTimeout(() => { const h = document.getElementById('hint'); if(h) h.style.opacity = '0'; }, 9000);
   toast(`⛏ Комната: ${NET.room}`);
-  setTimeout(() => toast('🏪 Кнопка магазина справа — продавай руду!'), 2500);
+  setTimeout(() => toast('👹 Осторожно, в шахте мобы!'), 2500);
+  setTimeout(() => toast('🏪 Продавай руду в магазине'), 5000);
 }
-
 const stepInterval = setInterval(() => {
   advanceLoad();
   if(loadStep >= loadSteps.length){
@@ -2181,10 +2385,8 @@ const stepInterval = setInterval(() => {
     tryStart();
   }
 }, 260);
-
 renderer.compile(scene, camera);
 requestAnimationFrame(animate);
-
 document.addEventListener('visibilitychange', () => { if(document.hidden) saveGame(); lastTime = performance.now(); });
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('gesturestart', e => e.preventDefault());
@@ -2195,21 +2397,17 @@ const nameInput = document.getElementById('nameInput');
 const roomInput = document.getElementById('roomInput');
 const joinBtn = document.getElementById('joinBtn');
 const lobbyStatus = document.getElementById('lobbyStatus');
-
 nameInput.value = localStorage.getItem('blackmine_name') || '';
 roomInput.value = localStorage.getItem('blackmine_room') || '';
-
 function setStatus(txt, isErr){
   lobbyStatus.textContent = txt;
   lobbyStatus.classList.toggle('err', !!isErr);
 }
-
 joinBtn.addEventListener('click', async () => {
   const name = (nameInput.value || '').trim().slice(0,14) || 'Игрок';
   const room = (roomInput.value || '').trim().toUpperCase().slice(0,8) || 'MINE';
   localStorage.setItem('blackmine_name', name);
   localStorage.setItem('blackmine_room', room);
-
   joinBtn.disabled = true;
   setStatus('Подключение…');
   try {
@@ -2227,7 +2425,8 @@ for(const el of [nameInput, roomInput]){
   el.addEventListener('keydown', e => { if(e.key === 'Enter') joinBtn.click(); });
 }
 setTimeout(() => { if(!nameInput.value) nameInput.focus(); }, 300);
-  /* ========== ЧАТ ========== */
+
+/* ========== ЧАТ ========== */
 const chatEl    = document.getElementById('chat');
 const chatLog   = document.getElementById('chatLog');
 const chatField = document.getElementById('chatField');
@@ -2235,19 +2434,14 @@ const chatSend  = document.getElementById('chatSend');
 const chatClose = document.getElementById('chatClose');
 const btnChat   = document.getElementById('btnChat');
 const chatBadge = document.getElementById('chatBadge');
-
 let chatOpen = false;
 let unreadChat = 0;
-
 function setBadge(n){
   if(n > 0){
     chatBadge.textContent = n > 99 ? '99+' : n;
     chatBadge.style.display = 'flex';
-  } else {
-    chatBadge.style.display = 'none';
-  }
+  } else chatBadge.style.display = 'none';
 }
-
 function openChat(){
   chatEl.classList.add('show');
   chatOpen = true;
@@ -2262,7 +2456,6 @@ function closeChat(){
 }
 btnChat.addEventListener('click', () => chatOpen ? closeChat() : openChat());
 chatClose.addEventListener('click', closeChat);
-
 function pushChatMessage(name, msg, isYou=false, sys=false){
   const el = document.createElement('div');
   if(sys){
@@ -2276,13 +2469,11 @@ function pushChatMessage(name, msg, isYou=false, sys=false){
   chatLog.scrollTop = chatLog.scrollHeight;
   while(chatLog.children.length > 60) chatLog.firstChild.remove();
 }
-
 function escapeHtml(s){
   return String(s).replace(/[&<>"']/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
 }
-
 function sendChat(){
   const txt = (chatField.value || '').trim();
   if(!txt) return;
