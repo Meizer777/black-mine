@@ -28,7 +28,14 @@ io.on('connection', (socket) => {
 
     let r = rooms.get(roomCode);
     if (!r) { r = new Map(); rooms.set(roomCode, r); }
-
+// Удаляем старую сессию с таким же именем (переподключение / дубликат)
+for (const [oldId, oldP] of [...r]) {
+  if (oldId !== socket.id && oldP.name === playerName) {
+    r.delete(oldId);
+    socket.to(roomCode).emit('playerLeft', { id: oldId });
+    console.log(`[${roomCode}] удалён дубликат ${playerName} (${oldId})`);
+  }
+}
     if (r.size >= MAX_PLAYERS) {
       socket.emit('roomFull', { room: roomCode, max: MAX_PLAYERS });
       return;
