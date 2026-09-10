@@ -1595,7 +1595,26 @@ const input = { move: new THREE.Vector2(0,0), jump: false, jumpPressed: false, m
 const cam = { yaw: Math.PI, pitch: -0.22, dist: CFG.camDist,
   currentPos: new THREE.Vector3(0,3,10), target: new THREE.Vector3(0,1.5,0) };
 const stats = { coinsEarned: 0, mobsKilled: 0, oresMined: 0 };
-
+/* ========== КОЛЛИЗИИ ========== */
+function resolveCollisions(pos, radius){
+  for(const s of solids){
+    const dx = pos.x - s.x, dz = pos.z - s.z;
+    const d = Math.hypot(dx,dz);
+    const min = s.r + radius;
+    if(d < min && d > 0.0001){
+      const push = (min-d)/d;
+      pos.x += dx*push; pos.z += dz*push;
+    } else if(d <= 0.0001){
+      pos.x += min;
+    }
+  }
+  const distFromCenter = Math.hypot(pos.x, pos.z);
+  const maxR = CFG.worldRadius - 2.2;
+  if(distFromCenter > maxR){
+    const k = maxR / distFromCenter;
+    pos.x *= k; pos.z *= k;
+  }
+}
 /* ========== ЗАДАНИЯ ========== */
 const QUEST_POOL = [
   { id:'mine_coal',     icon:'⛏', name:'Добыть 30 руды',       desc:'Любой руды за день',     target:30,  reward:150 },
