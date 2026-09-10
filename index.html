@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#07070c">
 <meta name="mobile-web-app-capable" content="yes">
 <title>BLACK MINE — 3D Мультиплеер</title>
+  <script>
+window.addEventListener('error', e => {
+  const d = document.createElement('div');
+  d.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:10px;background:#c00020;color:#fff;font:11px monospace;z-index:99999;word-break:break-all;line-height:1.4';
+  d.textContent = '❌ ' + (e.message || 'error') + ' | line ' + (e.lineno || '?') + ' | ' + (e.filename || '').split('/').pop();
+  document.body.appendChild(d);
+});
+window.addEventListener('unhandledrejection', e => {
+  const d = document.createElement('div');
+  d.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:10px;background:#a00;color:#fff;font:11px monospace;z-index:99999;word-break:break-all';
+  d.textContent = '❌ Promise: ' + (e.reason && e.reason.message || e.reason || '');
+  document.body.appendChild(d);
+});
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{font-size:clamp(12px,2.5vw,16px)}
