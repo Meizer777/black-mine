@@ -6,7 +6,6 @@
 <meta name="theme-color" content="#07070c">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>BLACK MINE — 3D Мультиплеер</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -31,14 +30,14 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #lobby .sub{font-size:.72rem;letter-spacing:.32em;color:#5a5a72;margin-bottom:22px}
 #lobby input{width:100%;padding:14px 16px;margin-bottom:10px;border-radius:12px;
   background:#0f0f18;border:1px solid rgba(255,255,255,.1);color:#fff;
-  font-size:1rem;font-family:inherit;outline:none;transition:.2s;
+  font-size:1rem;font-family:inherit;outline:none;
   -webkit-appearance:none;appearance:none}
 #lobby input:focus{border-color:rgba(176,108,255,.55);box-shadow:0 0 0 3px rgba(176,108,255,.14)}
 #lobby input::placeholder{color:#5a5a72}
 #joinBtn{width:100%;padding:15px;margin-top:6px;border-radius:12px;border:none;
   font-weight:800;letter-spacing:.14em;font-size:.85rem;color:#fff;cursor:pointer;
   background:linear-gradient(90deg,#b06cff,#ff5c8a);
-  box-shadow:0 8px 26px rgba(176,108,255,.35);transition:.15s}
+  box-shadow:0 8px 26px rgba(176,108,255,.35)}
 #joinBtn:active{transform:scale(.97)}
 #joinBtn:disabled{opacity:.5;cursor:wait}
 #lobbyStatus{margin-top:14px;font-size:.75rem;color:#7a7a92;min-height:1.2em;letter-spacing:.05em}
@@ -53,8 +52,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   background:linear-gradient(180deg,#fff 0%,#8a8a9a 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 #loader .sub{font-size:.7rem;letter-spacing:.4em;color:#5a5a72;margin-top:-14px}
-.bar{width:min(340px,72vw);height:5px;border-radius:99px;background:#1b1b28;overflow:hidden;
-  box-shadow:inset 0 0 8px #000}
+.bar{width:min(340px,72vw);height:5px;border-radius:99px;background:#1b1b28;overflow:hidden;box-shadow:inset 0 0 8px #000}
 .bar i{display:block;height:100%;width:0%;border-radius:99px;
   background:linear-gradient(90deg,#4fc3ff,#b06cff,#ff5c8a);
   box-shadow:0 0 18px rgba(176,108,255,.7);transition:width .25s}
@@ -85,6 +83,8 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #xpBar{height:5px;border-radius:99px;background:#1e1e2c;overflow:hidden}
 #xpBar i{display:block;height:100%;width:0%;
   background:linear-gradient(90deg,#b06cff,#ff5c8a);transition:width .3s}
+#worldName{padding:6px 12px;margin-top:6px;font-size:.7rem;font-weight:800;
+  letter-spacing:.1em;color:#7ef5ff;text-align:center}
 #playerList{margin-top:8px;padding:8px 12px;font-size:.72rem;color:#a0a0bc;
   display:flex;flex-direction:column;gap:5px;min-width:140px}
 #playerList .you{color:#7ef5ff;font-weight:800}
@@ -108,15 +108,13 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 .btn{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;font-size:1.4rem;
   background:rgba(20,20,32,.7);border:1.5px solid rgba(255,255,255,.13);
-  color:#dcdcea;backdrop-filter:blur(10px);transition:transform .08s,background .2s;
+  color:#dcdcea;backdrop-filter:blur(10px);
   box-shadow:0 6px 20px rgba(0,0,0,.5);cursor:pointer}
 .btn:active,.btn.on{transform:scale(.92);background:rgba(176,108,255,.3);
   border-color:rgba(176,108,255,.65)}
 #btnJump{width:74px;height:74px}
 #btnMine{background:rgba(255,92,138,.16);border-color:rgba(255,92,138,.4)}
-#btnMine:active{background:rgba(255,92,138,.42)}
 #btnShop{background:rgba(255,201,74,.16);border-color:rgba(255,201,74,.4)}
-#btnShop:active{background:rgba(255,201,74,.42)}
 #stick{position:absolute;left:calc(env(safe-area-inset-left) + 20px);
   bottom:calc(env(safe-area-inset-bottom) + 20px);
   width:132px;height:132px;border-radius:50%;pointer-events:auto;
@@ -182,8 +180,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #shop .wallet{font-size:.85rem;color:#7ef5ff;font-weight:800}
 #shop .tabs{display:flex;gap:8px;margin:16px 0}
 .tab{flex:1;padding:11px;border-radius:12px;background:#1a1a26;border:1px solid rgba(255,255,255,.08);
-  text-align:center;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:#9a9ab4;
-  cursor:pointer;transition:.2s}
+  text-align:center;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:#9a9ab4;cursor:pointer}
 .tab.on{background:linear-gradient(90deg,#b06cff,#ff5c8a);color:#fff;border-color:transparent}
 .shopTab{display:none}
 .shopTab.on{display:block}
@@ -196,9 +193,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 .sellRow .sub{font-size:.7rem;color:#8a8aa6;margin-top:2px}
 .sellRow .btns{display:flex;gap:6px;flex-shrink:0}
 .sellBtn{padding:9px 12px;border-radius:10px;border:none;font-weight:800;font-size:.72rem;
-  letter-spacing:.05em;color:#fff;cursor:pointer;background:#2a2a3a;
-  border:1px solid rgba(255,255,255,.1);transition:.15s;white-space:nowrap}
-.sellBtn:active{transform:scale(.94)}
+  color:#fff;cursor:pointer;background:#2a2a3a;border:1px solid rgba(255,255,255,.1);white-space:nowrap}
 .sellBtn.primary{background:linear-gradient(90deg,#b06cff,#ff5c8a);border-color:transparent}
 .sellBtn:disabled{opacity:.35;cursor:not-allowed}
 .upgrade{padding:12px;margin-bottom:10px;background:rgba(0,0,0,.28);
@@ -213,10 +208,9 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 .upgrade .desc{font-size:.68rem;color:#8a8aa6;line-height:1.35}
 .upgrade .lvl{font-size:.7rem;color:#7ef5ff;font-weight:800;margin-top:4px}
 .buyBtn{padding:11px 14px;border-radius:10px;border:none;font-weight:800;font-size:.75rem;
-  letter-spacing:.05em;color:#fff;cursor:pointer;flex-shrink:0;
+  color:#fff;cursor:pointer;flex-shrink:0;
   background:linear-gradient(90deg,#b06cff,#ff5c8a);
-  box-shadow:0 4px 14px rgba(176,108,255,.4);transition:.15s;white-space:nowrap}
-.buyBtn:active{transform:scale(.94)}
+  box-shadow:0 4px 14px rgba(176,108,255,.4);white-space:nowrap}
 .buyBtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
 #closeShop{margin-top:16px;width:100%;padding:13px;border-radius:12px;border:none;
   font-weight:800;letter-spacing:.1em;font-size:.82rem;color:#fff;
@@ -225,7 +219,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   bottom:calc(env(safe-area-inset-bottom) + 250px);
   width:min(300px,72vw);max-height:44vh;z-index:65;
   background:rgba(14,14,22,.85);border:1px solid rgba(255,255,255,.1);
-  border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:16px;backdrop-filter:blur(12px);
   display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.6);
   transform:translateX(110%);transition:transform .28s ease;pointer-events:auto}
 #chat.show{transform:translateX(0)}
@@ -248,15 +242,12 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 #chatInput input::placeholder{color:#5a5a72}
 #chatSend{padding:0 13px;border-radius:10px;border:none;font-weight:800;
   color:#fff;background:linear-gradient(135deg,#b06cff,#ff5c8a);cursor:pointer}
-#chatSend:active{transform:scale(.95)}
-#btnChat{background:rgba(126,245,255,.16);border-color:rgba(126,245,255,.4);
-  font-size:1.3rem}
-#btnChat:active{background:rgba(126,245,255,.42)}
+#btnChat{background:rgba(126,245,255,.16);border-color:rgba(126,245,255,.4);font-size:1.3rem}
 #chatBadge{position:absolute;top:-3px;right:-3px;min-width:16px;height:16px;
   border-radius:99px;background:#ff2a5a;color:#fff;font-size:.6rem;
   font-weight:800;display:none;align-items:center;justify-content:center;
   padding:0 4px;box-shadow:0 0 8px #ff2a5a;pointer-events:none}
-@media (max-width: 500px), (max-height: 620px){
+@media (max-width: 500px){
   #stick{width:114px;height:114px}
   #knob{width:50px;height:50px;margin:-25px 0 0 -25px}
   .btn{width:58px;height:58px;font-size:1.2rem}
@@ -267,13 +258,6 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   #rightBtns{gap:10px;bottom:calc(env(safe-area-inset-bottom) + 78px)}
   #hint{font-size:.62rem}
   #hpBar{width:90px}
-}
-@media (max-height: 480px){
-  #stick{width:96px;height:96px}
-  #knob{width:42px;height:42px;margin:-21px 0 0 -21px}
-  .btn{width:50px;height:50px;font-size:1rem}
-  #btnJump{width:56px;height:56px}
-  .slot{width:40px;height:44px}
 }
 </style>
 </head>
@@ -287,7 +271,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
     <input id="roomInput" maxlength="8" placeholder="Комната (необязательно)" autocomplete="off">
     <button id="joinBtn">ВОЙТИ В ШАХТУ</button>
     <div id="lobbyStatus">Готов к подключению…</div>
-    <div id="lobbyHint">Введите одинаковый код комнаты, чтобы играть вместе.<br>Максимум 3 игрока в одной комнате.</div>
+    <div id="lobbyHint">Введите одинаковый код комнаты.<br>Максимум 3 игрока. Портал на 5 уровне!</div>
   </div>
 </div>
 
@@ -315,6 +299,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
         <div class="row"><span>УРОВЕНЬ</span><b id="lvlNum">1</b></div>
         <div id="xpBar"><i id="xpFill"></i></div>
       </div>
+      <div class="panel" id="worldName">🏔 ШАХТА</div>
       <div class="panel" id="playerList">
         <div class="tag">ИГРОКИ (1/3)</div>
         <div class="you">● Вы</div>
@@ -323,11 +308,10 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
   </div>
 
   <div id="toasts"></div>
-  <div id="hint">⛏ бей руду и мобов · 🏪 магазин · 💬 чат</div>
+  <div id="hint">⛏ бей руду и мобов · 🏪 магазин · 💬 чат · 🌀 портал (5 ур.)</div>
 
   <div id="invWrap" class="panel"></div>
   <div id="oreBar"><i></i></div>
-
   <div id="stick"><div id="knob"></div></div>
 
   <div id="rightBtns">
@@ -362,10 +346,7 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 
 <div id="shop">
   <div class="card">
-    <h2>
-      <span>🏪 МАГАЗИН</span>
-      <span class="wallet">💎 <span id="shopWallet">0</span></span>
-    </h2>
+    <h2><span>🏪 МАГАЗИН</span><span class="wallet">💎 <span id="shopWallet">0</span></span></h2>
     <div class="tabs">
       <div class="tab on" data-tab="sell">ПРОДАТЬ</div>
       <div class="tab" data-tab="upgrade">УЛУЧШЕНИЯ</div>
@@ -377,16 +358,9 @@ canvas{display:block;position:fixed;inset:0;width:100%;height:100%}
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-
 <script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  }
-}
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
 </script>
-
 <script type="module">
 import * as THREE from 'three';
 import { EffectComposer }  from 'three/addons/postprocessing/EffectComposer.js';
@@ -394,7 +368,7 @@ import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass }      from 'three/addons/postprocessing/OutputPass.js';
 
-/* ========== КОНФИГ (НЕРФ) ========== */
+/* ========== КОНФИГ ========== */
 const CFG = {
   worldRadius: 58, groundSize: 150, groundSegments: 150,
   ceilingHeight: 22, holeRadius: 7,
@@ -427,10 +401,65 @@ function angleLerp(a,b,t){let d=((b-a+Math.PI)%(Math.PI*2))-Math.PI;if(d<-Math.P
 function hash1(n){return Math.sin(n*127.1)*43758.5453%1;}
 function smoothNoise(x){const i=Math.floor(x),f=x-i;const u=f*f*(3-2*f);return lerp(hash1(i),hash1(i+1),u);}
 
+/* ========== МИРЫ ========== */
+const ORE_MINE = [
+  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  sellPrice:1,  hard:1.0, weight:34 },
+  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:2,  sellPrice:3,  hard:1.8, weight:26 },
+  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:3,  sellPrice:6,  hard:2.2, weight:18 },
+  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:6,  sellPrice:14, hard:2.8, weight:12 },
+  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:10, sellPrice:28, hard:3.5, weight:8  },
+  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:18, sellPrice:55, hard:4.5, weight:4  },
+];
+const ORE_ICE = [
+  { id:'ice',      name:'Лёд',               color:0xbfe8ff, emissive:0x0a4a6a, value:2,  sellPrice:3,   hard:1.5, weight:34 },
+  { id:'frost',    name:'Морозный камень',   color:0x88d0ff, emissive:0x0a2a5a, value:5,  sellPrice:15,  hard:2.5, weight:26 },
+  { id:'sapphire', name:'Сапфир',            color:0x4a8aff, emissive:0x0a1a5a, value:10, sellPrice:40,  hard:3.5, weight:18 },
+  { id:'mithril',  name:'Мифрил',            color:0xb8d8ff, emissive:0x4a6a8a, value:20, sellPrice:90,  hard:4.2, weight:12 },
+  { id:'moon',     name:'Лунный камень',     color:0xe8e8ff, emissive:0x6a6a8a, value:35, sellPrice:200, hard:5.0, weight:8  },
+  { id:'star',     name:'Звёздный кристалл', color:0xfff8c8, emissive:0x8a7a3a, value:60, sellPrice:500, hard:6.0, weight:2  },
+];
+
+const MOB_MINE = {
+  bat:    { name:'Летучая мышь', hp:25,  damage:5,  speed:4.0, xp:5,   coins:[5,15],    scale:0.55, color:0x6a2a8a, isBoss:false },
+  spider: { name:'Паук',         hp:60,  damage:12, speed:2.5, xp:15,  coins:[20,50],   scale:0.85, color:0x2a0a1a, isBoss:false },
+  golem:  { name:'ГОЛЕМ-БОСС',   hp:600, damage:25, speed:1.5, xp:100, coins:[200,500], scale:1.8,  color:0x5a5a4a, isBoss:true  },
+};
+const MOB_ICE = {
+  wolf:   { name:'Ледяной волк', hp:40,   damage:15, speed:4.5, xp:12,  coins:[15,40],     scale:0.9, color:0x8ab8e8, isBoss:false },
+  spider: { name:'Снежный паук', hp:100,  damage:20, speed:2.8, xp:25,  coins:[40,100],    scale:0.95, color:0x6a8aa8, isBoss:false },
+  yeti:   { name:'ЙЕТИ-БОСС',    hp:1500, damage:40, speed:1.8, xp:250, coins:[600,1500], scale:2.2, color:0xd8e8ff, isBoss:true  },
+};
+
+const WORLDS = {
+  mine: {
+    id:'mine', name:'🏔 ШАХТА', portalLabel:'🚪 Портал в Бездну',
+    bg:0x07070c, fog:0x0a0a14, fogD:0.021,
+    sunColor:0xffe9b8, sunInt:1.55,
+    hemiSky:0x4a5a80, hemiGround:0x140f0a, hemiInt:0.38,
+    ambColor:0x2a2a3a, ambInt:0.5,
+    ground:0x9a9186, wall:0x6e6659, ceil:0x5b544a,
+    skyDisc:0xa8d8ff, shaft:0xffe9b8, lantern:0xffa64d,
+    spawn:{x:0,z:5.5}, portal:{x:0,z:-14}, portalColor:0x7ef5ff,
+    ores:ORE_MINE, mobs:MOB_MINE,
+  },
+  ice: {
+    id:'ice', name:'🧊 ЛЕДЯНАЯ БЕЗДНА', portalLabel:'🚪 Портал в Шахту',
+    bg:0x050a15, fog:0x0a1a2a, fogD:0.028,
+    sunColor:0xc8e0ff, sunInt:1.1,
+    hemiSky:0x5a7aa0, hemiGround:0x0a1420, hemiInt:0.45,
+    ambColor:0x3a4a5a, ambInt:0.55,
+    ground:0x9ab8d8, wall:0x6a8aa8, ceil:0x5a7a98,
+    skyDisc:0xc8e0ff, shaft:0xc8e0ff, lantern:0x6ec8ff,
+    spawn:{x:0,z:5.5}, portal:{x:0,z:-14}, portalColor:0xc8e0ff,
+    ores:ORE_ICE, mobs:MOB_ICE,
+  }
+};
+let currentWorldId = 'mine';
+let ORE_TYPES = WORLDS.mine.ores;
+let MOB_TYPES = WORLDS.mine.mobs;
+
 /* ========== РЕНДЕР ========== */
-const renderer = new THREE.WebGLRenderer({
-  antialias: !isMobile, powerPreference:'high-performance', stencil:false, alpha:false,
-});
+const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, powerPreference:'high-performance' });
 renderer.setPixelRatio(QUALITY.pixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -443,7 +472,6 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x07070c);
 scene.fog = new THREE.FogExp2(0x0a0a14, 0.021);
-
 const camera = new THREE.PerspectiveCamera(68, window.innerWidth/window.innerHeight, 0.1, 400);
 camera.position.set(0, 3, 8);
 
@@ -511,13 +539,7 @@ function wingTexture(size=256){
     g.quadraticCurveTo(originX-len*0.55,y0+14,originX,y0+8);
     g.closePath(); g.fillStyle='#0a0a0d'; g.fill();
     g.strokeStyle='rgba(255,255,255,.9)'; g.lineWidth=2.2; g.stroke();
-    g.beginPath(); g.moveTo(originX,y0);
-    g.quadraticCurveTo(originX-len*0.5,y0-3,originX-len*0.78,tipY);
-    g.strokeStyle='rgba(255,255,255,.5)'; g.lineWidth=1.4; g.stroke();
   }
-  const grad = g.createRadialGradient(originX,size*0.5,2,originX,size*0.5,size*0.3);
-  grad.addColorStop(0,'rgba(255,255,255,.85)'); grad.addColorStop(1,'rgba(0,0,0,0)');
-  g.fillStyle=grad; g.fillRect(0,0,size,size);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
@@ -564,7 +586,6 @@ const world = new THREE.Group();
 scene.add(world);
 const collidables = [];
 const solids = [];
-
 function terrainHeight(x,z){
   let h = 0;
   h += Math.sin(x*0.082)*Math.cos(z*0.074)*1.45;
@@ -584,8 +605,7 @@ groundGeo.rotateX(-Math.PI/2);
 {
   const pos = groundGeo.attributes.position;
   for(let i=0;i<pos.count;i++){
-    const x=pos.getX(i), z=pos.getZ(i);
-    pos.setY(i, terrainHeight(x,z));
+    pos.setY(i, terrainHeight(pos.getX(i), pos.getZ(i)));
   }
   pos.needsUpdate = true;
   groundGeo.computeVertexNormals();
@@ -595,13 +615,13 @@ const ground = new THREE.Mesh(groundGeo, groundMat);
 ground.receiveShadow = QUALITY.shadows;
 world.add(ground); collidables.push(ground);
 const wallGeo = new THREE.CylinderGeometry(CFG.worldRadius+2, CFG.worldRadius+4, 46, 56, 1, true);
-const wallMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x6e6659, roughness:1, metalness:0, side:THREE.BackSide });
+const wallMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x6e6659, roughness:1, side:THREE.BackSide });
 const walls = new THREE.Mesh(wallGeo, wallMat);
 walls.position.y = 12;
 world.add(walls); collidables.push(walls);
 const ceilGeo = new THREE.RingGeometry(CFG.holeRadius, CFG.worldRadius+6, 72, 1);
 ceilGeo.rotateX(Math.PI/2);
-const ceilMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x5b544a, roughness:1, metalness:0, side:THREE.DoubleSide });
+const ceilMat = new THREE.MeshStandardMaterial({ map: TEX.rock2, color:0x5b544a, roughness:1, side:THREE.DoubleSide });
 const ceiling = new THREE.Mesh(ceilGeo, ceilMat);
 ceiling.position.y = CFG.ceilingHeight;
 world.add(ceiling);
@@ -639,83 +659,36 @@ scene.add(shaft);
 }
 function buildSupport(x,z,rotY,scale=1){
   const g = new THREE.Group();
-  const woodMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x6b4a2c, roughness:0.9, metalness:0.02 });
+  const woodMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x6b4a2c, roughness:0.9 });
   const postGeo = new THREE.BoxGeometry(0.36,4.6,0.36);
   const beamGeo = new THREE.BoxGeometry(3.5,0.42,0.42);
   const braceGeo = new THREE.BoxGeometry(0.26,1.8,0.26);
-  for(const s of [-1,1]){
-    const p = new THREE.Mesh(postGeo, woodMat);
-    p.position.set(s*1.55, 2.3, 0);
-    p.castShadow = QUALITY.shadows;
-    g.add(p);
-  }
-  const b = new THREE.Mesh(beamGeo, woodMat);
-  b.position.set(0,4.45,0);
-  b.castShadow = QUALITY.shadows;
-  g.add(b);
-  for(const s of [-1,1]){
-    const br = new THREE.Mesh(braceGeo, woodMat);
-    br.position.set(s*1.5, 3.5, 0);
-    br.rotation.z = s*0.42;
-    g.add(br);
-  }
+  for(const s of [-1,1]){const p = new THREE.Mesh(postGeo, woodMat); p.position.set(s*1.55, 2.3, 0); p.castShadow = QUALITY.shadows; g.add(p);}
+  const b = new THREE.Mesh(beamGeo, woodMat); b.position.set(0,4.45,0); b.castShadow = QUALITY.shadows; g.add(b);
+  for(const s of [-1,1]){const br = new THREE.Mesh(braceGeo, woodMat); br.position.set(s*1.5, 3.5, 0); br.rotation.z = s*0.42; g.add(br);}
   g.position.set(x, terrainHeight(x,z)-0.2, z);
   g.rotation.y = rotY; g.scale.setScalar(scale);
   world.add(g);
   solids.push({ x:x-Math.cos(rotY)*1.55*scale, z:z+Math.sin(rotY)*1.55*scale, r:0.3 });
   solids.push({ x:x+Math.cos(rotY)*1.55*scale, z:z-Math.sin(rotY)*1.55*scale, r:0.3 });
-  return g;
 }
 for(let i=0;i<9;i++){
   const a = (i/9)*Math.PI*2+0.4;
   const r = rand(16,34);
   buildSupport(Math.cos(a)*r, Math.sin(a)*r, a+Math.PI/2, rand(0.9,1.25));
 }
-function buildRail(angle, length){
-  const g = new THREE.Group();
-  const metalMat = new THREE.MeshStandardMaterial({ color:0x555a60, roughness:0.45, metalness:0.9 });
-  const woodMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x4d3620, roughness:0.95 });
-  const railGeo = new THREE.BoxGeometry(0.11,0.11,length);
-  for(const s of [-0.52,0.52]){
-    const r = new THREE.Mesh(railGeo, metalMat);
-    r.position.set(s,0.16,length/2);
-    g.add(r);
-  }
-  const sleeperGeo = new THREE.BoxGeometry(1.5,0.11,0.24);
-  const n = Math.floor(length/1.15);
-  const inst = new THREE.InstancedMesh(sleeperGeo, woodMat, n);
-  const dummy = new THREE.Object3D();
-  for(let i=0;i<n;i++){
-    dummy.position.set(0,0.06,i*1.15+0.6);
-    dummy.updateMatrix();
-    inst.setMatrixAt(i, dummy.matrix);
-  }
-  g.add(inst);
-  g.rotation.y = angle;
-  world.add(g);
-  return g;
-}
-const railA = buildRail(0.35, 30);
-railA.position.set(0, terrainHeight(0,0), 0);
 function buildCart(x,z,rotY){
   const g = new THREE.Group();
-  const metal = new THREE.MeshStandardMaterial({ color:0x4a4a52, roughness:0.5, metalness:0.85 });
   const rust = new THREE.MeshStandardMaterial({ color:0x7a4a2a, roughness:0.95, metalness:0.3 });
   const body = new THREE.Mesh(new THREE.BoxGeometry(1.6,1.0,1.2), rust);
-  body.position.y = 1.0; body.castShadow = QUALITY.shadows;
-  g.add(body);
-  const inner = new THREE.Mesh(new THREE.BoxGeometry(1.35,0.85,0.95),
-    new THREE.MeshStandardMaterial({ color:0x151210, roughness:1 }));
-  inner.position.y = 1.18; g.add(inner);
-  g.position.set(x, terrainHeight(x,z), z);
-  g.rotation.y = rotY;
+  body.position.y = 1.0; body.castShadow = QUALITY.shadows; g.add(body);
+  g.position.set(x, terrainHeight(x,z), z); g.rotation.y = rotY;
   world.add(g);
   solids.push({ x, z, r:1.1 });
-  return g;
 }
 buildCart(4.5, 7.5, 0.35);
 {
-  const boulderMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x8a8074, roughness:1, metalness:0.02 });
+  const boulderMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x8a8074, roughness:1 });
   for(let i=0;i<42;i++){
     const a = Math.random()*Math.PI*2;
     const r = rand(12, CFG.worldRadius-5);
@@ -726,34 +699,23 @@ buildCart(4.5, 7.5, 0.35);
     mesh.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
     mesh.scale.y = rand(0.6,1.1);
     mesh.castShadow = QUALITY.shadows;
-    mesh.receiveShadow = QUALITY.shadows;
     world.add(mesh);
     if(s>1.0) solids.push({ x, z, r:s*0.85 });
   }
 }
 {
   const crateMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x7a5533, roughness:0.95 });
-  const barrelMat = new THREE.MeshStandardMaterial({ color:0x3f4a3a, roughness:0.7, metalness:0.5 });
   for(let i=0;i<10;i++){
     const a = Math.random()*Math.PI*2;
     const r = rand(14,30);
     const x = Math.cos(a)*r, z = Math.sin(a)*r;
     const y = terrainHeight(x,z);
-    if(Math.random()<0.5){
-      const s = rand(0.7,1.0);
-      const c = new THREE.Mesh(new THREE.BoxGeometry(s,s,s), crateMat);
-      c.position.set(x, y+s/2, z);
-      c.rotation.y = Math.random()*Math.PI;
-      c.castShadow = QUALITY.shadows;
-      world.add(c);
-      solids.push({ x, z, r:s*0.7 });
-    } else {
-      const b = new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,1.0,12), barrelMat);
-      b.position.set(x, y+0.5, z);
-      b.castShadow = QUALITY.shadows;
-      world.add(b);
-      solids.push({ x, z, r:0.5 });
-    }
+    const s = rand(0.7,1.0);
+    const c = new THREE.Mesh(new THREE.BoxGeometry(s,s,s), crateMat);
+    c.position.set(x, y+s/2, z);
+    c.castShadow = QUALITY.shadows;
+    world.add(c);
+    solids.push({ x, z, r:s*0.7 });
   }
 }
 function addLantern(x,y,z){
@@ -764,21 +726,11 @@ function addLantern(x,y,z){
   const bodyMat = new THREE.MeshStandardMaterial({ color:0x3a2a18, roughness:0.7, metalness:0.6 });
   const body = new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.20,0.36,8), bodyMat);
   g.add(body);
-  const glowMat = new THREE.MeshBasicMaterial({ color:0xffb454, fog:false });
-  const glow = new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8), glowMat);
+  const glow = new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8), new THREE.MeshBasicMaterial({ color:0xffb454, fog:false }));
   glow.position.y = -0.24; g.add(glow);
   g.position.set(x,y,z);
   world.add(g);
-  lanterns.push({ pos:new THREE.Vector3(x,y-0.24,z), color:new THREE.Color(0xffa64d), intensity:16 });
-  const halo = new THREE.Sprite(new THREE.SpriteMaterial({
-    color:0xffa64d, transparent:true, opacity:0.28,
-    blending:THREE.AdditiveBlending, depthWrite:false, fog:false,
-  }));
-  halo.scale.set(2.4,2.4,1);
-  halo.position.copy(g.position);
-  halo.position.y -= 0.24;
-  world.add(halo);
-  return g;
+  lanterns.push({ pos:new THREE.Vector3(x,y-0.24,z), color:new THREE.Color(0xffa64d), intensity:16, mesh:glow });
 }
 for(let i=0;i<CFG.lanternCount;i++){
   const a = (i/CFG.lanternCount)*Math.PI*2+0.9;
@@ -788,114 +740,40 @@ for(let i=0;i<CFG.lanternCount;i++){
 }
 addLantern(-6.5, terrainHeight(-6.5,4)+3.2, 4);
 addLantern( 6.5, terrainHeight( 6.5,4)+3.2, 4);
-{
-  const colors = [0x6ef0ff,0xb06cff,0x4fc3ff,0xff5c8a];
-  for(let i=0;i<26;i++){
-    const a = Math.random()*Math.PI*2;
-    const r = rand(20, CFG.worldRadius-6);
-    const x = Math.cos(a)*r, z = Math.sin(a)*r;
-    const y = terrainHeight(x,z);
-    const col = pick(colors);
-    const mat = new THREE.MeshStandardMaterial({
-      color:col, emissive:col, emissiveIntensity:0.55,
-      roughness:0.15, metalness:0.1, transparent:true, opacity:0.9,
-    });
-    const cluster = new THREE.Group();
-    const shards = randInt(2,5);
-    for(let s=0;s<shards;s++){
-      const h = rand(0.4,1.6);
-      const m = new THREE.Mesh(new THREE.ConeGeometry(rand(0.08,0.2), h, 5), mat);
-      m.position.set(rand(-0.4,0.4), h/2, rand(-0.4,0.4));
-      m.rotation.set(rand(-0.35,0.35), Math.random()*3, rand(-0.35,0.35));
-      cluster.add(m);
-    }
-    cluster.position.set(x,y,z);
-    world.add(cluster);
-  }
-}
 
-/* ========== РУДА (НОВЫЕ ЦЕНЫ) ========== */
-const ORE_TYPES = [
-  { id:'coal',     name:'Уголь',    color:0x2b2b30, emissive:0x111114, value:1,  sellPrice:1,  hard:1.0, weight:34 },
-  { id:'iron',     name:'Железо',   color:0xa5704a, emissive:0x2a1408, value:2,  sellPrice:3,  hard:1.8, weight:26 },
-  { id:'copper',   name:'Медь',     color:0xd07a3a, emissive:0x2e1206, value:3,  sellPrice:6,  hard:2.2, weight:18 },
-  { id:'gold',     name:'Золото',   color:0xffc94a, emissive:0x5a3400, value:6,  sellPrice:14, hard:2.8, weight:12 },
-  { id:'amethyst', name:'Аметист',  color:0xb06cff, emissive:0x2a0a55, value:10, sellPrice:28, hard:3.5, weight:8  },
-  { id:'diamond',  name:'Алмаз',    color:0x7ef5ff, emissive:0x0a4b55, value:18, sellPrice:55, hard:4.5, weight:4  },
-];
-const oreNodes = [];
-const oreGroup = new THREE.Group();
-world.add(oreGroup);
-const rockOreMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x5c554c, roughness:0.95, metalness:0.05 });
-function weightedOrePick(){
-  const total = ORE_TYPES.reduce((s,o)=>s+o.weight,0);
-  let r = Math.random()*total;
-  for(const o of ORE_TYPES){ r -= o.weight; if(r<=0) return o; }
-  return ORE_TYPES[0];
-}
-function createOreNode(type){
+/* ========== ПОРТАЛ ========== */
+let portalGroup = null;
+function createPortal(worldId){
+  if(portalGroup){
+    world.remove(portalGroup);
+    portalGroup = null;
+  }
+  const wc = WORLDS[worldId];
+  const pos = wc.portal;
   const g = new THREE.Group();
-  const size = rand(0.55,1.05);
-  const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(size,0), rockOreMat);
-  rock.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
-  rock.castShadow = QUALITY.shadows;
-  g.add(rock);
-  const mat = new THREE.MeshStandardMaterial({
-    color:type.color, emissive:type.emissive, emissiveIntensity:1.4,
-    roughness:0.22, metalness:0.35,
+  const ringMat = new THREE.MeshStandardMaterial({
+    color: wc.portalColor,
+    emissive: wc.portalColor,
+    emissiveIntensity: 1.8,
+    transparent: true, opacity: 0.9,
   });
-  const shardCount = randInt(3,7);
-  for(let i=0;i<shardCount;i++){
-    const s = rand(0.10,0.30);
-    const shard = new THREE.Mesh(new THREE.OctahedronGeometry(s,0), mat);
-    const a = Math.random()*Math.PI*2;
-    const b = Math.random()*Math.PI-Math.PI/2;
-    const rad = size*0.85;
-    shard.position.set(Math.cos(a)*Math.cos(b)*rad, Math.sin(b)*rad+rand(-0.1,0.25), Math.sin(a)*Math.cos(b)*rad);
-    shard.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
-    g.add(shard);
-  }
-  const halo = new THREE.Sprite(new THREE.SpriteMaterial({
-    color:type.color, transparent:true, opacity:0.16,
-    blending:THREE.AdditiveBlending, depthWrite:false, fog:false,
-  }));
-  halo.scale.setScalar(size*4.2);
-  g.add(halo);
-  return g;
-}
-function spawnOreAt(x,z,type){
-  const g = createOreNode(type);
-  const y = terrainHeight(x,z);
-  g.position.set(x, y+0.35, z);
-  g.rotation.y = Math.random()*Math.PI*2;
-  oreGroup.add(g);
-  const node = {
-    group:g, type, hp:type.hard, maxHp:type.hard, alive:true,
-    respawnAt:0, pos:new THREE.Vector3(x,y+0.35,z), baseY:y+0.35,
-    phase:Math.random()*Math.PI*2,
-  };
-  oreNodes.push(node);
-  return node;
-}
-function findOreSpawn(){
-  for(let attempt=0;attempt<40;attempt++){
-    const a = Math.random()*Math.PI*2;
-    const r = rand(7, CFG.worldRadius-6);
-    const x = Math.cos(a)*r, z = Math.sin(a)*r;
-    let ok = true;
-    for(const n of oreNodes){
-      if(n.pos.distanceToSquared(new THREE.Vector3(x,0,z)) < 6.0){ ok=false; break; }
-    }
-    if(!ok) continue;
-    if(solids.some(s=>Math.hypot(s.x-x,s.z-z) < s.r+1.2)) continue;
-    return { x, z };
-  }
-  return null;
-}
-for(let i=0;i<CFG.oreCount;i++){
-  const p = findOreSpawn();
-  if(!p) continue;
-  spawnOreAt(p.x, p.z, weightedOrePick());
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.18, 12, 32), ringMat);
+  ring.position.y = 1.6;
+  g.add(ring);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(1.4, 32),
+    new THREE.MeshBasicMaterial({
+      color: wc.portalColor, transparent: true, opacity: 0.35,
+      side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
+    }));
+  disc.position.y = 1.6;
+  g.add(disc);
+  const light = new THREE.PointLight(wc.portalColor, 10, 10);
+  light.position.y = 1.6;
+  g.add(light);
+  g.position.set(pos.x, terrainHeight(pos.x, pos.z), pos.z);
+  world.add(g);
+  portalGroup = g;
+  portalGroup.userData = { world: worldId, disc, ring, light };
 }
 
 /* ========== ЧАСТИЦЫ ========== */
@@ -990,26 +868,111 @@ let dustPoints = null;
   scene.add(dustPoints);
 }
 
+/* ========== РУДА (динамическая) ========== */
+const oreNodes = [];
+const oreGroup = new THREE.Group();
+world.add(oreGroup);
+const rockOreMat = new THREE.MeshStandardMaterial({ map:TEX.rock, color:0x5c554c, roughness:0.95, metalness:0.05 });
+function weightedOrePick(ores){
+  const total = ores.reduce((s,o)=>s+o.weight,0);
+  let r = Math.random()*total;
+  for(const o of ores){ r -= o.weight; if(r<=0) return o; }
+  return ores[0];
+}
+function createOreNode(type){
+  const g = new THREE.Group();
+  const size = rand(0.55,1.05);
+  const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(size,0), rockOreMat);
+  rock.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
+  rock.castShadow = QUALITY.shadows; g.add(rock);
+  const mat = new THREE.MeshStandardMaterial({
+    color:type.color, emissive:type.emissive, emissiveIntensity:1.4,
+    roughness:0.22, metalness:0.35,
+  });
+  const shardCount = randInt(3,7);
+  for(let i=0;i<shardCount;i++){
+    const s = rand(0.10,0.30);
+    const shard = new THREE.Mesh(new THREE.OctahedronGeometry(s,0), mat);
+    const a = Math.random()*Math.PI*2;
+    const b = Math.random()*Math.PI-Math.PI/2;
+    const rad = size*0.85;
+    shard.position.set(Math.cos(a)*Math.cos(b)*rad, Math.sin(b)*rad+rand(-0.1,0.25), Math.sin(a)*Math.cos(b)*rad);
+    shard.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
+    g.add(shard);
+  }
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+    color:type.color, transparent:true, opacity:0.16,
+    blending:THREE.AdditiveBlending, depthWrite:false, fog:false,
+  }));
+  halo.scale.setScalar(size*4.2);
+  g.add(halo);
+  return g;
+}
+function spawnOreAt(x,z,type){
+  const g = createOreNode(type);
+  const y = terrainHeight(x,z);
+  g.position.set(x, y+0.35, z);
+  g.rotation.y = Math.random()*Math.PI*2;
+  oreGroup.add(g);
+  const node = {
+    group:g, type, hp:type.hard, maxHp:type.hard, alive:true,
+    respawnAt:0, pos:new THREE.Vector3(x,y+0.35,z), baseY:y+0.35,
+    phase:Math.random()*Math.PI*2,
+  };
+  oreNodes.push(node);
+  return node;
+}
+function findOreSpawn(){
+  for(let attempt=0;attempt<40;attempt++){
+    const a = Math.random()*Math.PI*2;
+    const r = rand(7, CFG.worldRadius-6);
+    const x = Math.cos(a)*r, z = Math.sin(a)*r;
+    let ok = true;
+    for(const n of oreNodes){
+      if(n.pos.distanceToSquared(new THREE.Vector3(x,0,z)) < 6.0){ ok=false; break; }
+    }
+    if(!ok) continue;
+    if(solids.some(s=>Math.hypot(s.x-x,s.z-z) < s.r+1.2)) continue;
+    if(Math.hypot(x-WORLDS[currentWorldId].portal.x, z-WORLDS[currentWorldId].portal.z) < 4) continue;
+    return { x, z };
+  }
+  return null;
+}
+function generateOres(ores){
+  for(let i=0;i<CFG.oreCount;i++){
+    const p = findOreSpawn();
+    if(!p) continue;
+    spawnOreAt(p.x, p.z, weightedOrePick(ores));
+  }
+}
+function clearOres(){
+  for(const node of oreNodes){
+    oreGroup.remove(node.group);
+    node.group.traverse(o => {
+      if(o.geometry) o.geometry.dispose();
+      if(o.material){
+        if(o.material.map && o.material.map !== TEX.rock) o.material.map.dispose();
+        o.material.dispose();
+      }
+    });
+  }
+  oreNodes.length = 0;
+}
+
 /* ========== МОБЫ ========== */
-const MOB_TYPES = {
-  bat:    { name:'Летучая мышь', hp:25,  damage:5,  speed:4.0, xp:5,   coins:[5,15],    scale:0.55, color:0x6a2a8a, isBoss:false },
-  spider: { name:'Паук',         hp:60,  damage:12, speed:2.5, xp:15,  coins:[20,50],   scale:0.85, color:0x2a0a1a, isBoss:false },
-  golem:  { name:'ГОЛЕМ-БОСС',   hp:600, damage:25, speed:1.5, xp:100, coins:[200,500], scale:1.8,  color:0x5a5a4a, isBoss:true  },
-};
 const mobs = [];
 const mobGroup = new THREE.Group();
 scene.add(mobGroup);
-
 function createMobMesh(type){
   const g = new THREE.Group();
   const mainMat = new THREE.MeshStandardMaterial({
     color:type.color, roughness:0.7, metalness:0.1,
     emissive:type.color, emissiveIntensity:0.15,
   });
-  if (type === MOB_TYPES.bat) {
+  const name = type.name.toLowerCase();
+  if(name.includes('мышь')) {
     const body = new THREE.Mesh(new THREE.SphereGeometry(0.3, 10, 8), mainMat);
-    body.scale.set(1, 0.7, 1.2);
-    g.add(body);
+    body.scale.set(1, 0.7, 1.2); g.add(body);
     for (const s of [-1, 1]) {
       const wing = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.4),
         new THREE.MeshStandardMaterial({ color:0x1a0a1a, side:THREE.DoubleSide, transparent:true, opacity:0.9 }));
@@ -1020,57 +983,78 @@ function createMobMesh(type){
     for (const s of [-1, 1]) {
       const eye = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6),
         new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false }));
-      eye.position.set(s * 0.1, 0.08, 0.28);
-      g.add(eye);
+      eye.position.set(s * 0.1, 0.08, 0.28); g.add(eye);
     }
-  } else if (type === MOB_TYPES.spider) {
+  } else if(name.includes('паук')) {
     const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 12, 8), mainMat);
-    body.scale.set(1.3, 0.7, 1.2);
-    g.add(body);
+    body.scale.set(1.3, 0.7, 1.2); g.add(body);
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), mainMat);
-    head.position.set(0, 0.15, 0.4);
-    g.add(head);
+    head.position.set(0, 0.15, 0.4); g.add(head);
     for (let i = 0; i < 8; i++) {
       const angle = (i / 8) * Math.PI * 2;
       const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.6, 5), mainMat);
       leg.position.set(Math.cos(angle) * 0.35, -0.05, Math.sin(angle) * 0.35);
-      leg.rotation.z = Math.PI / 2;
-      leg.rotation.y = angle;
+      leg.rotation.z = Math.PI / 2; leg.rotation.y = angle;
       g.add(leg);
     }
     for (const s of [-1, 1]) {
       const eye = new THREE.Mesh(new THREE.SphereGeometry(0.06, 6, 6),
         new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false }));
-      eye.position.set(s * 0.08, 0.2, 0.55);
-      g.add(eye);
+      eye.position.set(s * 0.08, 0.2, 0.55); g.add(eye);
+    }
+  } else if(name.includes('волк')) {
+    const body = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.5, 1.0), mainMat);
+    body.position.y = 0.5; g.add(body);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.4, 0.5), mainMat);
+    head.position.set(0, 0.7, 0.6); g.add(head);
+    for (const s of [-1, 1]) {
+      const ear = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.25, 4), mainMat);
+      ear.position.set(s * 0.15, 0.95, 0.6); g.add(ear);
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6),
+        new THREE.MeshBasicMaterial({ color:0x6ec8ff, fog:false }));
+      eye.position.set(s * 0.12, 0.75, 0.83); g.add(eye);
+    }
+    for (let i = 0; i < 4; i++) {
+      const lx = (i < 2 ? -1 : 1) * 0.25;
+      const lz = (i % 2 === 0 ? 0.35 : -0.35);
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.5, 0.15), mainMat);
+      leg.position.set(lx, 0.25, lz); g.add(leg);
+    }
+  } else if(name.includes('йети')) {
+    const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.6, 1.0), mainMat);
+    body.position.y = 0.8; g.add(body);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.8, 0.8), mainMat);
+    head.position.y = 2.0; g.add(head);
+    for (const s of [-1, 1]) {
+      const eye = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.1, 0.05),
+        new THREE.MeshBasicMaterial({ color:0x6ec8ff, fog:false }));
+      eye.position.set(s * 0.2, 2.05, 0.43); g.add(eye);
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.3, 0.4), mainMat);
+      arm.position.set(s * 0.9, 1.0, 0); g.add(arm);
+    }
+    for (const s of [-1, 1]) {
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.9, 0.5), mainMat);
+      leg.position.set(s * 0.35, 0.45, 0); g.add(leg);
     }
   } else {
     const body = new THREE.Mesh(new THREE.BoxGeometry(1, 1.4, 0.8), mainMat);
-    body.position.y = 0.7;
-    g.add(body);
+    body.position.y = 0.7; g.add(body);
     const head = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 0.7), mainMat);
-    head.position.y = 1.7;
-    g.add(head);
+    head.position.y = 1.7; g.add(head);
     for (const s of [-1, 1]) {
       const eye = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.08, 0.05),
         new THREE.MeshBasicMaterial({ color:0xff5a2a, fog:false }));
-      eye.position.set(s * 0.15, 1.75, 0.38);
-      g.add(eye);
+      eye.position.set(s * 0.15, 1.75, 0.38); g.add(eye);
     }
     for (const s of [-1, 1]) {
       const arm = new THREE.Mesh(new THREE.BoxGeometry(0.35, 1.1, 0.35), mainMat);
-      arm.position.set(s * 0.75, 0.9, 0);
-      g.add(arm);
-    }
-    for (const s of [-1, 1]) {
+      arm.position.set(s * 0.75, 0.9, 0); g.add(arm);
       const leg = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.8, 0.4), mainMat);
-      leg.position.set(s * 0.3, 0.4, 0);
-      g.add(leg);
+      leg.position.set(s * 0.3, 0.4, 0); g.add(leg);
     }
   }
   return g;
 }
-
 function createHPBar(maxHp, isBoss){
   const c = document.createElement('canvas');
   c.width = 128; c.height = isBoss ? 32 : 16;
@@ -1089,19 +1073,17 @@ function updateHPBar(bar, hp, maxHp){
   g.fillStyle = 'rgba(0,0,0,0.7)';
   g.fillRect(0,0,c.width,c.height);
   g.strokeStyle = bar.userData.isBoss ? '#ff5a2a' : '#ffffff';
-  g.lineWidth = 2;
-  g.strokeRect(1,1,c.width-2,c.height-2);
+  g.lineWidth = 2; g.strokeRect(1,1,c.width-2,c.height-2);
   const pct = clamp(hp/maxHp, 0, 1);
   const grad = g.createLinearGradient(0,0,c.width,0);
-  grad.addColorStop(0,'#ff2a4a');
-  grad.addColorStop(1,'#ff8a2a');
+  grad.addColorStop(0,'#ff2a4a'); grad.addColorStop(1,'#ff8a2a');
   g.fillStyle = grad;
   g.fillRect(2,2,(c.width-4)*pct,c.height-4);
   bar.material.map.needsUpdate = true;
 }
-
 function spawnMobAt(x, z, typeKey){
   const type = MOB_TYPES[typeKey];
+  if (!type) return;
   const mesh = createMobMesh(type);
   mesh.scale.setScalar(type.scale);
   const y = terrainHeight(x, z);
@@ -1111,12 +1093,9 @@ function spawnMobAt(x, z, typeKey){
   scene.add(bar);
   mobs.push({
     type, key:typeKey, hp:type.hp, maxHp:type.hp,
-    pos:new THREE.Vector3(x, y, z),
-    mesh, bar,
-    attackCooldown:0,
-    phase:Math.random()*Math.PI*2,
-    isBoss:type.isBoss,
-    walking:0,
+    pos:new THREE.Vector3(x, y, z), mesh, bar,
+    attackCooldown:0, phase:Math.random()*Math.PI*2,
+    isBoss:type.isBoss, walking:0,
   });
 }
 function findMobSpawn(distMin, distMax){
@@ -1132,16 +1111,30 @@ function findMobSpawn(distMin, distMax){
 }
 function trySpawnMob(){
   if(mobs.length >= CFG.maxMobs) return;
+  const keys = Object.keys(MOB_TYPES);
   const r = Math.random();
-  let key = 'bat';
-  if(r < 0.10) key = 'golem';
-  else if(r < 0.35) key = 'spider';
-  if(key === 'golem' && mobs.some(m => m.isBoss)) return;
-  const distMin = key === 'golem' ? 20 : 12;
-  const distMax = key === 'golem' ? 35 : 45;
+  let key;
+  if (r < 0.10) key = keys.find(k => MOB_TYPES[k].isBoss) || keys[0];
+  else key = pick(keys.filter(k => !MOB_TYPES[k].isBoss));
+  if(key && MOB_TYPES[key].isBoss && mobs.some(m => m.isBoss)) return;
+  const distMin = MOB_TYPES[key].isBoss ? 20 : 12;
+  const distMax = MOB_TYPES[key].isBoss ? 35 : 45;
   const pos = findMobSpawn(distMin, distMax);
   if(!pos) return;
   spawnMobAt(pos.x, pos.z, key);
+}
+function clearMobs(){
+  for (const m of mobs) {
+    mobGroup.remove(m.mesh);
+    scene.remove(m.bar);
+    m.mesh.traverse(o => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material) o.material.dispose();
+    });
+    if (m.bar.material.map) m.bar.material.map.dispose();
+    m.bar.material.dispose();
+  }
+  mobs.length = 0;
 }
 function killMob(mob){
   emitParticles(mob.pos.clone().setY(mob.pos.y + 0.5), mob.type.color, 30, 4, 1, 0.18);
@@ -1173,10 +1166,11 @@ function damagePlayer(dmg){
   emitParticles(player.pos.clone().setY(player.pos.y + 1.5), 0xff2a4a, 8, 2.5, 0.6, 0.1);
   updateHUD();
   if(player.hp <= 0){
-    player.pos.set(0, terrainHeight(0,0) + 0.1, 5.5);
+    const wc = WORLDS[currentWorldId];
+    player.pos.set(wc.spawn.x, terrainHeight(wc.spawn.x, wc.spawn.z) + 0.1, wc.spawn.z);
     player.hp = Math.floor(player.hpMax * 0.5);
     player.invulnUntil = performance.now() + 3000;
-    toast('💀 Вы погибли! Возрождение на спавне');
+    toast('💀 Вы погибли! Возрождение');
     updateHUD();
   }
 }
@@ -1209,18 +1203,18 @@ function updateMobs(dt){
       const min = s.r + (mob.isBoss ? 1.0 : 0.4);
       if(dd < min && dd > 0.001){
         const push = (min - dd) / dd;
-        mob.pos.x += ddx * push;
-        mob.pos.z += ddz * push;
+        mob.pos.x += ddx * push; mob.pos.z += ddz * push;
       }
     }
     const groundY = terrainHeight(mob.pos.x, mob.pos.z);
     let y = groundY;
-    if(mob.key === 'bat') y += 1.2 + Math.sin(t*3 + mob.phase)*0.3;
-    else if(mob.key === 'spider') y += 0.15 + Math.abs(Math.sin(mob.walking))*0.08;
+    const nm = mob.type.name.toLowerCase();
+    if(nm.includes('мышь')) y += 1.2 + Math.sin(t*3 + mob.phase)*0.3;
+    else y += Math.abs(Math.sin(mob.walking))*0.08;
     mob.mesh.position.set(mob.pos.x, y, mob.pos.z);
     mob.mesh.rotation.y = Math.atan2(dx, dz);
     mob.pos.y = y;
-    if(mob.key === 'bat'){
+    if(nm.includes('мышь')){
       mob.mesh.children.forEach(c => {
         if(c.isMesh && c.userData.wingSide){
           c.rotation.z = Math.sin(t*8 + mob.phase) * 0.6;
@@ -1246,63 +1240,37 @@ function makeCharacter(){
     root:new THREE.Group(), body:null, head:null,
     armL:null, armR:null, legL:null, legR:null,
     wingGroup:null, wingL:null, wingR:null,
-    eyes:[], halo:null,
-    walkPhase:0, swing:0, swingActive:false,
+    eyes:[], halo:null, walkPhase:0, swing:0, swingActive:false,
   };
   const skinMat = new THREE.MeshStandardMaterial({ color:0xe8c9a8, roughness:0.75 });
-  const shirtMat = new THREE.MeshStandardMaterial({ map:TEX.jacket, color:0xffffff, roughness:0.82, metalness:0.03 });
-  const pantsMat = new THREE.MeshStandardMaterial({ map:TEX.pants, color:0xf0f0f0, roughness:0.9, metalness:0.02 });
+  const shirtMat = new THREE.MeshStandardMaterial({ map:TEX.jacket, color:0xffffff, roughness:0.82 });
+  const pantsMat = new THREE.MeshStandardMaterial({ map:TEX.pants, color:0xf0f0f0, roughness:0.9 });
   const blackMat = new THREE.MeshStandardMaterial({ color:0x0c0c10, roughness:0.65, metalness:0.12 });
-  const hairMat  = new THREE.MeshStandardMaterial({ color:0xf2f2f5, roughness:0.55, metalness:0.05 });
+  const hairMat  = new THREE.MeshStandardMaterial({ color:0xf2f2f5, roughness:0.55 });
   const hatMat   = new THREE.MeshStandardMaterial({ color:0x0a0a0d, roughness:0.5, metalness:0.25 });
-  const maskMat  = new THREE.MeshStandardMaterial({ color:0x12203f, roughness:0.6, metalness:0.15 });
+  const maskMat  = new THREE.MeshStandardMaterial({ color:0x12203f, roughness:0.6 });
   const eyeMat   = new THREE.MeshBasicMaterial({ color:0xff2a3a, fog:false });
   const torso = new THREE.Mesh(new THREE.BoxGeometry(0.78,0.88,0.42), shirtMat);
-  torso.position.y = 1.28;
-  torso.castShadow = QUALITY.shadows;
-  char.root.add(torso);
+  torso.position.y = 1.28; torso.castShadow = QUALITY.shadows; char.root.add(torso);
   const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.20,0.90,0.03), blackMat);
-  stripe.position.set(0,1.28,0.225);
-  char.root.add(stripe);
-  const zipper = new THREE.Mesh(new THREE.BoxGeometry(0.035,0.86,0.02), blackMat);
-  zipper.position.set(0,1.28,0.245);
-  char.root.add(zipper);
-  const badge = new THREE.Mesh(new THREE.CircleGeometry(0.11,20),
-    new THREE.MeshBasicMaterial({ color:0x3aa0e8, fog:false }));
-  badge.position.set(0.24,1.45,0.235);
-  char.root.add(badge);
+  stripe.position.set(0,1.28,0.225); char.root.add(stripe);
   const head = new THREE.Group();
-  head.position.y = 1.72;
-  char.root.add(head);
+  head.position.y = 1.72; char.root.add(head);
   const skull = new THREE.Mesh(new THREE.BoxGeometry(0.58,0.54,0.54), skinMat);
-  skull.position.y = 0.27;
-  skull.castShadow = QUALITY.shadows;
-  head.add(skull);
+  skull.position.y = 0.27; skull.castShadow = QUALITY.shadows; head.add(skull);
   for(const sx of [-0.14,0.14]){
     const eye = new THREE.Mesh(new THREE.BoxGeometry(0.13,0.055,0.03), eyeMat);
-    eye.position.set(sx,0.34,0.276);
-    head.add(eye);
-    char.eyes.push(eye);
+    eye.position.set(sx,0.34,0.276); head.add(eye); char.eyes.push(eye);
     const gl = new THREE.Sprite(new THREE.SpriteMaterial({
       color:0xff2a3a, transparent:true, opacity:0.55,
       blending:THREE.AdditiveBlending, depthWrite:false, fog:false,
     }));
-    gl.scale.set(0.42,0.42,1);
-    gl.position.set(sx,0.34,0.30);
-    head.add(gl);
+    gl.scale.set(0.42,0.42,1); gl.position.set(sx,0.34,0.30); head.add(gl);
   }
   const mask = new THREE.Mesh(new THREE.BoxGeometry(0.55,0.24,0.10), maskMat);
-  mask.position.set(0,0.14,0.255);
-  head.add(mask);
-  for(const sx of [-0.29,0.29]){
-    const strap = new THREE.Mesh(new THREE.BoxGeometry(0.05,0.07,0.42), maskMat);
-    strap.position.set(sx,0.16,0.02);
-    head.add(strap);
-  }
+  mask.position.set(0,0.14,0.255); head.add(mask);
   const hairBase = new THREE.Mesh(new THREE.SphereGeometry(0.34,14,12), hairMat);
-  hairBase.position.set(0,0.42,-0.02);
-  hairBase.scale.set(1.03,0.85,1.03);
-  head.add(hairBase);
+  hairBase.position.set(0,0.42,-0.02); hairBase.scale.set(1.03,0.85,1.03); head.add(hairBase);
   const spikeGeo = new THREE.ConeGeometry(0.075,0.42,4);
   for(let i=0;i<22;i++){
     const spike = new THREE.Mesh(spikeGeo, hairMat);
@@ -1310,122 +1278,77 @@ function makeCharacter(){
     const r = rand(0.20,0.33);
     spike.position.set(Math.cos(a)*r, 0.42+rand(-0.06,0.16), Math.sin(a)*r-0.02);
     spike.rotation.set(rand(-0.9,0.9), Math.random()*Math.PI*2, rand(-0.9,0.9));
-    spike.scale.setScalar(rand(0.65,1.25));
-    head.add(spike);
-  }
-  for(let i=0;i<7;i++){
-    const spike = new THREE.Mesh(spikeGeo, hairMat);
-    spike.position.set(rand(-0.26,0.26), 0.46, 0.24);
-    spike.rotation.set(rand(-2.4,-1.6), 0, rand(-0.4,0.4));
-    spike.scale.setScalar(rand(0.7,1.1));
-    head.add(spike);
+    spike.scale.setScalar(rand(0.65,1.25)); head.add(spike);
   }
   const hat = new THREE.Group();
-  hat.position.y = 0.62;
-  head.add(hat);
+  hat.position.y = 0.62; head.add(hat);
   const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.52,0.52,0.045,28), hatMat);
-  brim.castShadow = QUALITY.shadows;
-  hat.add(brim);
+  brim.castShadow = QUALITY.shadows; hat.add(brim);
   const crown = new THREE.Mesh(new THREE.CylinderGeometry(0.30,0.33,0.30,24), hatMat);
-  crown.position.y = 0.17;
-  crown.castShadow = QUALITY.shadows;
-  hat.add(crown);
-  const band = new THREE.Mesh(new THREE.CylinderGeometry(0.335,0.335,0.06,24),
-    new THREE.MeshStandardMaterial({ color:0x1a1a20, roughness:0.4, metalness:0.4 }));
-  band.position.y = 0.05;
-  hat.add(band);
+  crown.position.y = 0.17; crown.castShadow = QUALITY.shadows; hat.add(crown);
   function makeArm(side){
-    const g = new THREE.Group();
-    g.position.set(side*0.50, 1.62, 0);
+    const g = new THREE.Group(); g.position.set(side*0.50, 1.62, 0);
     const upper = new THREE.Mesh(new THREE.BoxGeometry(0.22,0.52,0.24), shirtMat);
-    upper.position.y = -0.26; upper.castShadow = QUALITY.shadows;
-    g.add(upper);
+    upper.position.y = -0.26; upper.castShadow = QUALITY.shadows; g.add(upper);
     const lower = new THREE.Mesh(new THREE.BoxGeometry(0.20,0.36,0.22), blackMat);
-    lower.position.y = -0.70; lower.castShadow = QUALITY.shadows;
-    g.add(lower);
+    lower.position.y = -0.70; g.add(lower);
     const hand = new THREE.Mesh(new THREE.BoxGeometry(0.19,0.18,0.21), skinMat);
-    hand.position.y = -0.96; hand.castShadow = QUALITY.shadows;
-    g.add(hand);
-    char.root.add(g);
-    return g;
+    hand.position.y = -0.96; g.add(hand);
+    char.root.add(g); return g;
   }
-  char.armL = makeArm(-1);
-  char.armR = makeArm(1);
+  char.armL = makeArm(-1); char.armR = makeArm(1);
   function makeLeg(side){
-    const g = new THREE.Group();
-    g.position.set(side*0.20, 0.86, 0);
+    const g = new THREE.Group(); g.position.set(side*0.20, 0.86, 0);
     const leg = new THREE.Mesh(new THREE.BoxGeometry(0.28,0.88,0.28), pantsMat);
-    leg.position.y = -0.44; leg.castShadow = QUALITY.shadows;
-    g.add(leg);
+    leg.position.y = -0.44; leg.castShadow = QUALITY.shadows; g.add(leg);
     const shoe = new THREE.Mesh(new THREE.BoxGeometry(0.30,0.16,0.40),
       new THREE.MeshStandardMaterial({ color:0xf5f5f5, roughness:0.6 }));
-    shoe.position.set(0,-0.86,0.05); shoe.castShadow = QUALITY.shadows;
-    g.add(shoe);
-    char.root.add(g);
-    return g;
+    shoe.position.set(0,-0.86,0.05); g.add(shoe);
+    char.root.add(g); return g;
   }
-  char.legL = makeLeg(-1);
-  char.legR = makeLeg(1);
+  char.legL = makeLeg(-1); char.legR = makeLeg(1);
   const wingGroup = new THREE.Group();
-  wingGroup.position.set(0,1.42,-0.30);
-  char.root.add(wingGroup);
+  wingGroup.position.set(0,1.42,-0.30); char.root.add(wingGroup);
   const wingMat = new THREE.MeshStandardMaterial({
     map:TEX.wing, transparent:true, alphaTest:0.45, side:THREE.DoubleSide,
     roughness:0.6, metalness:0.1, emissive:0x222230, emissiveIntensity:0.4,
   });
   const wingGeo = new THREE.PlaneGeometry(2.6,2.0);
   const wingL = new THREE.Mesh(wingGeo, wingMat);
-  wingL.position.set(-1.15,0,0);
-  wingL.rotation.y = 0.42;
-  wingGroup.add(wingL);
+  wingL.position.set(-1.15,0,0); wingL.rotation.y = 0.42; wingGroup.add(wingL);
   const wingR = new THREE.Mesh(wingGeo, wingMat);
-  wingR.position.set(1.15,0,0);
-  wingR.scale.x = -1;
-  wingR.rotation.y = -0.42;
-  wingGroup.add(wingR);
-  char.wingGroup = wingGroup;
-  char.wingL = wingL;
-  char.wingR = wingR;
+  wingR.position.set(1.15,0,0); wingR.scale.x = -1; wingR.rotation.y = -0.42; wingGroup.add(wingR);
+  char.wingGroup = wingGroup; char.wingL = wingL; char.wingR = wingR;
   const halo = new THREE.Mesh(new THREE.RingGeometry(0.45,0.85,32),
     new THREE.MeshBasicMaterial({
       color:0xffffff, transparent:true, opacity:0.10,
       blending:THREE.AdditiveBlending, depthWrite:false,
       side:THREE.DoubleSide, fog:false,
     }));
-  halo.rotation.x = -Math.PI/2;
-  halo.position.y = 0.04;
-  char.root.add(halo);
-  char.halo = halo;
-  char.body = torso;
-  char.head = head;
-  scene.add(char.root);
-  return char;
+  halo.rotation.x = -Math.PI/2; halo.position.y = 0.04; char.root.add(halo);
+  char.halo = halo; char.body = torso; char.head = head;
+  scene.add(char.root); return char;
 }
 const character = makeCharacter();
-
 function makeNameplate(name, isLocal=false){
   const c = document.createElement('canvas');
   c.width = 256; c.height = 64;
   const g = c.getContext('2d');
   g.fillStyle = 'rgba(10,10,18,.72)';
   g.beginPath();
-  if (g.roundRect) g.roundRect(4,4,248,56,14);
-  else g.rect(4,4,248,56);
+  if (g.roundRect) g.roundRect(4,4,248,56,14); else g.rect(4,4,248,56);
   g.fill();
   g.strokeStyle = isLocal ? '#7ef5ff' : '#b06cff';
-  g.lineWidth = 3;
-  g.stroke();
+  g.lineWidth = 3; g.stroke();
   g.font = 'bold 30px "Segoe UI",sans-serif';
-  g.textAlign = 'center';
-  g.textBaseline = 'middle';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
   g.fillStyle = isLocal ? '#7ef5ff' : '#ffffff';
   g.fillText(name, 128, 34);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
   const mat = new THREE.SpriteMaterial({ map:tex, transparent:true, depthTest:false, fog:false });
   const sp = new THREE.Sprite(mat);
-  sp.scale.set(1.6, 0.4, 1);
-  sp.renderOrder = 999;
+  sp.scale.set(1.6, 0.4, 1); sp.renderOrder = 999;
   return sp;
 }
 
@@ -1433,27 +1356,22 @@ function makeNameplate(name, isLocal=false){
 const player = {
   pos: new THREE.Vector3(0,0,5.5),
   vel: new THREE.Vector3(),
-  onGround: true,
-  facing: Math.PI,
+  onGround: true, facing: Math.PI,
   hp: 100, hpMax: 100, invulnUntil: 0, lastDamageTime: 0,
   usedDoubleJump: false,
-  coins: 0,
-  level: 1, xp: 0, xpNext: 100,
-  inventory: { coal:0, iron:0, copper:0, gold:0, amethyst:0, diamond:0 },
+  coins: 0, level: 1, xp: 0, xpNext: 100,
+  inventory: {},
   upgrades: { pickaxe:0, speed:0, jump:0, range:0, torch:0, greed:0, luck:0, power:0, armor:0, djump:0 },
   mining: null, mineProgress: 0,
 };
-const input = {
-  move: new THREE.Vector2(0,0),
-  jump: false, jumpPressed: false,
-  mine: false, run: false,
-};
-const cam = {
-  yaw: Math.PI, pitch: -0.22,
-  dist: CFG.camDist,
-  currentPos: new THREE.Vector3(0,3,10),
-  target: new THREE.Vector3(0,1.5,0),
-};
+function ensureInventoryForWorld() {
+  for (const t of ORE_MINE) if (player.inventory[t.id] === undefined) player.inventory[t.id] = 0;
+  for (const t of ORE_ICE) if (player.inventory[t.id] === undefined) player.inventory[t.id] = 0;
+}
+ensureInventoryForWorld();
+const input = { move: new THREE.Vector2(0,0), jump: false, jumpPressed: false, mine: false, run: false };
+const cam = { yaw: Math.PI, pitch: -0.22, dist: CFG.camDist,
+  currentPos: new THREE.Vector3(0,3,10), target: new THREE.Vector3(0,1.5,0) };
 
 function resolveCollisions(pos, radius){
   for(const s of solids){
@@ -1463,9 +1381,7 @@ function resolveCollisions(pos, radius){
     if(d < min && d > 0.0001){
       const push = (min-d)/d;
       pos.x += dx*push; pos.z += dz*push;
-    } else if(d <= 0.0001){
-      pos.x += min;
-    }
+    } else if(d <= 0.0001){ pos.x += min; }
   }
   const distFromCenter = Math.hypot(pos.x, pos.z);
   const maxR = CFG.worldRadius - 2.2;
@@ -1477,30 +1393,18 @@ function resolveCollisions(pos, radius){
 
 /* ========== УЛУЧШЕНИЯ ========== */
 const UPGRADES = [
-  { id:'pickaxe', icon:'⛏',  name:'Кирка',          desc:'+20% к скорости добычи руды.', max:10, baseCost:150,  costMul:1.7,
-    apply:lvl => CFG.mineDPS_BASE * (1 + lvl*0.20) },
-  { id:'speed',   icon:'👟',  name:'Скорость',       desc:'+8% к скорости бега.',         max:10, baseCost:200,  costMul:1.7,
-    apply:lvl => CFG.moveSpeed_BASE * (1 + lvl*0.08) },
-  { id:'jump',    icon:'🦘',  name:'Прыжок',         desc:'+7% к высоте прыжка.',         max:8,  baseCost:180,  costMul:1.7,
-    apply:lvl => CFG.jumpSpeed_BASE * (1 + lvl*0.07) },
-  { id:'range',   icon:'🎯',  name:'Радиус добычи',  desc:'+0.3 м к дистанции.',          max:6,  baseCost:250,  costMul:1.8,
-    apply:lvl => CFG.mineRange_BASE + lvl*0.3 },
-  { id:'torch',   icon:'🔦',  name:'Фонарик',        desc:'Ярче светит.',                 max:5,  baseCost:120,  costMul:1.6,
-    apply:lvl => 30 + lvl*10 },
-  { id:'greed',   icon:'💰',  name:'Жадность',       desc:'+10% к цене продажи руды.',    max:5,  baseCost:400,  costMul:1.9,
-    apply:lvl => lvl * 0.10 },
-  { id:'luck',    icon:'🍀',  name:'Удача',          desc:'+8% шанс получить 2× руды.',   max:5,  baseCost:500,  costMul:1.9,
-    apply:lvl => lvl * 0.08 },
-  { id:'power',   icon:'⚔️',  name:'Сила',           desc:'+20% урона по мобам.',         max:5,  baseCost:350,  costMul:1.8,
-    apply:lvl => 1 + lvl * 0.20 },
-  { id:'armor',   icon:'🛡️',  name:'Броня',          desc:'+15 к максимальному HP.',      max:5,  baseCost:300,  costMul:1.8,
-    apply:lvl => 100 + lvl * 15 },
-  { id:'djump',   icon:'🌀',  name:'Двойной прыжок', desc:'Позволяет прыгнуть в воздухе.', max:1, baseCost:1200, costMul:2.0,
-    apply:lvl => lvl },
+  { id:'pickaxe', icon:'⛏',  name:'Кирка',          desc:'+20% к скорости добычи руды.', max:10, baseCost:150,  costMul:1.7, apply:lvl => CFG.mineDPS_BASE * (1 + lvl*0.20) },
+  { id:'speed',   icon:'👟',  name:'Скорость',       desc:'+8% к скорости бега.',         max:10, baseCost:200,  costMul:1.7, apply:lvl => CFG.moveSpeed_BASE * (1 + lvl*0.08) },
+  { id:'jump',    icon:'🦘',  name:'Прыжок',         desc:'+7% к высоте прыжка.',         max:8,  baseCost:180,  costMul:1.7, apply:lvl => CFG.jumpSpeed_BASE * (1 + lvl*0.07) },
+  { id:'range',   icon:'🎯',  name:'Радиус добычи',  desc:'+0.3 м к дистанции.',          max:6,  baseCost:250,  costMul:1.8, apply:lvl => CFG.mineRange_BASE + lvl*0.3 },
+  { id:'torch',   icon:'🔦',  name:'Фонарик',        desc:'Ярче светит.',                 max:5,  baseCost:120,  costMul:1.6, apply:lvl => 30 + lvl*10 },
+  { id:'greed',   icon:'💰',  name:'Жадность',       desc:'+10% к цене продажи.',         max:5,  baseCost:400,  costMul:1.9, apply:lvl => lvl * 0.10 },
+  { id:'luck',    icon:'🍀',  name:'Удача',          desc:'+8% шанс двойного дропа.',     max:5,  baseCost:500,  costMul:1.9, apply:lvl => lvl * 0.08 },
+  { id:'power',   icon:'⚔️',  name:'Сила',           desc:'+20% урона по мобам.',         max:5,  baseCost:350,  costMul:1.8, apply:lvl => 1 + lvl * 0.20 },
+  { id:'armor',   icon:'🛡️',  name:'Броня',          desc:'+15 к максимальному HP.',      max:5,  baseCost:300,  costMul:1.8, apply:lvl => 100 + lvl * 15 },
+  { id:'djump',   icon:'🌀',  name:'Двойной прыжок', desc:'Прыжок в воздухе.',            max:1,  baseCost:1200, costMul:2.0, apply:lvl => lvl },
 ];
-function upgradeCost(up){
-  return Math.floor(up.baseCost * Math.pow(up.costMul, player.upgrades[up.id] || 0));
-}
+function upgradeCost(up){ return Math.floor(up.baseCost * Math.pow(up.costMul, player.upgrades[up.id] || 0)); }
 function applyUpgrades(){
   for(const up of UPGRADES){
     const lvl = player.upgrades[up.id] || 0;
@@ -1510,19 +1414,13 @@ function applyUpgrades(){
     else if(up.id === 'jump') CFG.jumpSpeed = val;
     else if(up.id === 'range') CFG.mineRange = val;
     else if(up.id === 'torch'){ if(torchOn) torch.intensity = val; }
-    else if(up.id === 'armor'){
-      player.hpMax = val;
-      player.hp = Math.min(player.hp, player.hpMax);
-    }
+    else if(up.id === 'armor'){ player.hpMax = val; player.hp = Math.min(player.hp, player.hpMax); }
   }
   updateHUD();
 }
 
 /* ========== СЕТЬ ========== */
-const NET = {
-  socket:null, selfId:null, room:null, name:'Игрок',
-  ready:false, sendTimer:0, sendRate:1/18, latency:0,
-};
+const NET = { socket:null, selfId:null, room:null, name:'Игрок', ready:false, sendTimer:0, sendRate:1/18, latency:0 };
 const remotePlayers = new Map();
 function spawnRemotePlayer(data){
   if(remotePlayers.has(data.id)) return;
@@ -1536,46 +1434,33 @@ function spawnRemotePlayer(data){
   remotePlayers.set(data.id, {
     id:data.id, name:data.name || 'Игрок', char, nameplate,
     targetPos:new THREE.Vector3(data.x||0, data.y||0, data.z||5.5),
-    targetRot:data.ry || 0,
-    walkPhase:0, swinging:false, swing:0,
+    targetRot:data.ry || 0, walkPhase:0, swinging:false, swing:0,
   });
   updatePlayerListUI();
 }
 function removeRemotePlayer(id){
   const rp = remotePlayers.get(id);
   if(!rp) return;
-  scene.remove(rp.char.root);
-  scene.remove(rp.nameplate);
-  remotePlayers.delete(id);
-  updatePlayerListUI();
+  scene.remove(rp.char.root); scene.remove(rp.nameplate);
+  remotePlayers.delete(id); updatePlayerListUI();
 }
 function updateRemotePlayers(dt){
   const t = performance.now()*0.001;
   for(const [, rp] of remotePlayers){
     rp.char.root.position.lerp(rp.targetPos, 1 - Math.exp(-13*dt));
     rp.char.root.rotation.y = angleLerp(rp.char.root.rotation.y, rp.targetRot, 1 - Math.exp(-14*dt));
-    const wp = rp.walkPhase;
-    const amp = 0.6;
+    const wp = rp.walkPhase, amp = 0.6;
     rp.char.legL.rotation.x = Math.sin(wp)*amp;
     rp.char.legR.rotation.x = -Math.sin(wp)*amp;
-    let armL = -Math.sin(wp)*amp*0.8;
-    let armR =  Math.sin(wp)*amp*0.8;
+    let armL = -Math.sin(wp)*amp*0.8, armR = Math.sin(wp)*amp*0.8;
     if(rp.swinging){
-      rp.swing += dt*6.5;
-      if(rp.swing > Math.PI*2) rp.swing = 0;
+      rp.swing += dt*6.5; if(rp.swing > Math.PI*2) rp.swing = 0;
       const s = Math.sin(rp.swing);
-      armR = -1.5 + s*1.9;
-      armL = -0.35 + s*0.35;
+      armR = -1.5 + s*1.9; armL = -0.35 + s*0.35;
     }
     rp.char.armL.rotation.x = damp(rp.char.armL.rotation.x, armL, 16, dt);
     rp.char.armR.rotation.x = damp(rp.char.armR.rotation.x, armR, 16, dt);
-    rp.char.armL.rotation.z = 0.06;
-    rp.char.armR.rotation.z = -0.06;
-    const flap = Math.sin(t*2.6)*0.11;
-    rp.char.wingL.rotation.z = 0.12 + flap;
-    rp.char.wingR.rotation.z = -0.12 - flap;
     rp.char.halo.material.opacity = 0.06 + Math.sin(t*2.2)*0.025;
-    for(const e of rp.char.eyes) e.material.color.setRGB(1, 0.16 + Math.sin(t*6)*0.05, 0.22);
     rp.nameplate.position.copy(rp.char.root.position);
     rp.nameplate.position.y += 2.45;
   }
@@ -1584,17 +1469,13 @@ function netEmitUpdate(){
   if(!NET.socket || !NET.ready) return;
   NET.socket.emit('playerUpdate', {
     x:+player.pos.x.toFixed(3), y:+player.pos.y.toFixed(3), z:+player.pos.z.toFixed(3),
-    ry:+player.facing.toFixed(3), wp:+character.walkPhase.toFixed(3),
-    sw:character.swingActive,
+    ry:+player.facing.toFixed(3), wp:+character.walkPhase.toFixed(3), sw:character.swingActive,
   });
 }
 function connectNetwork(name, room){
   return new Promise((resolve, reject) => {
     if(typeof window.io !== 'function'){ reject(new Error('Socket.IO не загружен')); return; }
-    const socket = window.io({
-      transports:['websocket','polling'],
-      reconnection:true, reconnectionDelay:1200, timeout:8000,
-    });
+    const socket = window.io({ transports:['websocket','polling'], reconnection:true, reconnectionDelay:1200, timeout:8000 });
     NET.socket = socket;
     const onConnect = () => { NET.selfId = socket.id; socket.emit('joinRoom', { name, room }); };
     const failTimer = setTimeout(() => reject(new Error('Нет ответа от сервера')), 9000);
@@ -1615,15 +1496,12 @@ function connectNetwork(name, room){
         const rp = remotePlayers.get(data.id);
         if(!rp) return;
         rp.targetPos.set(data.x, data.y, data.z);
-        rp.targetRot = data.ry;
-        rp.walkPhase = data.wp || 0;
-        rp.swinging = !!data.sw;
+        rp.targetRot = data.ry; rp.walkPhase = data.wp || 0; rp.swinging = !!data.sw;
       });
       socket.on('oreBroken', ({index, delay}) => {
         const node = oreNodes[index];
         if(!node || !node.alive) return;
-        node.alive = false;
-        node.group.visible = false;
+        node.alive = false; node.group.visible = false;
         node.respawnAt = performance.now()/1000 + delay;
         emitParticles(node.pos, node.type.color, 30, 4.0, 1.0, 0.14);
       });
@@ -1631,11 +1509,70 @@ function connectNetwork(name, room){
         pushChatMessage(name, msg, false);
         if(!chatOpen){ unreadChat++; setBadge(unreadChat); }
       });
+      socket.on('worldChanged', ({ world }) => {
+        if (world !== currentWorldId) switchWorld(world);
+      });
       socket.on('disconnect', () => { NET.ready = false; toast('⚠ Связь потеряна'); });
       socket.io.on('reconnect', () => socket.emit('joinRoom', { name, room }));
       resolve();
     });
   });
+}
+
+/* ========== СМЕНА МИРА ========== */
+let portalCooldown = 0;
+function switchWorld(newWorldId){
+  if (portalCooldown > 0) return;
+  if (currentWorldId === newWorldId) return;
+  portalCooldown = 3;
+  const wc = WORLDS[newWorldId];
+  scene.background.setHex(wc.bg);
+  scene.fog.color.setHex(wc.fog);
+  scene.fog.density = wc.fogD;
+  sun.color.setHex(wc.sunColor);
+  sun.intensity = wc.sunInt;
+  hemi.color.setHex(wc.hemiSky);
+  hemi.groundColor.setHex(wc.hemiGround);
+  hemi.intensity = wc.hemiInt;
+  ambient.color.setHex(wc.ambColor);
+  ambient.intensity = wc.ambInt;
+  ground.material.color.setHex(wc.ground);
+  walls.material.color.setHex(wc.wall);
+  ceiling.material.color.setHex(wc.ceil);
+  skyDisc.material.color.setHex(wc.skyDisc);
+  shaftMat.color.setHex(wc.shaft);
+  for (const l of lanterns) {
+    l.color.setHex(wc.lantern);
+    if (l.mesh) l.mesh.material.color.setHex(wc.lantern === 0xffa64d ? 0xffb454 : 0x8ad8ff);
+  }
+  ORE_TYPES = wc.ores;
+  MOB_TYPES = wc.mobs;
+  clearOres();
+  generateOres(wc.ores);
+  clearMobs();
+  buildInventoryUI();
+  // Портал в новом мире
+  createPortal(newWorldId);
+  // Телепорт игрока
+  player.pos.set(wc.spawn.x, terrainHeight(wc.spawn.x, wc.spawn.z), wc.spawn.z);
+  player.vel.set(0,0,0);
+  player.invulnUntil = performance.now() + 2000;
+  // Обновить HUD
+  currentWorldId = newWorldId;
+  document.getElementById('worldName').textContent = wc.name;
+  toast(`${wc.name} — добро пожаловать!`);
+  updateHUD();
+  saveGame();
+}
+function checkPortal(){
+  if(!portalGroup || portalCooldown > 0) return;
+  const p = portalGroup.position;
+  const dx = player.pos.x - p.x, dz = player.pos.z - p.z;
+  if(Math.hypot(dx, dz) < 2.2){
+    const target = currentWorldId === 'mine' ? 'ice' : 'mine';
+    if(NET.socket && NET.ready) NET.socket.emit('switchWorld', { world: target });
+    else switchWorld(target);
+  }
 }
 
 /* ========== УПРАВЛЕНИЕ ========== */
@@ -1664,8 +1601,7 @@ function stickStart(e){
 }
 function stickMove(e){
   if(e.pointerId !== stickPointerId) return;
-  let dx = e.clientX - stickCenter.x;
-  let dy = e.clientY - stickCenter.y;
+  let dx = e.clientX - stickCenter.x, dy = e.clientY - stickCenter.y;
   const len = Math.hypot(dx,dy);
   if(len > stickRadius){ dx = dx/len*stickRadius; dy = dy/len*stickRadius; }
   knobEl.style.transform = `translate(${dx}px, ${dy}px)`;
@@ -1692,11 +1628,9 @@ renderer.domElement.addEventListener('pointerdown', e => {
 });
 renderer.domElement.addEventListener('pointermove', e => {
   if(e.pointerId !== lookPointerId) return;
-  const dx = e.clientX - lookLast.x;
-  const dy = e.clientY - lookLast.y;
+  const dx = e.clientX - lookLast.x, dy = e.clientY - lookLast.y;
   lookLast.x = e.clientX; lookLast.y = e.clientY;
-  cam.yaw   -= dx*0.0055;
-  cam.pitch -= dy*0.0042;
+  cam.yaw -= dx*0.0055; cam.pitch -= dy*0.0042;
   cam.pitch = clamp(cam.pitch, CFG.camMinPitch, CFG.camMaxPitch);
 });
 function lookEnd(e){ if(e.pointerId === lookPointerId) lookPointerId = null; }
@@ -1709,8 +1643,7 @@ function bindHold(el, onDown, onUp){
   el.addEventListener('pointerdown', e => {
     e.preventDefault();
     try { el.setPointerCapture(e.pointerId); } catch(_){}
-    el.classList.add('on');
-    onDown();
+    el.classList.add('on'); onDown();
   });
   const up = e => { el.classList.remove('on'); onUp && onUp(); };
   el.addEventListener('pointerup', up);
@@ -1726,38 +1659,29 @@ function readKeyboard(){
   if(keys['KeyS']||keys['ArrowDown'])  my -= 1;
   if(keys['KeyA']||keys['ArrowLeft'])  mx -= 1;
   if(keys['KeyD']||keys['ArrowRight']) mx += 1;
-  if(mx||my){
-    const l = Math.hypot(mx,my);
-    input.move.x = mx/l; input.move.y = my/l;
-  } else if(stickPointerId === null){
-    input.move.x = 0; input.move.y = 0;
-  }
-  input.run  = !!(keys['ShiftLeft']||keys['ShiftRight']);
+  if(mx||my){ const l = Math.hypot(mx,my); input.move.x = mx/l; input.move.y = my/l; }
+  else if(stickPointerId === null){ input.move.x = 0; input.move.y = 0; }
+  input.run = !!(keys['ShiftLeft']||keys['ShiftRight']);
   input.mine = input.mine || !!keys['KeyE'];
 }
 
 /* ========== ОБНОВЛЕНИЕ ИГРОКА ========== */
 function updatePlayer(dt){
   readKeyboard();
-  const forwardX = Math.sin(cam.yaw);
-  const forwardZ = Math.cos(cam.yaw);
-  const rightX   = Math.cos(cam.yaw);
-  const rightZ   = -Math.sin(cam.yaw);
+  const forwardX = Math.sin(cam.yaw), forwardZ = Math.cos(cam.yaw);
+  const rightX = Math.cos(cam.yaw), rightZ = -Math.sin(cam.yaw);
   let wx = forwardX*input.move.y + rightX*input.move.x;
   let wz = forwardZ*input.move.y + rightZ*input.move.x;
   const wlen = Math.hypot(wx,wz);
   if(wlen > 1){ wx /= wlen; wz /= wlen; }
-
   const speed = CFG.moveSpeed * (input.run ? CFG.runMul : 1);
   const accel = player.onGround ? 1 : CFG.airControl;
   player.vel.x = damp(player.vel.x, wx*speed, CFG.friction*accel, dt);
   player.vel.z = damp(player.vel.z, wz*speed, CFG.friction*accel, dt);
-
   if(input.jumpPressed){
     if(player.onGround){
       player.vel.y = CFG.jumpSpeed;
-      player.onGround = false;
-      player.usedDoubleJump = false;
+      player.onGround = false; player.usedDoubleJump = false;
       emitParticles(new THREE.Vector3(player.pos.x, player.pos.y+0.1, player.pos.z), 0xbbaaff, 12, 2.2, 0.6, 0.1);
     } else if((player.upgrades.djump || 0) > 0 && !player.usedDoubleJump){
       player.vel.y = CFG.jumpSpeed * 0.9;
@@ -1766,26 +1690,17 @@ function updatePlayer(dt){
     }
   }
   input.jumpPressed = false;
-
   player.vel.y += CFG.gravity * dt;
   player.pos.x += player.vel.x * dt;
   player.pos.z += player.vel.z * dt;
   player.pos.y += player.vel.y * dt;
   resolveCollisions(player.pos, 0.42);
-
   const gy = terrainHeight(player.pos.x, player.pos.z);
   if(player.pos.y <= gy){
     player.pos.y = gy;
-    if(player.vel.y < -6){
-      emitParticles(new THREE.Vector3(player.pos.x, gy+0.05, player.pos.z), 0xccbb99, 10, 2.0, 0.5, 0.09);
-    }
-    player.vel.y = 0;
-    player.onGround = true;
-    player.usedDoubleJump = false;
-  } else {
-    player.onGround = false;
-  }
-
+    if(player.vel.y < -6) emitParticles(new THREE.Vector3(player.pos.x, gy+0.05, player.pos.z), 0xccbb99, 10, 2.0, 0.5, 0.09);
+    player.vel.y = 0; player.onGround = true; player.usedDoubleJump = false;
+  } else player.onGround = false;
   if(wlen > 0.06){
     const target = Math.atan2(wx,wz);
     player.facing = angleLerp(player.facing, target, 1 - Math.exp(-14*dt));
@@ -1808,25 +1723,20 @@ function updateCharacter(dt){
   let armSwingL = -Math.sin(wp)*amp*0.8;
   let armSwingR =  Math.sin(wp)*amp*0.8;
   if(character.swingActive){
-    character.swing += dt*6.5;
-    if(character.swing > Math.PI*2) character.swing = 0;
+    character.swing += dt*6.5; if(character.swing > Math.PI*2) character.swing = 0;
     const s = Math.sin(character.swing);
-    armSwingR = -1.5 + s*1.9;
-    armSwingL = -0.35 + s*0.35;
+    armSwingR = -1.5 + s*1.9; armSwingL = -0.35 + s*0.35;
   }
   character.armL.rotation.x = damp(character.armL.rotation.x, armSwingL, 16, dt);
   character.armR.rotation.x = damp(character.armR.rotation.x, armSwingR, 16, dt);
-  character.armL.rotation.z = 0.06;
-  character.armR.rotation.z = -0.06;
   const bob = moving ? Math.abs(Math.sin(wp))*0.055 : Math.sin(t*1.8)*0.018;
   character.root.position.y = player.pos.y + bob;
-  character.root.rotation.z = damp(character.root.rotation.z,
-    moving ? -clamp(player.vel.x*0.012, -0.06, 0.06) : 0, 8, dt);
+  character.root.rotation.z = damp(character.root.rotation.z, moving ? -clamp(player.vel.x*0.012, -0.06, 0.06) : 0, 8, dt);
   const headYaw = clamp(angleLerp(0, cam.yaw - player.facing, 1)*0.12, -0.3, 0.3);
   character.head.rotation.y = damp(character.head.rotation.y, headYaw, 6, dt);
   const flapSpeed = moving ? 6.5 : 2.6;
   const flap = Math.sin(t*flapSpeed)*(moving ? 0.22 : 0.11);
-  character.wingL.rotation.z =  0.12 + flap;
+  character.wingL.rotation.z = 0.12 + flap;
   character.wingR.rotation.z = -0.12 - flap;
   const pulse = 1 + Math.sin(t*3.4)*0.045;
   character.wingL.scale.set(pulse, pulse, 1);
@@ -1907,7 +1817,6 @@ function updateMining(dt){
     return;
   }
   character.swingActive = true;
-
   if(target.type === 'ore'){
     const node = target.node;
     player.mining = node;
@@ -1942,13 +1851,9 @@ function breakOre(node){
   emitParticles(node.pos, 0xffffff, 14, 3.2, 0.7, 0.1);
   let amount = randInt(1,3);
   const luckChance = (player.upgrades.luck || 0) * 0.08;
-  if(Math.random() < luckChance){
-    amount *= 2;
-    toast(`🍀 Удача! ×2 руды`);
-  }
+  if(Math.random() < luckChance){ amount *= 2; toast('🍀 Удача! ×2 руды'); }
   player.inventory[node.type.id] = (player.inventory[node.type.id]||0) + amount;
-  const xpGain = Math.ceil(node.type.value * 0.9);
-  player.xp += xpGain;
+  player.xp += Math.ceil(node.type.value * 0.9);
   toast(`+${amount} ${node.type.name}`);
   popSlot(node.type.id);
   while(player.xp >= player.xpNext){
@@ -1971,8 +1876,7 @@ function updateOres(dt){
   for(const node of oreNodes){
     if(!node.alive){
       if(now >= node.respawnAt){
-        node.alive = true;
-        node.hp = node.maxHp;
+        node.alive = true; node.hp = node.maxHp;
         node.group.visible = true;
         node.group.position.set(node.pos.x, node.pos.y, node.pos.z);
         node.group.scale.setScalar(0.01);
@@ -2035,6 +1939,7 @@ const playerListEl = document.getElementById('playerList');
 const slotEls = {};
 function buildInventoryUI(){
   invEl.innerHTML = '';
+  for(const k in slotEls) delete slotEls[k];
   for(const type of ORE_TYPES){
     const el = document.createElement('div');
     el.className = 'slot';
@@ -2047,8 +1952,8 @@ function buildInventoryUI(){
     invEl.appendChild(el);
     slotEls[type.id] = el;
   }
+  updateHUD();
 }
-buildInventoryUI();
 function updateHUD(){
   gemCountEl.textContent = player.coins.toLocaleString('ru-RU');
   lvlNumEl.textContent = player.level;
@@ -2130,7 +2035,8 @@ function renderSellTab(){
   });
 }
 function sellOre(id, count){
-  const type = ORE_TYPES.find(t => t.id === id);
+  const allOres = [...ORE_MINE, ...ORE_ICE];
+  const type = allOres.find(t => t.id === id);
   if(!type) return;
   const have = player.inventory[id] || 0;
   if(have <= 0) return;
@@ -2227,19 +2133,20 @@ function toggleTorch(){
   toast(torchOn ? '🔦 Фонарик включён' : '🔦 Фонарик выключен');
 }
 
-/* ========== СОХРАНЕНИЕ (v3 с миграцией) ========== */
+/* ========== СОХРАНЕНИЕ ========== */
 function saveGame(){
   try {
-    localStorage.setItem('blackmine_save_v3', JSON.stringify({
+    localStorage.setItem('blackmine_save_v4', JSON.stringify({
       coins:player.coins, level:player.level, xp:player.xp, xpNext:player.xpNext,
       inventory:player.inventory, upgrades:player.upgrades,
+      currentWorldId,
       pos:{ x:player.pos.x, y:player.pos.y, z:player.pos.z },
     }));
   } catch(_){}
 }
 function loadGame(){
   try {
-    const raw = localStorage.getItem('blackmine_save_v3');
+    const raw = localStorage.getItem('blackmine_save_v4');
     if(raw){
       const d = JSON.parse(raw);
       player.coins = d.coins ?? 0;
@@ -2248,34 +2155,51 @@ function loadGame(){
       player.xpNext = d.xpNext ?? 100;
       if(d.inventory) Object.assign(player.inventory, d.inventory);
       if(d.upgrades) Object.assign(player.upgrades, d.upgrades);
-      if(d.pos){
-        player.pos.set(
-          clamp(d.pos.x, -40, 40),
-          terrainHeight(d.pos.x, d.pos.z),
-          clamp(d.pos.z, -40, 40)
-        );
+      if(d.currentWorldId && WORLDS[d.currentWorldId]) {
+        switchWorldInternal(d.currentWorldId);
       }
     } else {
-      // Миграция из v2 — оставляем монеты, инвентарь, но апгрейды сбрасываются
-      const oldRaw = localStorage.getItem('blackmine_save_v2') || localStorage.getItem('blackmine_save');
+      const oldRaw = localStorage.getItem('blackmine_save_v3') || localStorage.getItem('blackmine_save_v2');
       if(oldRaw){
         const old = JSON.parse(oldRaw);
         player.coins = old.coins ?? old.gems ?? 0;
         player.level = old.level ?? 1;
         player.xp = old.xp ?? 0;
         if(old.inventory) Object.assign(player.inventory, old.inventory);
-        if(old.pos){
-          player.pos.set(
-            clamp(old.pos.x, -40, 40),
-            terrainHeight(old.pos.x, old.pos.z),
-            clamp(old.pos.z, -40, 40)
-          );
-        }
-        // ВАЖНО: upgrades НЕ переносятся — перебалансировка
       }
     }
+    ensureInventoryForWorld();
     applyUpgrades();
   } catch(_){}
+}
+function switchWorldInternal(worldId){
+  const wc = WORLDS[worldId];
+  if(!wc) return;
+  scene.background.setHex(wc.bg);
+  scene.fog.color.setHex(wc.fog);
+  scene.fog.density = wc.fogD;
+  sun.color.setHex(wc.sunColor); sun.intensity = wc.sunInt;
+  hemi.color.setHex(wc.hemiSky);
+  hemi.groundColor.setHex(wc.hemiGround);
+  hemi.intensity = wc.hemiInt;
+  ambient.color.setHex(wc.ambColor); ambient.intensity = wc.ambInt;
+  ground.material.color.setHex(wc.ground);
+  walls.material.color.setHex(wc.wall);
+  ceiling.material.color.setHex(wc.ceil);
+  skyDisc.material.color.setHex(wc.skyDisc);
+  shaftMat.color.setHex(wc.shaft);
+  for (const l of lanterns) {
+    l.color.setHex(wc.lantern);
+    if (l.mesh) l.mesh.material.color.setHex(wc.lantern === 0xffa64d ? 0xffb454 : 0x8ad8ff);
+  }
+  ORE_TYPES = wc.ores;
+  MOB_TYPES = wc.mobs;
+  clearOres();
+  generateOres(wc.ores);
+  clearMobs();
+  createPortal(worldId);
+  currentWorldId = worldId;
+  document.getElementById('worldName').textContent = wc.name;
 }
 setInterval(saveGame, 8000);
 window.addEventListener('beforeunload', saveGame);
@@ -2283,7 +2207,7 @@ window.addEventListener('beforeunload', saveGame);
 /* ========== ЗАГРУЗЧИК ========== */
 const loadBar = document.getElementById('loadBar');
 const loadTxt = document.getElementById('loadTxt');
-const loadSteps = ['Генерация пещеры…','Рудные жилы…','Освещение…','Персонаж…','Магазин…','Мобы…','Готово!'];
+const loadSteps = ['Генерация пещеры…','Рудные жилы…','Освещение…','Порталы…','Персонаж…','Магазин…','Мобы…','Готово!'];
 let loadStep = 0;
 function advanceLoad(){
   const pct = ((loadStep+1)/loadSteps.length)*100;
@@ -2294,7 +2218,7 @@ function advanceLoad(){
 
 /* ========== ЦИКЛ ========== */
 let lastTime = performance.now();
-let frames = 0, fpsTimer = 0, fpsValue = 60;
+let frames = 0, fpsTimer = 0;
 let started = false;
 let mobSpawnTimer = 0;
 function animate(now){
@@ -2302,6 +2226,8 @@ function animate(now){
   const dt = Math.min((now - lastTime)/1000, 0.05);
   lastTime = now;
   if(!started) return;
+
+  if (portalCooldown > 0) portalCooldown -= dt;
 
   updatePlayer(dt);
   updateCharacter(dt);
@@ -2312,25 +2238,34 @@ function animate(now){
   updateParticles(dt);
   updateLights();
   updateRemotePlayers(dt);
+  checkPortal();
+
+  if (portalGroup) {
+    const t = performance.now() * 0.001;
+    portalGroup.rotation.y += dt * 0.5;
+    if (portalGroup.userData.disc) {
+      portalGroup.userData.disc.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+    }
+    if (portalGroup.userData.light) {
+      portalGroup.userData.light.intensity = 8 + Math.sin(t * 4) * 3;
+    }
+  }
 
   mobSpawnTimer += dt * 1000;
   if(mobSpawnTimer >= CFG.mobSpawnInterval){
     mobSpawnTimer = 0;
     trySpawnMob();
   }
-
   NET.sendTimer += dt;
   if(NET.sendTimer >= NET.sendRate){ NET.sendTimer = 0; netEmitUpdate(); }
-
   if(dustPoints && QUALITY.particles) dustPoints.rotation.y += dt*0.008;
   shaftMat.opacity = 0.045 + Math.sin(now*0.0012)*0.018;
 
   if(QUALITY.bloom) composer.render();
   else renderer.render(scene, camera);
-
   frames++; fpsTimer += dt;
   if(fpsTimer >= 0.5){
-    fpsValue = Math.round(frames/fpsTimer);
+    const fpsValue = Math.round(frames/fpsTimer);
     fpsEl.textContent = fpsValue + ' FPS';
     frames = 0; fpsTimer = 0;
     if(NET.ready) netStatEl.textContent = `NET ${NET.latency} ms`;
@@ -2361,20 +2296,23 @@ function startGame(){
   loadGame();
   updateHUD();
   updatePlayerListUI();
+  document.getElementById('worldName').textContent = WORLDS[currentWorldId].name;
   const myPlate = makeNameplate(NET.name + ' (Вы)', true);
   scene.add(myPlate);
   setInterval(() => {
     myPlate.position.copy(character.root.position);
     myPlate.position.y += 2.5;
   }, 1000/30);
+  const wc = WORLDS[currentWorldId];
+  player.pos.set(wc.spawn.x, terrainHeight(wc.spawn.x, wc.spawn.z), wc.spawn.z);
   character.root.position.copy(player.pos);
   cam.currentPos.set(player.pos.x, player.pos.y+3, player.pos.z+8);
   camera.position.copy(cam.currentPos);
   started = true;
   lastTime = performance.now();
   setTimeout(() => { const h = document.getElementById('hint'); if(h) h.style.opacity = '0'; }, 9000);
-  toast(`⛏ Комната: ${NET.room}`);
-  setTimeout(() => toast('👹 Осторожно, в шахте мобы!'), 2500);
+  toast(`⛏ ${wc.name}`);
+  setTimeout(() => toast('🌀 Найди портал (0, -14)'), 2500);
   setTimeout(() => toast('🏪 Продавай руду в магазине'), 5000);
 }
 const stepInterval = setInterval(() => {
@@ -2437,31 +2375,24 @@ const chatBadge = document.getElementById('chatBadge');
 let chatOpen = false;
 let unreadChat = 0;
 function setBadge(n){
-  if(n > 0){
-    chatBadge.textContent = n > 99 ? '99+' : n;
-    chatBadge.style.display = 'flex';
-  } else chatBadge.style.display = 'none';
+  if(n > 0){ chatBadge.textContent = n > 99 ? '99+' : n; chatBadge.style.display = 'flex'; }
+  else chatBadge.style.display = 'none';
 }
 function openChat(){
-  chatEl.classList.add('show');
-  chatOpen = true;
-  unreadChat = 0;
-  setBadge(0);
+  chatEl.classList.add('show'); chatOpen = true;
+  unreadChat = 0; setBadge(0);
   setTimeout(() => chatField.focus(), 220);
 }
 function closeChat(){
-  chatEl.classList.remove('show');
-  chatOpen = false;
+  chatEl.classList.remove('show'); chatOpen = false;
   chatField.blur();
 }
 btnChat.addEventListener('click', () => chatOpen ? closeChat() : openChat());
 chatClose.addEventListener('click', closeChat);
 function pushChatMessage(name, msg, isYou=false, sys=false){
   const el = document.createElement('div');
-  if(sys){
-    el.className = 'msg sys';
-    el.textContent = msg;
-  } else {
+  if(sys){ el.className = 'msg sys'; el.textContent = msg; }
+  else {
     el.className = 'msg' + (isYou ? ' you' : '');
     el.innerHTML = `<b>${escapeHtml(name)}:</b> ${escapeHtml(msg)}`;
   }
@@ -2470,21 +2401,15 @@ function pushChatMessage(name, msg, isYou=false, sys=false){
   while(chatLog.children.length > 60) chatLog.firstChild.remove();
 }
 function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[c]));
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function sendChat(){
   const txt = (chatField.value || '').trim();
   if(!txt) return;
-  if(!NET.socket || !NET.ready){
-    pushChatMessage('Система', 'Нет соединения', false, true);
-    return;
-  }
+  if(!NET.socket || !NET.ready){ pushChatMessage('Система', 'Нет соединения', false, true); return; }
   NET.socket.emit('chat', txt);
   pushChatMessage(NET.name, txt, true);
-  chatField.value = '';
-  chatField.focus();
+  chatField.value = ''; chatField.focus();
 }
 chatSend.addEventListener('click', sendChat);
 chatField.addEventListener('keydown', e => {
